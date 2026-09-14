@@ -241,7 +241,7 @@
         </select>
       </div>
       <div>
-        <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan (Contoh: Termin 1 / Pelunasan)</label>
+        <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan (Contoh: Termin 1 / DP / Pelunasan)</label>
         <input id="subMasukKet" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div class="flex gap-3 pt-3 border-t border-slate-100">
@@ -260,7 +260,7 @@
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
-          <label class="block text-xs font-medium text-slate-600 mb-1">Kategori</label>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Kategori Pengeluaran</label>
           <select id="subKeluarKategori" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm"></select>
         </div>
         <div>
@@ -273,7 +273,7 @@
         <input id="subKeluarNominal" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div>
-        <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan (Contoh: Beli Kabel NYM)</label>
+        <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan (Contoh: Beli Kabel NYM / Ongkos Kerja)</label>
         <input id="subKeluarKet" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div class="flex gap-3 pt-3 border-t border-slate-100">
@@ -283,17 +283,19 @@
     </div>
   </div>
 
-  <!-- MODAL TAMBAH PEKERJAAN BARU (DILENGKAPI INPUT PEMASUKAN AWAL & PENGELUARAN AWAL) -->
+  <!-- MODAL TAMBAH PEKERJAAN BARU DENGAN RINCIAN LENGKAP -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPekerjaan">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-        <h2 class="font-bold text-base text-slate-900">Tambah Pekerjaan & Keuangan Awal</h2>
+        <h2 class="font-bold text-base text-slate-900">Tambah Pekerjaan & Rincian Keuangan</h2>
         <button onclick="closeModal('modalPekerjaan')" class="text-slate-400 hover:text-slate-700">✕</button>
       </div>
+      
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nama Customer</label>
-        <input id="pNama" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="pNama" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm" placeholder="Contoh: Bpk. Budi">
       </div>
+
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Tipe Customer</label>
@@ -304,27 +306,51 @@
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">No HP</label>
-          <input id="pHp" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <input id="pHp" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm" placeholder="08xxxxxxxxxx">
         </div>
       </div>
+
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Jenis Pekerjaan</label>
         <select id="pJenis" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm"></select>
       </div>
+
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Total Nilai Harga Proyek (Rp)</label>
-        <input id="pTotal" type="number" placeholder="Contoh: 5000000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="pTotal" type="number" placeholder="Contoh: 5000000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900">
       </div>
 
-      <!-- KOTAK INPUT PEMASUKAN AWAL & PENGELUARAN AWAL -->
-      <div class="grid grid-cols-2 gap-3 bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
-        <div>
-          <label class="block text-[11px] font-bold text-emerald-700 mb-1 uppercase">📥 Pemasukan Awal / DP (Rp)</label>
-          <input id="pMasukAwal" type="number" placeholder="0" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-emerald-600">
+      <!-- KOTAK RINCIAN PEMASUKAN AWAL / TERMIN -->
+      <div class="bg-emerald-50/60 p-4 rounded-2xl border border-emerald-200 space-y-3">
+        <h3 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">📥 Rincian Pembayaran Awal / Termin</h3>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-medium text-emerald-700 mb-1">Nominal Masuk (Rp)</label>
+            <input id="pMasukNominal" type="number" placeholder="0" class="w-full bg-white border border-emerald-200 rounded-xl px-3 py-2 text-sm font-semibold text-emerald-700">
+          </div>
+          <div>
+            <label class="block text-[11px] font-medium text-emerald-700 mb-1">Keterangan Pembayaran</label>
+            <input id="pMasukKet" type="text" placeholder="Contoh: DP / Termin 1 / Lunas" value="DP / Pembayaran Awal" class="w-full bg-white border border-emerald-200 rounded-xl px-3 py-2 text-sm">
+          </div>
+        </div>
+      </div>
+
+      <!-- KOTAK RINCIAN PENGELUARAN / MATERIAL AWAL -->
+      <div class="bg-rose-50/60 p-4 rounded-2xl border border-rose-200 space-y-3">
+        <h3 class="text-xs font-bold text-rose-800 uppercase tracking-wider">📤 Rincian Pengeluaran Awal / Material</h3>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] font-medium text-rose-700 mb-1">Kategori Pengeluaran</label>
+            <select id="pKategoriKeluar" class="w-full bg-white border border-rose-200 rounded-xl px-3 py-2 text-sm"></select>
+          </div>
+          <div>
+            <label class="block text-[11px] font-medium text-rose-700 mb-1">Nominal Keluar (Rp)</label>
+            <input id="pKeluarNominal" type="number" placeholder="0" class="w-full bg-white border border-rose-200 rounded-xl px-3 py-2 text-sm font-semibold text-rose-700">
+          </div>
         </div>
         <div>
-          <label class="block text-[11px] font-bold text-rose-700 mb-1 uppercase">📤 Pengeluaran Awal (Rp)</label>
-          <input id="pKeluarAwal" type="number" placeholder="0" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-rose-600">
+          <label class="block text-[11px] font-medium text-rose-700 mb-1">Keterangan Pengeluaran</label>
+          <input id="pKeluarKet" type="text" placeholder="Contoh: Beli Kabel / Ongkos Kerja" class="w-full bg-white border border-rose-200 rounded-xl px-3 py-2 text-sm">
         </div>
       </div>
 
@@ -341,6 +367,7 @@
           <input id="pTgl" type="date" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
         </div>
       </div>
+
       <div class="flex gap-3 pt-3 border-t border-slate-100">
         <button onclick="simpanPekerjaan()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Simpan Pekerjaan</button>
         <button onclick="closeModal('modalPekerjaan')" class="px-4 bg-slate-100 text-slate-600 font-semibold py-2.5 rounded-xl text-sm">Batal</button>
@@ -746,8 +773,12 @@
     }
 
     function isiDropdownAdmin() {
-      document.getElementById("pJenis").innerHTML = masterJenisPekerjaan.map(j => `<option value="${j.nama}">${j.nama}</option>`).join("");
-      document.getElementById("subKeluarKategori").innerHTML = masterKategori.map(k => `<option value="${k.nama}">${k.nama}</option>`).join("");
+      const opsiJenis = masterJenisPekerjaan.map(j => `<option value="${j.nama}">${j.nama}</option>`).join("");
+      const opsiKat = masterKategori.map(k => `<option value="${k.nama}">${k.nama}</option>`).join("");
+
+      document.getElementById("pJenis").innerHTML = opsiJenis;
+      document.getElementById("subKeluarKategori").innerHTML = opsiKat;
+      document.getElementById("pKategoriKeluar").innerHTML = opsiKat;
     }
 
     window.tambahMasterKategori = async () => {
@@ -783,8 +814,9 @@
     window.openTambahPekerjaan = () => {
       document.getElementById("pTgl").value = new Date().toISOString().split("T")[0];
       document.getElementById("pTotal").value = "";
-      document.getElementById("pMasukAwal").value = "";
-      document.getElementById("pKeluarAwal").value = "";
+      document.getElementById("pMasukNominal").value = "";
+      document.getElementById("pKeluarNominal").value = "";
+      document.getElementById("pKeluarKet").value = "";
       document.getElementById("modalPekerjaan").classList.remove("hidden");
       document.getElementById("modalPekerjaan").classList.add("flex");
     };
@@ -799,15 +831,20 @@
       document.getElementById(id).classList.add("hidden");
     };
 
-    // SIMPAN PEKERJAAN BARU DENGAN PEMASUKAN & PENGELUARAN AWAL SEKALIGUS
+    // SIMPAN PEKERJAAN BARU DENGAN RINCIAN PEMASUKAN & PENGELUARAN LENGKAP
     window.simpanPekerjaan = async () => {
       const nama = document.getElementById("pNama").value.trim();
       const total = Number(document.getElementById("pTotal").value);
       const jenis = document.getElementById("pJenis").value;
       const tgl = document.getElementById("pTgl").value;
       const tipeBayar = document.getElementById("pTipeBayar").value;
-      const masukAwal = Number(document.getElementById("pMasukAwal").value || 0);
-      const keluarAwal = Number(document.getElementById("pKeluarAwal").value || 0);
+      
+      const masukNominal = Number(document.getElementById("pMasukNominal").value || 0);
+      const masukKet = document.getElementById("pMasukKet").value.trim() || "Pembayaran Awal";
+
+      const keluarNominal = Number(document.getElementById("pKeluarNominal").value || 0);
+      const keluarKategori = document.getElementById("pKategoriKeluar").value;
+      const keluarKet = document.getElementById("pKeluarKet").value.trim() || "Belanja Material";
 
       if (!nama || !total || !jenis) {
         alert("Nama Customer, Jenis Pekerjaan, dan Total Nilai Harga wajib diisi!");
@@ -824,22 +861,22 @@
           metode: "transfer",
           keterangan: "Pembayaran Full / Lunas"
         });
-      } else if (masukAwal > 0) {
+      } else if (masukNominal > 0) {
         pemasukanArr.push({
           tanggal: tgl,
-          nominal: masukAwal,
+          nominal: masukNominal,
           metode: "transfer",
-          keterangan: "Pembayaran / DP Awal"
+          keterangan: masukKet
         });
       }
 
       let pengeluaranArr = [];
-      if (keluarAwal > 0) {
+      if (keluarNominal > 0) {
         pengeluaranArr.push({
           tanggal: tgl,
-          kategori: masterKategori[0] ? masterKategori[0].nama : "Material Awal",
-          nominal: keluarAwal,
-          keterangan: "Pengeluaran / Belanja Awal Proyek"
+          kategori: keluarKategori || "Material",
+          nominal: keluarNominal,
+          keterangan: keluarKet
         });
       }
 
@@ -859,7 +896,7 @@
 
       closeModal("modalPekerjaan");
       await loadAll();
-      alert("✅ Pekerjaan beserta rincian keuangan awal berhasil disimpan!");
+      alert("✅ Pekerjaan beserta rincian pembayaran dan pengeluarannya berhasil disimpan!");
     };
 
     window.simpanStok = async () => {
