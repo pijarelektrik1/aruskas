@@ -169,7 +169,7 @@
         </div>
       </div>
 
-      <!-- TAB 5: ADMIN (DILENGKAPI MENU GANTI PIN & MASTER DATA) -->
+      <!-- TAB 5: ADMIN -->
       <div class="card-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden hidden" id="tab-admin">
         <div class="p-5 border-b border-slate-100 flex justify-between items-center">
           <div>
@@ -179,7 +179,6 @@
           <button onclick="lockDashboard()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-3 py-1.5 rounded-xl text-xs font-semibold">Kunci Dashboard</button>
         </div>
         <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- Kelola Kategori Pengeluaran -->
           <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
             <h3 class="font-semibold text-sm text-slate-800">📁 Kategori Pengeluaran Baru</h3>
             <div>
@@ -188,7 +187,6 @@
             </div>
             <div><div id="listMasterKategori" class="space-y-1.5 max-h-40 overflow-y-auto"></div></div>
           </div>
-          <!-- Kelola Jenis Pekerjaan -->
           <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
             <h3 class="font-semibold text-sm text-slate-800">🔧 Jenis Pekerjaan Baru</h3>
             <div>
@@ -197,7 +195,6 @@
             </div>
             <div><div id="listMasterJenisPekerjaan" class="space-y-1.5 max-h-40 overflow-y-auto"></div></div>
           </div>
-          <!-- Kelola Ganti PIN Dashboard -->
           <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
             <h3 class="font-semibold text-sm text-slate-800">🔐 Ubah PIN Dashboard</h3>
             <div class="space-y-2">
@@ -212,9 +209,9 @@
     </main>
   </div>
 
-  <!-- MODAL DETAIL PEKERJAAN -->
+  <!-- MODAL DETAIL PEKERJAAN (DIPISAH KEMBALI: TABEL MASUK & TABEL KELUAR TERPISAH) -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalDetailPekerjaan">
-    <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-3xl w-full shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-4xl w-full shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <div>
           <h2 class="font-bold text-lg text-slate-900" id="detailJudulCustomer">Detail Pekerjaan</h2>
@@ -238,20 +235,22 @@
         </div>
       </div>
 
-      <div class="space-y-2">
+      <!-- TABEL 1: PEMASUKAN KHUSUS PROYEK INI -->
+      <div class="space-y-3">
         <div class="flex justify-between items-center">
-          <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider">💰 Riwayat Pembayaran / Pemasukan</h3>
-          <button onclick="bukaTambahMasukUntukPekerjaan()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">+ Catat Pembayaran</button>
+          <h3 class="font-bold text-xs text-emerald-700 uppercase tracking-wider">📥 Daftar Pemasukan / Pembayaran Proyek</h3>
+          <button onclick="bukaTambahMasukUntukPekerjaan()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">+ Catat Pemasukan</button>
         </div>
-        <div id="detailTabelMasuk" class="overflow-x-auto border border-slate-100 rounded-xl"></div>
+        <div id="detailTabelMasuk" class="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm"></div>
       </div>
 
-      <div class="space-y-2 pt-2">
+      <!-- TABEL 2: PENGELUARAN KHUSUS PROYEK INI -->
+      <div class="space-y-3 pt-2">
         <div class="flex justify-between items-center">
-          <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider">💸 Pengeluaran & Material Terpakai</h3>
+          <h3 class="font-bold text-xs text-rose-700 uppercase tracking-wider">📤 Daftar Pengeluaran & Material Proyek</h3>
           <button onclick="bukaTambahKeluarUntukPekerjaan()" class="bg-rose-600 hover:bg-rose-700 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">+ Catat Pengeluaran</button>
         </div>
-        <div id="detailTabelKeluar" class="overflow-x-auto border border-slate-100 rounded-xl"></div>
+        <div id="detailTabelKeluar" class="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm"></div>
       </div>
     </div>
   </div>
@@ -473,7 +472,6 @@
     let selectedStokId = null;
     let currentDetailPekerjaanId = null;
 
-    // PIN Default disimpan dan dibaca dari localStorage browser (Default hash untuk "123456")
     const DEFAULT_HASH = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
     
     function getStoredPinHash() {
@@ -516,26 +514,15 @@
       document.getElementById("inputGerbangPin").value = "";
     };
 
-    // Fungsi Ganti PIN dari Menu Admin
     window.prosesGantiPin = async () => {
       const lama = document.getElementById("pinLama").value.trim();
       const baru = document.getElementById("pinBaru").value.trim();
 
-      if (!lama || !baru) {
-        alert("PIN lama dan PIN baru wajib diisi!");
-        return;
-      }
+      if (!lama || !baru) { alert("PIN lama dan PIN baru wajib diisi!"); return; }
 
       const hashedLama = await hashPin(lama);
-      if (hashedLama !== getStoredPinHash()) {
-        alert("❌ PIN lama yang Anda masukkan salah!");
-        return;
-      }
-
-      if (baru.length < 4) {
-        alert("PIN baru minimal harus 4 karakter!");
-        return;
-      }
+      if (hashedLama !== getStoredPinHash()) { alert("❌ PIN lama salah!"); return; }
+      if (baru.length < 4) { alert("PIN baru minimal 4 karakter!"); return; }
 
       const hashedBaru = await hashPin(baru);
       localStorage.setItem("pijar_custom_pin_hash", hashedBaru);
@@ -625,6 +612,7 @@
       el.innerHTML = html;
     }
 
+    // DETAIL PEKERJAAN DENGAN 2 TABEL TERPISAH (PEMASUKAN & PENGELUARAN)
     window.bukaDetailPekerjaan = (pid) => {
       currentDetailPekerjaanId = pid;
       const pj = dataPekerjaan.find(x => x.id === pid);
@@ -638,40 +626,46 @@
       const totalMasuk = masukPekerjaan.reduce((s, x) => s + Number(x.nominal || 0), 0);
       document.getElementById("detailValMasuk").textContent = rupiah(totalMasuk);
 
+      const keluarPekerjaan = dataPengeluaran.filter(k => k.pekerjaanId === pid);
+      const totalKeluar = keluarPekerjaan.reduce((s, x) => s + Number(x.nominal || 0), 0);
+      document.getElementById("detailValKeluar").textContent = rupiah(totalKeluar);
+
+      // TABEL 1: PEMASUKAN PROYEK
       let htmlMasuk = `<table class="w-full text-left text-xs bg-white">
-        <tr class="bg-slate-50 text-slate-500 border-b"><th class="p-2.5">Tanggal</th><th class="p-2.5">Nominal</th><th class="p-2.5">Metode</th><th class="p-2.5">Keterangan</th><th class="p-2.5 text-right">Aksi</th></tr>`;
+        <tr class="bg-slate-50 text-slate-500 border-b uppercase font-semibold">
+          <th class="p-3">Tanggal</th><th class="p-3">Nominal</th><th class="p-3">Metode</th><th class="p-3">Keterangan</th><th class="p-3 text-right">Aksi</th>
+        </tr>`;
       if(masukPekerjaan.length === 0) {
-        htmlMasuk += `<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada pembayaran.</td></tr>`;
+        htmlMasuk += `<tr><td colspan="5" class="p-6 text-center text-slate-400">Belum ada catatan pemasukan untuk pekerjaan ini.</td></tr>`;
       } else {
         masukPekerjaan.forEach(m => {
           htmlMasuk += `<tr class="border-b hover:bg-slate-50">
-            <td class="p-2.5">${m.tanggal}</td>
-            <td class="p-2.5 font-semibold text-emerald-600">+${rupiah(m.nominal)}</td>
-            <td class="p-2.5 uppercase">${m.metode}</td>
-            <td class="p-2.5">${m.keterangan || '-'}</td>
-            <td class="p-2.5 text-right"><button onclick="hapusData('pemasukan','${m.id}')" class="text-rose-600 font-semibold">Hapus</button></td>
+            <td class="p-3 text-slate-600">${m.tanggal}</td>
+            <td class="p-3 font-bold text-emerald-600">+${rupiah(m.nominal)}</td>
+            <td class="p-3 uppercase">${m.metode || '-'}</td>
+            <td class="p-3 font-medium text-slate-800">${m.keterangan || '-'}</td>
+            <td class="p-3 text-right"><button onclick="hapusData('pemasukan','${m.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button></td>
           </tr>`;
         });
       }
       htmlMasuk += `</table>`;
       document.getElementById("detailTabelMasuk").innerHTML = htmlMasuk;
 
-      const keluarPekerjaan = dataPengeluaran.filter(k => k.pekerjaanId === pid);
-      const totalKeluar = keluarPekerjaan.reduce((s, x) => s + Number(x.nominal || 0), 0);
-      document.getElementById("detailValKeluar").textContent = rupiah(totalKeluar);
-
+      // TABEL 2: PENGELUARAN PROYEK
       let htmlKeluar = `<table class="w-full text-left text-xs bg-white">
-        <tr class="bg-slate-50 text-slate-500 border-b"><th class="p-2.5">Tanggal</th><th class="p-2.5">Kategori</th><th class="p-2.5">Nominal</th><th class="p-2.5">Keterangan</th><th class="p-2.5 text-right">Aksi</th></tr>`;
+        <tr class="bg-slate-50 text-slate-500 border-b uppercase font-semibold">
+          <th class="p-3">Tanggal</th><th class="p-3">Kategori</th><th class="p-3">Nominal</th><th class="p-3">Keterangan</th><th class="p-3 text-right">Aksi</th>
+        </tr>`;
       if(keluarPekerjaan.length === 0) {
-        htmlKeluar += `<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada pengeluaran.</td></tr>`;
+        htmlKeluar += `<tr><td colspan="5" class="p-6 text-center text-slate-400">Belum ada catatan pengeluaran/material untuk pekerjaan ini.</td></tr>`;
       } else {
         keluarPekerjaan.forEach(k => {
           htmlKeluar += `<tr class="border-b hover:bg-slate-50">
-            <td class="p-2.5">${k.tanggal}</td>
-            <td class="p-2.5 font-medium">${k.kategori}</td>
-            <td class="p-2.5 font-semibold text-rose-600">-${rupiah(k.nominal)}</td>
-            <td class="p-2.5">${k.keterangan || '-'}</td>
-            <td class="p-2.5 text-right"><button onclick="hapusData('pengeluaran','${k.id}')" class="text-rose-600 font-semibold">Hapus</button></td>
+            <td class="p-3 text-slate-600">${k.tanggal}</td>
+            <td class="p-3 font-medium text-slate-700">${k.kategori || '-'}</td>
+            <td class="p-3 font-bold text-rose-600">-${rupiah(k.nominal)}</td>
+            <td class="p-3 font-medium text-slate-800">${k.keterangan || '-'}</td>
+            <td class="p-3 text-right"><button onclick="hapusData('pengeluaran','${k.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button></td>
           </tr>`;
         });
       }
