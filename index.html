@@ -123,15 +123,25 @@
 
       <!-- TAB 1: PEKERJAAN & KEUANGAN TERPADU -->
       <div class="card-section bg-white border border-slate-200/80 rounded-3xl shadow-sm overflow-hidden" id="tab-pekerjaan">
-        <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div class="p-6 border-b border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <h2 class="font-bold text-base text-slate-900">Daftar Pekerjaan & Keuangan Terpadu</h2>
             <p class="text-xs text-slate-500 mt-0.5">Kelola termin pembayaran, material, dan lihat keuntungan bersih setiap proyek.</p>
           </div>
-          <button onclick="openTambahPekerjaan()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl text-xs font-semibold transition-all shadow-md shadow-blue-600/20 flex items-center gap-2 shrink-0">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-            Tambah Pekerjaan Baru
-          </button>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+            <!-- SEARCH BAR -->
+            <div class="relative flex-1 sm:w-64">
+              <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </span>
+              <input id="inputPencarian" type="text" oninput="renderPekerjaan()" placeholder="Cari nama customer / kode..." class="uppercase-input w-full bg-slate-50 border border-slate-200 rounded-2xl pl-10 pr-4 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all">
+            </div>
+            <!-- TOMBOL TAMBAH -->
+            <button onclick="openTambahPekerjaan()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-2xl text-xs font-semibold transition-all shadow-md shadow-blue-600/20 flex items-center justify-center gap-2 shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+              Tambah Pekerjaan Baru
+            </button>
+          </div>
         </div>
         <div class="overflow-x-auto">
           <div id="listPekerjaan"><div class="empty py-16 text-center text-slate-400 text-sm">Memuat data...</div></div>
@@ -586,10 +596,19 @@
       document.getElementById("statLaba").textContent = rupiah(totalMasukGlobal - totalKeluarGlobal);
     }
 
-    function renderPekerjaan() {
+    window.renderPekerjaan = () => {
       const el = document.getElementById("listPekerjaan");
-      if (dataPekerjaan.length === 0) {
-        el.innerHTML = '<div class="text-center py-16 text-slate-400 text-sm">Belum ada pekerjaan. Silakan buat pekerjaan baru.</div>';
+      const keyword = (document.getElementById("inputPencarian")?.value || "").toUpperCase();
+
+      const filteredData = dataPekerjaan.filter(p => {
+        const nama = (p.namaCustomer || "").toUpperCase();
+        const kode = (p.kode || "").toUpperCase();
+        const jenis = (p.jenisPekerjaan || "").toUpperCase();
+        return nama.includes(keyword) || kode.includes(keyword) || jenis.includes(keyword);
+      });
+
+      if (filteredData.length === 0) {
+        el.innerHTML = '<div class="text-center py-16 text-slate-400 text-sm">Tidak ada data pekerjaan yang sesuai pencarian.</div>';
         return;
       }
 
@@ -604,7 +623,7 @@
           <th class="py-4 px-6 text-right">Aksi</th>
         </tr></thead><tbody class="divide-y divide-slate-100">`;
 
-      dataPekerjaan.forEach(p => {
+      filteredData.forEach(p => {
         const arrM = p.pemasukan || [];
         const arrK = p.pengeluaran || [];
         const totalMasukProj = arrM.reduce((s, x) => s + Number(x.nominal || 0), 0);
