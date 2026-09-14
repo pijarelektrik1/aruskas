@@ -34,22 +34,26 @@
       </div>
       <div>
         <h1 class="font-bold text-base tracking-tight text-slate-900">PIJAR ELEKTRIK</h1>
-        <p class="text-[11px] text-slate-500">Manajemen & Stok Proyek</p>
+        <p class="text-[11px] text-slate-500">Manajemen & Stok</p>
       </div>
     </div>
 
     <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto">
       <button onclick="switchTab('pekerjaan', this)" class="nav-btn active w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all bg-blue-600 text-white shadow-sm">
-        <span>🔧</span> Pekerjaan Proyek
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.12 2.12 0 0120 18.25l-5.83-5.83M15 11.25a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg> 
+        Pekerjaan
       </button>
       <button onclick="switchTab('pemasukan', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-100">
-        <span>💰</span> Pemasukan
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.17-.879 1.17-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Pemasukan
       </button>
       <button onclick="switchTab('pengeluaran', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-100">
-        <span>💸</span> Pengeluaran
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+        Pengeluaran
       </button>
       <button onclick="switchTab('stok', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-100">
-        <span>📦</span> Stok & Barang Keluar
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+        Stok & Barang Keluar
       </button>
     </nav>
   </aside>
@@ -63,7 +67,7 @@
         <span class="text-xl">⚡</span>
         <h1 class="font-bold text-sm text-slate-900">PIJAR ELEKTRIK</h1>
       </div>
-      <div class="flex gap-2 overflow-x-auto py-1">
+      <div class="flex gap-1.5 overflow-x-auto py-1">
         <button onclick="switchTab('pekerjaan', this)" class="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-semibold">Pekerjaan</button>
         <button onclick="switchTab('pemasukan', this)" class="px-3 py-1.5 bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold">Masuk</button>
         <button onclick="switchTab('pengeluaran', this)" class="px-3 py-1.5 bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold">Keluar</button>
@@ -96,7 +100,7 @@
       <!-- TAB 1: PEKERJAAN -->
       <div class="card-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden" id="tab-pekerjaan">
         <div class="p-5 border-b border-slate-100 flex justify-between items-center">
-          <h2 class="font-bold text-sm sm:text-base text-slate-800">Daftar Pekerjaan Proyek</h2>
+          <h2 class="font-bold text-sm sm:text-base text-slate-800">Daftar Pekerjaan</h2>
           <button onclick="openTambahPekerjaan()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm">
             + Tambah Pekerjaan
           </button>
@@ -137,11 +141,11 @@
         <div class="p-5 border-b border-slate-100 flex justify-between items-center">
           <h2 class="font-bold text-sm sm:text-base text-slate-800">Manajemen Stok Barang & Pengeluaran Material</h2>
           <button onclick="openTambahStok()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm">
-            + Tambah Barang / Stok Masuk
+            + Tambah Stok Masuk
           </button>
         </div>
         <div class="p-5 border-b border-slate-100 bg-slate-50 flex flex-wrap gap-4 items-center justify-between">
-          <div class="text-xs text-slate-600">Catatan: Stok barang akan otomatis berkurang ketika Anda menggunakannya untuk suatu pekerjaan proyek.</div>
+          <div class="text-xs text-slate-600">Catatan: Stok barang akan otomatis berkurang ketika Anda menggunakannya untuk suatu pekerjaan.</div>
         </div>
         <div class="overflow-x-auto">
           <div id="listStok"><div class="empty py-12 text-center text-slate-400 text-sm">Memuat stok...</div></div>
@@ -288,16 +292,16 @@
     </div>
   </div>
 
-  <!-- MODAL TAMBAH / KELOLA STOK BARANG -->
+  <!-- MODAL STOK BARANG -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalStok">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-        <h2 class="font-bold text-base text-slate-900" id="modalStokTitle">Tambah Stok Barang Baru</h2>
+        <h2 class="font-bold text-base text-slate-900">Tambah Stok Barang Baru</h2>
         <button onclick="closeModal('modalStok')" class="text-slate-400 hover:text-slate-700">✕</button>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nama Barang / Material</label>
-        <input id="sNama" placeholder="Cth: Pipa AC 1/4 inch, Kabel NYM" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="sNama" placeholder="Cth: Pipa AC 1/4 inch" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
@@ -306,7 +310,7 @@
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Satuan</label>
-          <input id="sSatuan" placeholder="Meter / Pcs / Roll" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <input id="sSatuan" placeholder="Meter / Pcs" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
         </div>
       </div>
       <div>
@@ -324,12 +328,12 @@
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPakaiBarang">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-        <h2 class="font-bold text-base text-slate-900">Gunakan Barang untuk Proyek</h2>
+        <h2 class="font-bold text-base text-slate-900">Gunakan Barang untuk Pekerjaan</h2>
         <button onclick="closeModal('modalPakaiBarang')" class="text-slate-400 hover:text-slate-700">✕</button>
       </div>
       <p class="text-xs text-slate-500" id="infoBarangPakai"></p>
       <div>
-        <label class="block text-xs font-medium text-slate-600 mb-1">Pilih Pekerjaan Proyek</label>
+        <label class="block text-xs font-medium text-slate-600 mb-1">Pilih Pekerjaan</label>
         <select id="pakaiPekerjaanId" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm"><option value="">-- Pilih Pekerjaan --</option></select>
       </div>
       <div>
@@ -416,15 +420,19 @@
       }
       let html = `<table class="w-full text-left border-collapse text-sm">
         <thead><tr class="border-b border-slate-200 bg-slate-50 text-slate-500 text-xs uppercase font-semibold">
-          <th class="p-4">Kode</th><th class="p-4">Customer</th><th class="p-4">Jenis</th><th class="p-4">Total</th><th class="p-4">Bayar</th><th class="p-4">Status</th><th class="p-4 text-right">Aksi</th>
+          <th class="p-4">Kode</th><th class="p-4">Customer</th><th class="p-4">Tipe</th><th class="p-4">Jenis</th><th class="p-4">Total</th><th class="p-4">Status</th><th class="p-4 text-right">Aksi</th>
         </tr></thead><tbody class="divide-y divide-slate-100">`;
       dataPekerjaan.forEach(p => {
+        const badgeTipe = p.tipe === 'instansi' 
+          ? '<span class="px-2.5 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">🏢 Instansi</span>' 
+          : '<span class="px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">👤 Perorangan</span>';
+
         html += `<tr class="hover:bg-slate-50">
           <td class="p-4 font-mono font-semibold text-blue-600">${p.kode || "-"}</td>
           <td class="p-4 font-medium text-slate-900">${p.namaCustomer || "-"}</td>
+          <td class="p-4">${badgeTipe}</td>
           <td class="p-4 text-slate-600">${p.jenisPekerjaan || "-"}</td>
           <td class="p-4 font-semibold text-slate-900">${rupiah(p.totalHarga)}</td>
-          <td class="p-4 text-xs text-slate-600">${p.tipeBayar === 'full' ? 'Full' : 'Termin'}</td>
           <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-medium ${p.status === "lunas" ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-700"}">${p.status}</span></td>
           <td class="p-4 text-right"><button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="hapusData('pekerjaan','${p.id}')">Hapus</button></td>
         </tr>`;
@@ -487,7 +495,7 @@
           <td class="p-4 font-bold ${s.jumlah <= 2 ? 'text-rose-600' : 'text-slate-800'}">${s.jumlah} ${s.satuan || ''}</td>
           <td class="p-4 text-slate-600">${rupiah(s.harga)}</td>
           <td class="p-4 text-right space-x-2">
-            <button class="bg-amber-50 hover:bg-amber-100 text-amber-700 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="openPakaiBarang('${s.id}', '${s.nama}', ${s.jumlah})">Pakai untuk Proyek</button>
+            <button class="bg-amber-50 hover:bg-amber-100 text-amber-700 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="openPakaiBarang('${s.id}', '${s.nama}', ${s.jumlah})">Pakai untuk Pekerjaan</button>
             <button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="hapusData('stok','${s.id}')">Hapus</button>
           </td>
         </tr>`;
@@ -636,12 +644,10 @@
       if (!barang) return;
       if (qty > barang.jumlah) { alert("Stok tidak mencukupi!"); return; }
 
-      // Kurangi jumlah stok di database
       await updateDoc(doc(db, "stok", selectedStokId), {
         jumlah: barang.jumlah - qty
       });
 
-      // Otomatis catat sebagai pengeluaran material proyek
       await addDoc(collection(db, "pengeluaran"), {
         kategori: "material",
         tanggal: new Date().toISOString().split("T")[0],
