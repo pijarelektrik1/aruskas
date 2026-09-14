@@ -82,7 +82,7 @@
 
     <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 overflow-x-hidden">
 
-      <!-- STATS GRID -->
+      <!-- STATs -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
           <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Pemasukan</p>
@@ -118,7 +118,7 @@
       <!-- TAB 2: PEMASUKAN -->
       <div class="card-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden hidden" id="tab-pemasukan">
         <div class="p-5 border-b border-slate-100 flex justify-between items-center">
-          <h2 class="font-bold text-sm sm:text-base text-slate-800">Riwayat Pemasukan</h2>
+          <h2 class="font-bold text-sm sm:text-base text-slate-800">Riwayat Pemasukan Global</h2>
           <button onclick="openTambahMasuk()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm">
             + Tambah Pemasukan
           </button>
@@ -131,7 +131,7 @@
       <!-- TAB 3: PENGELUARAN -->
       <div class="card-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden hidden" id="tab-pengeluaran">
         <div class="p-5 border-b border-slate-100 flex justify-between items-center">
-          <h2 class="font-bold text-sm sm:text-base text-slate-800">Riwayat Pengeluaran</h2>
+          <h2 class="font-bold text-sm sm:text-base text-slate-800">Riwayat Pengeluaran Global</h2>
           <button onclick="openTambahKeluar()" class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm">
             + Tambah Pengeluaran
           </button>
@@ -141,10 +141,10 @@
         </div>
       </div>
 
-      <!-- TAB 4: STOK & BARANG KELUAR -->
+      <!-- TAB 4: STOK -->
       <div class="card-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden hidden" id="tab-stok">
         <div class="p-5 border-b border-slate-100 flex justify-between items-center">
-          <h2 class="font-bold text-sm sm:text-base text-slate-800">Manajemen Stok Barang & Pengeluaran Material</h2>
+          <h2 class="font-bold text-sm sm:text-base text-slate-800">Manajemen Stok Barang & Material</h2>
           <button onclick="openTambahStok()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm">
             + Tambah Stok Masuk
           </button>
@@ -154,40 +154,31 @@
         </div>
       </div>
 
-      <!-- TAB 5: ADMIN / MASTER DATA -->
+      <!-- TAB 5: ADMIN -->
       <div class="card-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden hidden" id="tab-admin">
         <div class="p-5 border-b border-slate-100 flex justify-between items-center">
           <div>
             <h2 class="font-bold text-base text-slate-900">Panel Admin - Master Data Pilihan</h2>
-            <p class="text-xs text-slate-500 mt-0.5">Tambah opsi kategori pengeluaran atau jenis pekerjaan baru agar muncul di form input.</p>
+            <p class="text-xs text-slate-500 mt-0.5">Tambah opsi kategori pengeluaran atau jenis pekerjaan baru.</p>
           </div>
           <button onclick="logoutAdmin()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-3 py-1.5 rounded-xl text-xs font-semibold">Keluar Admin</button>
         </div>
         <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Kelola Kategori Pengeluaran -->
           <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
             <h3 class="font-semibold text-sm text-slate-800">📁 Kategori Pengeluaran Baru</h3>
             <div>
               <input id="adminKategoriBaru" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm mb-2">
               <button onclick="tambahMasterKategori()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-semibold py-2 rounded-xl text-xs shadow-sm">Tambah Kategori</button>
             </div>
-            <div>
-              <h4 class="text-xs font-medium text-slate-500 mb-2">Daftar Kategori Tersedia:</h4>
-              <div id="listMasterKategori" class="space-y-1.5 max-h-40 overflow-y-auto"></div>
-            </div>
+            <div><div id="listMasterKategori" class="space-y-1.5 max-h-40 overflow-y-auto"></div></div>
           </div>
-
-          <!-- Kelola Jenis Pekerjaan -->
           <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
             <h3 class="font-semibold text-sm text-slate-800">🔧 Jenis Pekerjaan Baru</h3>
             <div>
               <input id="adminJenisPekerjaanBaru" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm mb-2">
               <button onclick="tambahMasterJenisPekerjaan()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-semibold py-2 rounded-xl text-xs shadow-sm">Tambah Jenis Pekerjaan</button>
             </div>
-            <div>
-              <h4 class="text-xs font-medium text-slate-500 mb-2">Daftar Jenis Pekerjaan Tersedia:</h4>
-              <div id="listMasterJenisPekerjaan" class="space-y-1.5 max-h-40 overflow-y-auto"></div>
-            </div>
+            <div><div id="listMasterJenisPekerjaan" class="space-y-1.5 max-h-40 overflow-y-auto"></div></div>
           </div>
         </div>
       </div>
@@ -195,11 +186,57 @@
     </main>
   </div>
 
+  <!-- MODAL DETAIL PEKERJAAN (TERPADU: PEMASUKAN & PENGELUARAN KHUSUS PROYEK INI) -->
+  <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalDetailPekerjaan">
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-3xl w-full shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+        <div>
+          <h2 class="font-bold text-lg text-slate-900" id="detailJudulCustomer">Detail Pekerjaan</h2>
+          <p class="text-xs text-slate-500 font-mono" id="detailSubKode">-</p>
+        </div>
+        <button onclick="closeModal('modalDetailPekerjaan')" class="text-slate-400 hover:text-slate-700 font-bold text-lg">✕</button>
+      </div>
+
+      <!-- Ringkasan Keuangan Proyek Ini -->
+      <div class="grid grid-cols-3 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
+        <div>
+          <p class="text-[11px] text-slate-500 uppercase font-semibold">Total Nilai Proyek</p>
+          <p class="text-base font-bold text-slate-900 mt-1" id="detailValTotal">Rp 0</p>
+        </div>
+        <div>
+          <p class="text-[11px] text-slate-500 uppercase font-semibold">Total Pemasukan Masuk</p>
+          <p class="text-base font-bold text-emerald-600 mt-1" id="detailValMasuk">Rp 0</p>
+        </div>
+        <div>
+          <p class="text-[11px] text-slate-500 uppercase font-semibold">Total Pengeluaran / Material</p>
+          <p class="text-base font-bold text-rose-600 mt-1" id="detailValKeluar">Rp 0</p>
+        </div>
+      </div>
+
+      <!-- Tabel Riwayat Pembayaran / Pemasukan Proyek Ini -->
+      <div class="space-y-2">
+        <div class="flex justify-between items-center">
+          <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider">💰 Riwayat Pembayaran / Pemasukan</h3>
+          <button onclick="bukaTambahMasukUntukPekerjaan()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">+ Catat Pembayaran</button>
+        </div>
+        <div id="detailTabelMasuk" class="overflow-x-auto border border-slate-100 rounded-xl"></div>
+      </div>
+
+      <!-- Tabel Riwayat Pengeluaran / Material Proyek Ini -->
+      <div class="space-y-2 pt-2">
+        <div class="flex justify-between items-center">
+          <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider">💸 Pengeluaran & Material Terpakai</h3>
+          <button onclick="bukaTambahKeluarUntukPekerjaan()" class="bg-rose-600 hover:bg-rose-700 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">+ Catat Pengeluaran</button>
+        </div>
+        <div id="detailTabelKeluar" class="overflow-x-auto border border-slate-100 rounded-xl"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL PIN ADMIN -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPin">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-xs w-full shadow-2xl space-y-4 text-center">
       <div class="text-xl font-bold text-slate-900">🔒 Masukkan PIN Admin</div>
-      <p class="text-xs text-slate-500">Akses panel master data dibatasi.</p>
       <input id="inputPinAdmin" type="password" placeholder="••••••" class="w-full text-center tracking-widest bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-lg font-bold">
       <div class="flex gap-2 pt-2">
         <button onclick="verifikasiPin()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs">Masuk</button>
@@ -208,7 +245,7 @@
     </div>
   </div>
 
-  <!-- MODAL LAINNYA (Pekerjaan, Pemasukan, Pengeluaran, Stok, dll) -->
+  <!-- MODAL TAMBAH PEKERJAAN -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPekerjaan">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
@@ -264,6 +301,7 @@
     </div>
   </div>
 
+  <!-- MODAL TAMBAH PEMASUKAN GLOBAL -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalMasuk">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
@@ -302,11 +340,16 @@
     </div>
   </div>
 
+  <!-- MODAL TAMBAH PENGELUARAN GLOBAL -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalKeluar">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
         <h2 class="font-bold text-base text-slate-900">Tambah Pengeluaran</h2>
         <button onclick="closeModal('modalKeluar')" class="text-slate-400 hover:text-slate-700">✕</button>
+      </div>
+      <div>
+        <label class="block text-xs font-medium text-slate-600 mb-1">Pilih Pekerjaan Terkait (Opsional)</label>
+        <select id="kPekerjaan" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm"><option value="">-- Umum / Tanpa Proyek --</option></select>
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
@@ -333,6 +376,7 @@
     </div>
   </div>
 
+  <!-- MODAL STOK -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalStok">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
@@ -364,6 +408,7 @@
     </div>
   </div>
 
+  <!-- MODAL PAKAI BARANG -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPakaiBarang">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
@@ -386,7 +431,7 @@
     </div>
   </div>
 
-  <!-- FIREBASE SCRIPT -->
+  <!-- SCRIPT FIREBASE & LOGIKA -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
     import {
@@ -415,9 +460,8 @@
     let masterKategori = [];
     let masterJenisPekerjaan = [];
     let selectedStokId = null;
+    let currentDetailPekerjaanId = null;
 
-    // HASH PIN ACAK TERENKRISI (Default PIN: "123456")
-    // Nilai ini berupa hash SHA-256 acak, sehingga PIN aslinya tidak terbaca di kodingan!
     const TARGET_PIN_HASH = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
 
     async function hashPin(pin) {
@@ -428,7 +472,6 @@
     }
 
     window.cekAksesAdmin = async () => {
-      // Cek apakah sudah login admin sebelumnya di sesi ini
       if (sessionStorage.getItem("admin_logged") === "true") {
         switchTab('admin', document.querySelector("aside button:last-child"));
       } else {
@@ -441,21 +484,18 @@
     window.verifikasiPin = async () => {
       const inputVal = document.getElementById("inputPinAdmin").value.trim();
       const hashedInput = await hashPin(inputVal);
-
       if (hashedInput === TARGET_PIN_HASH) {
         sessionStorage.setItem("admin_logged", "true");
         closeModal("modalPin");
         switchTab('admin', document.querySelector("aside button:last-child"));
       } else {
-        alert("❌ PIN yang Anda masukkan salah!");
-        document.getElementById("inputPinAdmin").value = "";
+        alert("❌ PIN salah!");
       }
     };
 
     window.logoutAdmin = () => {
       sessionStorage.removeItem("admin_logged");
       switchTab('pekerjaan', document.querySelector("aside button"));
-      alert("🔒 Berkeluar dari mode admin.");
     };
 
     async function loadAll() {
@@ -486,9 +526,13 @@
         renderAdminMaster();
         isiDropdownPekerjaan();
         isiDropdownAdmin();
+
+        // Jika modal detail sedang terbuka, refresh datanya secara live
+        if (currentDetailPekerjaanId) {
+          bukaDetailPekerjaan(currentDetailPekerjaanId);
+        }
       } catch (err) {
         console.error(err);
-        alert("Gagal load data. Cek Firebase config.");
       }
     }
 
@@ -525,12 +569,93 @@
           <td class="p-4 text-slate-600">${p.jenisPekerjaan || "-"}</td>
           <td class="p-4 font-semibold text-slate-900">${rupiah(p.totalHarga)}</td>
           <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-medium ${p.status === "lunas" ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-700"}">${p.status}</span></td>
-          <td class="p-4 text-right"><button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="hapusData('pekerjaan','${p.id}')">Hapus</button></td>
+          <td class="p-4 text-right space-x-2">
+            <button class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="bukaDetailPekerjaan('${p.id}')">📂 Detail</button>
+            <button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="hapusData('pekerjaan','${p.id}')">Hapus</button>
+          </td>
         </tr>`;
       });
       html += "</tbody></table>";
       el.innerHTML = html;
     }
+
+    // FUNGSI MEMBUKA DETAIL SPESIFIK PER PEKERJAAN
+    window.bukaDetailPekerjaan = (pid) => {
+      currentDetailPekerjaanId = pid;
+      const pj = dataPekerjaan.find(x => x.id === pid);
+      if(!pj) return;
+
+      document.getElementById("detailJudulCustomer").textContent = `Customer: ${pj.namaCustomer}`;
+      document.getElementById("detailSubKode").textContent = `Kode: ${pj.kode} | Jenis: ${pj.jenisPekerjaan} | No HP: ${pj.noHp || '-'}`;
+      document.getElementById("detailValTotal").textContent = rupiah(pj.totalHarga);
+
+      // Filter Pemasukan untuk pekerjaan ini saja
+      const masukPekerjaan = dataPemasukan.filter(m => m.pekerjaanId === pid);
+      const totalMasuk = masukPekerjaan.reduce((s, x) => s + Number(x.nominal || 0), 0);
+      document.getElementById("detailValMasuk").textContent = rupiah(totalMasuk);
+
+      let htmlMasuk = `<table class="w-full text-left text-xs bg-white">
+        <tr class="bg-slate-50 text-slate-500 border-b"><th class="p-2.5">Tanggal</th><th class="p-2.5">Nominal</th><th class="p-2.5">Metode</th><th class="p-2.5">Keterangan</th><th class="p-2.5 text-right">Aksi</th></tr>`;
+      if(masukPekerjaan.length === 0) {
+        htmlMasuk += `<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada data pembayaran/pemasukan untuk pekerjaan ini.</td></tr>`;
+      } else {
+        masukPekerjaan.forEach(m => {
+          htmlMasuk += `<tr class="border-b hover:bg-slate-50">
+            <td class="p-2.5">${m.tanggal}</td>
+            <td class="p-2.5 font-semibold text-emerald-600">+${rupiah(m.nominal)}</td>
+            <td class="p-2.5 uppercase">${m.metode}</td>
+            <td class="p-2.5">${m.keterangan || '-'}</td>
+            <td class="p-2.5 text-right"><button onclick="hapusData('pemasukan','${m.id}')" class="text-rose-600 font-semibold">Hapus</button></td>
+          </tr>`;
+        });
+      }
+      htmlMasuk += `</table>`;
+      document.getElementById("detailTabelMasuk").innerHTML = htmlMasuk;
+
+      // Filter Pengeluaran untuk pekerjaan ini saja
+      const keluarPekerjaan = dataPengeluaran.filter(k => k.pekerjaanId === pid);
+      const totalKeluar = keluarPekerjaan.reduce((s, x) => s + Number(x.nominal || 0), 0);
+      document.getElementById("detailValKeluar").textContent = rupiah(totalKeluar);
+
+      let htmlKeluar = `<table class="w-full text-left text-xs bg-white">
+        <tr class="bg-slate-50 text-slate-500 border-b"><th class="p-2.5">Tanggal</th><th class="p-2.5">Kategori</th><th class="p-2.5">Nominal</th><th class="p-2.5">Keterangan</th><th class="p-2.5 text-right">Aksi</th></tr>`;
+      if(keluarPekerjaan.length === 0) {
+        htmlKeluar += `<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada pengeluaran/material tercatat untuk pekerjaan ini.</td></tr>`;
+      } else {
+        keluarPekerjaan.forEach(k => {
+          htmlKeluar += `<tr class="border-b hover:bg-slate-50">
+            <td class="p-2.5">${k.tanggal}</td>
+            <td class="p-2.5 font-medium">${k.kategori}</td>
+            <td class="p-2.5 font-semibold text-rose-600">-${rupiah(k.nominal)}</td>
+            <td class="p-2.5">${k.keterangan || '-'}</td>
+            <td class="p-2.5 text-right"><button onclick="hapusData('pengeluaran','${k.id}')" class="text-rose-600 font-semibold">Hapus</button></td>
+          </tr>`;
+        });
+      }
+      htmlKeluar += `</table>`;
+      document.getElementById("detailTabelKeluar").innerHTML = htmlKeluar;
+
+      document.getElementById("modalDetailPekerjaan").classList.remove("hidden");
+      document.getElementById("modalDetailPekerjaan").classList.add("flex");
+    };
+
+    window.bukaTambahMasukUntukPekerjaan = () => {
+      document.getElementById("mTanggal").value = new Date().toISOString().split("T")[0];
+      document.getElementById("mNominal").value = "";
+      document.getElementById("mKet").value = "";
+      document.getElementById("mPekerjaan").value = currentDetailPekerjaanId;
+      closeModal('modalDetailPekerjaan');
+      openTambahMasuk();
+    };
+
+    window.bukaTambahKeluarUntukPekerjaan = () => {
+      document.getElementById("kTanggal").value = new Date().toISOString().split("T")[0];
+      document.getElementById("kNominal").value = "";
+      document.getElementById("kKet").value = "";
+      document.getElementById("kPekerjaan").value = currentDetailPekerjaanId;
+      closeModal('modalDetailPekerjaan');
+      openTambahKeluar();
+    };
 
     function renderPemasukan() {
       const el = document.getElementById("listPemasukan");
@@ -543,7 +668,7 @@
         const pj = dataPekerjaan.find(x => x.id === m.pekerjaanId);
         html += `<tr class="hover:bg-slate-50">
           <td class="p-4 text-slate-600">${m.tanggal || "-"}</td>
-          <td class="p-4 font-mono text-blue-600">${pj ? pj.kode : "-"}</td>
+          <td class="p-4 font-mono text-blue-600">${pj ? pj.kode + ' (' + pj.namaCustomer + ')' : "-"}</td>
           <td class="p-4 font-semibold text-emerald-600">+${rupiah(m.nominal)}</td>
           <td class="p-4 text-slate-600">${m.keterangan || "-"}</td>
           <td class="p-4 text-right"><button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="hapusData('pemasukan','${m.id}')">Hapus</button></td>
@@ -558,11 +683,13 @@
       if (dataPengeluaran.length === 0) { el.innerHTML = '<div class="text-center py-12 text-slate-400 text-sm">Belum ada pengeluaran.</div>'; return; }
       let html = `<table class="w-full text-left border-collapse text-sm">
         <thead><tr class="border-b border-slate-200 bg-slate-50 text-slate-500 text-xs uppercase font-semibold">
-          <th class="p-4">Tanggal</th><th class="p-4">Kategori</th><th class="p-4">Nominal</th><th class="p-4">Ket</th><th class="p-4 text-right">Aksi</th>
+          <th class="p-4">Tanggal</th><th class="p-4">Pekerjaan Terkait</th><th class="p-4">Kategori</th><th class="p-4">Nominal</th><th class="p-4">Ket</th><th class="p-4 text-right">Aksi</th>
         </tr></thead><tbody class="divide-y divide-slate-100">`;
       dataPengeluaran.forEach(k => {
+        const pj = dataPekerjaan.find(x => x.id === k.pekerjaanId);
         html += `<tr class="hover:bg-slate-50">
           <td class="p-4 text-slate-600">${k.tanggal || "-"}</td>
+          <td class="p-4 font-mono text-blue-600">${pj ? pj.kode + ' (' + pj.namaCustomer + ')' : '<span class="text-slate-400 italic">Umum / Non-Proyek</span>'}</td>
           <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700">${k.kategori || "-"}</span></td>
           <td class="p-4 font-semibold text-rose-600">-${rupiah(k.nominal)}</td>
           <td class="p-4 text-slate-600">${k.keterangan || "-"}</td>
@@ -575,7 +702,7 @@
 
     function renderStok() {
       const el = document.getElementById("listStok");
-      if (dataStok.length === 0) { el.innerHTML = '<div class="text-center py-12 text-slate-400 text-sm">Belum ada data stok barang.</div>'; return; }
+      if (dataStok.length === 0) { el.innerHTML = '<div class="text-center py-12 text-slate-400 text-sm">Belum ada stok.</div>'; return; }
       let html = `<table class="w-full text-left border-collapse text-sm">
         <thead><tr class="border-b border-slate-200 bg-slate-50 text-slate-500 text-xs uppercase font-semibold">
           <th class="p-4">Nama Barang</th><th class="p-4">Sisa Stok</th><th class="p-4">Harga Satuan</th><th class="p-4 text-right">Aksi</th>
@@ -597,44 +724,25 @@
 
     function renderAdminMaster() {
       const elKat = document.getElementById("listMasterKategori");
-      if (masterKategori.length === 0) {
-        elKat.innerHTML = '<p class="text-xs text-slate-400 italic">Belum ada kategori.</p>';
-      } else {
-        elKat.innerHTML = masterKategori.map(k => `
-          <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
-            <span class="font-medium text-slate-700">${k.nama}</span>
-            <button onclick="hapusMasterData('master_kategori', '${k.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button>
-          </div>
-        `).join("");
-      }
+      elKat.innerHTML = masterKategori.map(k => `
+        <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
+          <span class="font-medium text-slate-700">${k.nama}</span>
+          <button onclick="hapusMasterData('master_kategori', '${k.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button>
+        </div>
+      `).join("");
 
       const elJen = document.getElementById("listMasterJenisPekerjaan");
-      if (masterJenisPekerjaan.length === 0) {
-        elJen.innerHTML = '<p class="text-xs text-slate-400 italic">Belum ada jenis pekerjaan.</p>';
-      } else {
-        elJen.innerHTML = masterJenisPekerjaan.map(j => `
-          <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
-            <span class="font-medium text-slate-700">${j.nama}</span>
-            <button onclick="hapusMasterData('master_jenis_pekerjaan', '${j.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button>
-          </div>
-        `).join("");
-      }
+      elJen.innerHTML = masterJenisPekerjaan.map(j => `
+        <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
+          <span class="font-medium text-slate-700">${j.nama}</span>
+          <button onclick="hapusMasterData('master_jenis_pekerjaan', '${j.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button>
+        </div>
+      `).join("");
     }
 
     function isiDropdownAdmin() {
-      const elJenis = document.getElementById("pJenis");
-      if(masterJenisPekerjaan.length === 0) {
-        elJenis.innerHTML = '<option value="">-- Tambah Jenis Pekerjaan di Menu Admin --</option>';
-      } else {
-        elJenis.innerHTML = masterJenisPekerjaan.map(j => `<option value="${j.nama}">${j.nama}</option>`).join("");
-      }
-
-      const elKat = document.getElementById("kKategori");
-      if(masterKategori.length === 0) {
-        elKat.innerHTML = '<option value="">-- Tambah Kategori di Menu Admin --</option>';
-      } else {
-        elKat.innerHTML = masterKategori.map(k => `<option value="${k.nama}">${k.nama}</option>`).join("");
-      }
+      document.getElementById("pJenis").innerHTML = masterJenisPekerjaan.map(j => `<option value="${j.nama}">${j.nama}</option>`).join("");
+      document.getElementById("kKategori").innerHTML = masterKategori.map(k => `<option value="${k.nama}">${k.nama}</option>`).join("");
     }
 
     window.tambahMasterKategori = async () => {
@@ -668,6 +776,7 @@
       const opts = '<option value="">-- Pilih Pekerjaan --</option>' + dataPekerjaan.map(p => `<option value="${p.id}">${p.kode} - ${p.namaCustomer}</option>`).join("");
       document.getElementById("mPekerjaan").innerHTML = opts;
       document.getElementById("pakaiPekerjaanId").innerHTML = opts;
+      document.getElementById("kPekerjaan").innerHTML = '<option value="">-- Umum / Tanpa Proyek --</option>' + dataPekerjaan.map(p => `<option value="${p.id}">${p.kode} - ${p.namaCustomer}</option>`).join("");
     }
 
     window.switchTab = (tab, el) => {
@@ -684,7 +793,6 @@
       document.getElementById("modalPekerjaan").classList.add("flex");
     };
     window.openTambahMasuk = () => {
-      document.getElementById("mTanggal").value = new Date().toISOString().split("T")[0];
       document.getElementById("modalMasuk").classList.remove("hidden");
       document.getElementById("modalMasuk").classList.add("flex");
     };
@@ -762,14 +870,17 @@
       });
       closeModal("modalMasuk");
       await loadAll();
+      if(currentDetailPekerjaanId) bukaDetailPekerjaan(currentDetailPekerjaanId);
     };
 
     window.simpanKeluar = async () => {
+      const pid = document.getElementById("kPekerjaan").value;
       const kategori = document.getElementById("kKategori").value;
       const nominal = Number(document.getElementById("kNominal").value);
       if (!kategori || !nominal) { alert("Kategori dan nominal wajib diisi!"); return; }
 
       await addDoc(collection(db, "pengeluaran"), {
+        pekerjaanId: pid || null,
         kategori: kategori,
         tanggal: document.getElementById("kTanggal").value,
         nominal,
@@ -778,6 +889,7 @@
       });
       closeModal("modalKeluar");
       await loadAll();
+      if(currentDetailPekerjaanId) bukaDetailPekerjaan(currentDetailPekerjaanId);
     };
 
     window.simpanStok = async () => {
@@ -806,6 +918,7 @@
       });
 
       await addDoc(collection(db, "pengeluaran"), {
+        pekerjaanId: pid,
         kategori: masterKategori[0] ? masterKategori[0].nama : "Material",
         tanggal: new Date().toISOString().split("T")[0],
         nominal: qty * (barang.harga || 0),
@@ -815,13 +928,14 @@
 
       closeModal("modalPakaiBarang");
       await loadAll();
-      alert("✅ Stok berhasil dikurangi dan tercatat ke pengeluaran!");
+      alert("✅ Stok berhasil dikurangi dan tercatat ke pengeluaran proyek!");
     };
 
     window.hapusData = async (coll, id) => {
       if (!confirm("Yakin ingin menghapus data ini?")) return;
       await deleteDoc(doc(db, coll, id));
-      loadAll();
+      await loadAll();
+      if(currentDetailPekerjaanId) bukaDetailPekerjaan(currentDetailPekerjaanId);
     };
 
     loadAll();
