@@ -55,7 +55,7 @@
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
         Stok & Barang Keluar
       </button>
-      <button onclick="switchTab('admin', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-100">
+      <button onclick="cekAksesAdmin()" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-100">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         Admin / Master Data
       </button>
@@ -72,11 +72,11 @@
         <h1 class="font-bold text-sm text-slate-900">PIJAR ELEKTRIK</h1>
       </div>
       <div class="flex gap-1 overflow-x-auto py-1">
-        <button onclick="switchTab('pekerjaan', this)" class="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-[11px] font-semibold">Pekerjaan</button>
-        <button onclick="switchTab('pemasukan', this)" class="px-2.5 py-1 bg-slate-200 text-slate-700 rounded-lg text-[11px] font-semibold">Masuk</button>
-        <button onclick="switchTab('pengeluaran', this)" class="px-2.5 py-1 bg-slate-200 text-slate-700 rounded-lg text-[11px] font-semibold">Keluar</button>
-        <button onclick="switchTab('stok', this)" class="px-2.5 py-1 bg-slate-200 text-slate-700 rounded-lg text-[11px] font-semibold">Stok</button>
-        <button onclick="switchTab('admin', this)" class="px-2.5 py-1 bg-slate-200 text-slate-700 rounded-lg text-[11px] font-semibold">Admin</button>
+        <button onclick="switchTab('pekerjaan', this)" class="px-2 py-1 bg-blue-600 text-white rounded-lg text-[10px] font-semibold">Pekerjaan</button>
+        <button onclick="switchTab('pemasukan', this)" class="px-2 py-1 bg-slate-200 text-slate-700 rounded-lg text-[10px] font-semibold">Masuk</button>
+        <button onclick="switchTab('pengeluaran', this)" class="px-2 py-1 bg-slate-200 text-slate-700 rounded-lg text-[10px] font-semibold">Keluar</button>
+        <button onclick="switchTab('stok', this)" class="px-2 py-1 bg-slate-200 text-slate-700 rounded-lg text-[10px] font-semibold">Stok</button>
+        <button onclick="cekAksesAdmin()" class="px-2 py-1 bg-slate-200 text-slate-700 rounded-lg text-[10px] font-semibold">Admin</button>
       </div>
     </header>
 
@@ -156,9 +156,12 @@
 
       <!-- TAB 5: ADMIN / MASTER DATA -->
       <div class="card-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden hidden" id="tab-admin">
-        <div class="p-5 border-b border-slate-100">
-          <h2 class="font-bold text-base text-slate-900">Panel Admin - Master Data Pilihan</h2>
-          <p class="text-xs text-slate-500 mt-0.5">Tambah opsi kategori pengeluaran atau jenis pekerjaan baru agar muncul di form input.</p>
+        <div class="p-5 border-b border-slate-100 flex justify-between items-center">
+          <div>
+            <h2 class="font-bold text-base text-slate-900">Panel Admin - Master Data Pilihan</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Tambah opsi kategori pengeluaran atau jenis pekerjaan baru agar muncul di form input.</p>
+          </div>
+          <button onclick="logoutAdmin()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-3 py-1.5 rounded-xl text-xs font-semibold">Keluar Admin</button>
         </div>
         <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Kelola Kategori Pengeluaran -->
@@ -192,7 +195,20 @@
     </main>
   </div>
 
-  <!-- MODAL TAMBAH PEKERJAAN -->
+  <!-- MODAL PIN ADMIN -->
+  <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPin">
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-xs w-full shadow-2xl space-y-4 text-center">
+      <div class="text-xl font-bold text-slate-900">🔒 Masukkan PIN Admin</div>
+      <p class="text-xs text-slate-500">Akses panel master data dibatasi.</p>
+      <input id="inputPinAdmin" type="password" placeholder="••••••" class="w-full text-center tracking-widest bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-lg font-bold">
+      <div class="flex gap-2 pt-2">
+        <button onclick="verifikasiPin()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs">Masuk</button>
+        <button onclick="closeModal('modalPin')" class="px-4 bg-slate-100 text-slate-600 font-semibold py-2 rounded-xl text-xs">Batal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL LAINNYA (Pekerjaan, Pemasukan, Pengeluaran, Stok, dll) -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPekerjaan">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
@@ -218,9 +234,7 @@
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Jenis Pekerjaan</label>
-        <select id="pJenis" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
-          <!-- Otomatis diisi oleh data Admin -->
-        </select>
+        <select id="pJenis" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm"></select>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Total Harga (Rp)</label>
@@ -250,7 +264,6 @@
     </div>
   </div>
 
-  <!-- MODAL TAMBAH PEMASUKAN -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalMasuk">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
@@ -289,7 +302,6 @@
     </div>
   </div>
 
-  <!-- MODAL TAMBAH PENGELUARAN -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalKeluar">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
@@ -299,9 +311,7 @@
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Kategori</label>
-          <select id="kKategori" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
-            <!-- Otomatis diisi oleh data Admin -->
-          </select>
+          <select id="kKategori" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm"></select>
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Tanggal</label>
@@ -323,7 +333,6 @@
     </div>
   </div>
 
-  <!-- MODAL STOK BARANG -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalStok">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
@@ -355,7 +364,6 @@
     </div>
   </div>
 
-  <!-- MODAL PAKAI MATERIAL KE PEKERJAAN -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPakaiBarang">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
@@ -407,6 +415,48 @@
     let masterKategori = [];
     let masterJenisPekerjaan = [];
     let selectedStokId = null;
+
+    // HASH PIN ACAK TERENKRISI (Default PIN: "123456")
+    // Nilai ini berupa hash SHA-256 acak, sehingga PIN aslinya tidak terbaca di kodingan!
+    const TARGET_PIN_HASH = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
+
+    async function hashPin(pin) {
+      const msgUint8 = new TextEncoder().encode(pin);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    window.cekAksesAdmin = async () => {
+      // Cek apakah sudah login admin sebelumnya di sesi ini
+      if (sessionStorage.getItem("admin_logged") === "true") {
+        switchTab('admin', document.querySelector("aside button:last-child"));
+      } else {
+        document.getElementById("inputPinAdmin").value = "";
+        document.getElementById("modalPin").classList.remove("hidden");
+        document.getElementById("modalPin").classList.add("flex");
+      }
+    };
+
+    window.verifikasiPin = async () => {
+      const inputVal = document.getElementById("inputPinAdmin").value.trim();
+      const hashedInput = await hashPin(inputVal);
+
+      if (hashedInput === TARGET_PIN_HASH) {
+        sessionStorage.setItem("admin_logged", "true");
+        closeModal("modalPin");
+        switchTab('admin', document.querySelector("aside button:last-child"));
+      } else {
+        alert("❌ PIN yang Anda masukkan salah!");
+        document.getElementById("inputPinAdmin").value = "";
+      }
+    };
+
+    window.logoutAdmin = () => {
+      sessionStorage.removeItem("admin_logged");
+      switchTab('pekerjaan', document.querySelector("aside button"));
+      alert("🔒 Berkeluar dari mode admin.");
+    };
 
     async function loadAll() {
       try {
@@ -548,7 +598,7 @@
     function renderAdminMaster() {
       const elKat = document.getElementById("listMasterKategori");
       if (masterKategori.length === 0) {
-        elKat.innerHTML = '<p class="text-xs text-slate-400 italic">Belum ada kategori. Tambahkan di atas.</p>';
+        elKat.innerHTML = '<p class="text-xs text-slate-400 italic">Belum ada kategori.</p>';
       } else {
         elKat.innerHTML = masterKategori.map(k => `
           <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
@@ -560,7 +610,7 @@
 
       const elJen = document.getElementById("listMasterJenisPekerjaan");
       if (masterJenisPekerjaan.length === 0) {
-        elJen.innerHTML = '<p class="text-xs text-slate-400 italic">Belum ada jenis pekerjaan. Tambahkan di atas.</p>';
+        elJen.innerHTML = '<p class="text-xs text-slate-400 italic">Belum ada jenis pekerjaan.</p>';
       } else {
         elJen.innerHTML = masterJenisPekerjaan.map(j => `
           <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
@@ -574,14 +624,14 @@
     function isiDropdownAdmin() {
       const elJenis = document.getElementById("pJenis");
       if(masterJenisPekerjaan.length === 0) {
-        elJenis.innerHTML = '<option value="">-- Harap Tambah Jenis Pekerjaan di Menu Admin --</option>';
+        elJenis.innerHTML = '<option value="">-- Tambah Jenis Pekerjaan di Menu Admin --</option>';
       } else {
         elJenis.innerHTML = masterJenisPekerjaan.map(j => `<option value="${j.nama}">${j.nama}</option>`).join("");
       }
 
       const elKat = document.getElementById("kKategori");
       if(masterKategori.length === 0) {
-        elKat.innerHTML = '<option value="">-- Harap Tambah Kategori di Menu Admin --</option>';
+        elKat.innerHTML = '<option value="">-- Tambah Kategori di Menu Admin --</option>';
       } else {
         elKat.innerHTML = masterKategori.map(k => `<option value="${k.nama}">${k.nama}</option>`).join("");
       }
