@@ -26,6 +26,21 @@
 </head>
 <body class="bg-slate-100 text-slate-800 min-h-screen flex selection:bg-blue-600 selection:text-white">
 
+  <!-- GERBANG UTAMA: HALAMAN LOGIN PIN (MUNCUL PERTAMA KALI) -->
+  <div id="gerbangLogin" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-white border border-slate-200 rounded-3xl p-8 max-w-sm w-full shadow-2xl space-y-5 text-center">
+      <div class="h-14 w-14 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 text-2xl font-bold mx-auto shadow-sm">
+        ⚡
+      </div>
+      <div>
+        <h2 class="font-bold text-lg text-slate-900">PIJAR ELEKTRIK</h2>
+        <p class="text-xs text-slate-500 mt-1">Masukkan PIN untuk masuk ke Dashboard</p>
+      </div>
+      <input id="inputGerbangPin" type="password" placeholder="••••••" class="w-full text-center tracking-widest bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 text-xl font-bold">
+      <button onclick="prosesLoginUtama()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl text-sm shadow-sm">Masuk Dashboard</button>
+    </div>
+  </div>
+
   <!-- SIDEBAR NAVIGATION -->
   <aside class="w-64 bg-white border-r border-slate-200 hidden md:flex flex-col sticky top-0 h-screen z-30 shadow-sm">
     <div class="p-6 border-b border-slate-100 flex items-center gap-3">
@@ -55,7 +70,7 @@
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
         Stok & Barang Keluar
       </button>
-      <button onclick="cekAksesAdmin()" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-100">
+      <button onclick="switchTab('admin', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-100">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         Admin / Master Data
       </button>
@@ -76,7 +91,7 @@
         <button onclick="switchTab('pemasukan', this)" class="px-2 py-1 bg-slate-200 text-slate-700 rounded-lg text-[10px] font-semibold">Masuk</button>
         <button onclick="switchTab('pengeluaran', this)" class="px-2 py-1 bg-slate-200 text-slate-700 rounded-lg text-[10px] font-semibold">Keluar</button>
         <button onclick="switchTab('stok', this)" class="px-2 py-1 bg-slate-200 text-slate-700 rounded-lg text-[10px] font-semibold">Stok</button>
-        <button onclick="cekAksesAdmin()" class="px-2 py-1 bg-slate-200 text-slate-700 rounded-lg text-[10px] font-semibold">Admin</button>
+        <button onclick="switchTab('admin', this)" class="px-2 py-1 bg-slate-200 text-slate-700 rounded-lg text-[10px] font-semibold">Admin</button>
       </div>
     </header>
 
@@ -161,7 +176,7 @@
             <h2 class="font-bold text-base text-slate-900">Panel Admin - Master Data Pilihan</h2>
             <p class="text-xs text-slate-500 mt-0.5">Tambah opsi kategori pengeluaran atau jenis pekerjaan baru.</p>
           </div>
-          <button onclick="logoutAdmin()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-3 py-1.5 rounded-xl text-xs font-semibold">Keluar Admin</button>
+          <button onclick="lockDashboard()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-3 py-1.5 rounded-xl text-xs font-semibold">Kunci Dashboard</button>
         </div>
         <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
@@ -186,7 +201,7 @@
     </main>
   </div>
 
-  <!-- MODAL DETAIL PEKERJAAN (TERPADU: PEMASUKAN & PENGELUARAN KHUSUS PROYEK INI) -->
+  <!-- MODAL DETAIL PEKERJAAN -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalDetailPekerjaan">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-3xl w-full shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
@@ -197,7 +212,6 @@
         <button onclick="closeModal('modalDetailPekerjaan')" class="text-slate-400 hover:text-slate-700 font-bold text-lg">✕</button>
       </div>
 
-      <!-- Ringkasan Keuangan Proyek Ini -->
       <div class="grid grid-cols-3 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
         <div>
           <p class="text-[11px] text-slate-500 uppercase font-semibold">Total Nilai Proyek</p>
@@ -213,7 +227,6 @@
         </div>
       </div>
 
-      <!-- Tabel Riwayat Pembayaran / Pemasukan Proyek Ini -->
       <div class="space-y-2">
         <div class="flex justify-between items-center">
           <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider">💰 Riwayat Pembayaran / Pemasukan</h3>
@@ -222,25 +235,12 @@
         <div id="detailTabelMasuk" class="overflow-x-auto border border-slate-100 rounded-xl"></div>
       </div>
 
-      <!-- Tabel Riwayat Pengeluaran / Material Proyek Ini -->
       <div class="space-y-2 pt-2">
         <div class="flex justify-between items-center">
           <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider">💸 Pengeluaran & Material Terpakai</h3>
           <button onclick="bukaTambahKeluarUntukPekerjaan()" class="bg-rose-600 hover:bg-rose-700 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">+ Catat Pengeluaran</button>
         </div>
         <div id="detailTabelKeluar" class="overflow-x-auto border border-slate-100 rounded-xl"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL PIN ADMIN -->
-  <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPin">
-    <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-xs w-full shadow-2xl space-y-4 text-center">
-      <div class="text-xl font-bold text-slate-900">🔒 Masukkan PIN Admin</div>
-      <input id="inputPinAdmin" type="password" placeholder="••••••" class="w-full text-center tracking-widest bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-lg font-bold">
-      <div class="flex gap-2 pt-2">
-        <button onclick="verifikasiPin()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs">Masuk</button>
-        <button onclick="closeModal('modalPin')" class="px-4 bg-slate-100 text-slate-600 font-semibold py-2 rounded-xl text-xs">Batal</button>
       </div>
     </div>
   </div>
@@ -462,7 +462,8 @@
     let selectedStokId = null;
     let currentDetailPekerjaanId = null;
 
-    const TARGET_PIN_HASH = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
+    // HASH PIN ACAK TERENKRISI (Default PIN Gerbang: "123456")
+    const TARGET_DASHBOARD_HASH = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
 
     async function hashPin(pin) {
       const msgUint8 = new TextEncoder().encode(pin);
@@ -471,31 +472,34 @@
       return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
-    window.cekAksesAdmin = async () => {
-      if (sessionStorage.getItem("admin_logged") === "true") {
-        switchTab('admin', document.querySelector("aside button:last-child"));
-      } else {
-        document.getElementById("inputPinAdmin").value = "";
-        document.getElementById("modalPin").classList.remove("hidden");
-        document.getElementById("modalPin").classList.add("flex");
+    // Cek apakah sudah login sebelumnya di sesi ini
+    window.addEventListener("DOMContentLoaded", () => {
+      if (sessionStorage.getItem("dashboard_logged") === "true") {
+        document.getElementById("gerbangLogin").classList.add("hidden");
+        loadAll();
       }
-    };
+    });
 
-    window.verifikasiPin = async () => {
-      const inputVal = document.getElementById("inputPinAdmin").value.trim();
+    window.prosesLoginUtama = async () => {
+      const inputVal = document.getElementById("inputGerbangPin").value.trim();
       const hashedInput = await hashPin(inputVal);
-      if (hashedInput === TARGET_PIN_HASH) {
-        sessionStorage.setItem("admin_logged", "true");
-        closeModal("modalPin");
-        switchTab('admin', document.querySelector("aside button:last-child"));
+
+      if (hashedInput === TARGET_DASHBOARD_HASH) {
+        sessionStorage.setItem("dashboard_logged", "true");
+        document.getElementById("gerbangLogin").classList.add("hidden");
+        loadAll();
       } else {
-        alert("❌ PIN salah!");
+        alert("❌ PIN yang Anda masukkan salah!");
+        document.getElementById("inputGerbangPin").value = "";
       }
     };
 
-    window.logoutAdmin = () => {
-      sessionStorage.removeItem("admin_logged");
-      switchTab('pekerjaan', document.querySelector("aside button"));
+    window.lockDashboard = () => {
+      sessionStorage.removeItem("dashboard_logged");
+      document.getElementById("gerbangLogin").classList.remove("flex");
+      document.getElementById("gerbangLogin").classList.remove("hidden");
+      document.getElementById("gerbangLogin").style.display = "flex";
+      document.getElementById("inputGerbangPin").value = "";
     };
 
     async function loadAll() {
@@ -527,7 +531,6 @@
         isiDropdownPekerjaan();
         isiDropdownAdmin();
 
-        // Jika modal detail sedang terbuka, refresh datanya secara live
         if (currentDetailPekerjaanId) {
           bukaDetailPekerjaan(currentDetailPekerjaanId);
         }
@@ -579,7 +582,6 @@
       el.innerHTML = html;
     }
 
-    // FUNGSI MEMBUKA DETAIL SPESIFIK PER PEKERJAAN
     window.bukaDetailPekerjaan = (pid) => {
       currentDetailPekerjaanId = pid;
       const pj = dataPekerjaan.find(x => x.id === pid);
@@ -589,7 +591,6 @@
       document.getElementById("detailSubKode").textContent = `Kode: ${pj.kode} | Jenis: ${pj.jenisPekerjaan} | No HP: ${pj.noHp || '-'}`;
       document.getElementById("detailValTotal").textContent = rupiah(pj.totalHarga);
 
-      // Filter Pemasukan untuk pekerjaan ini saja
       const masukPekerjaan = dataPemasukan.filter(m => m.pekerjaanId === pid);
       const totalMasuk = masukPekerjaan.reduce((s, x) => s + Number(x.nominal || 0), 0);
       document.getElementById("detailValMasuk").textContent = rupiah(totalMasuk);
@@ -597,7 +598,7 @@
       let htmlMasuk = `<table class="w-full text-left text-xs bg-white">
         <tr class="bg-slate-50 text-slate-500 border-b"><th class="p-2.5">Tanggal</th><th class="p-2.5">Nominal</th><th class="p-2.5">Metode</th><th class="p-2.5">Keterangan</th><th class="p-2.5 text-right">Aksi</th></tr>`;
       if(masukPekerjaan.length === 0) {
-        htmlMasuk += `<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada data pembayaran/pemasukan untuk pekerjaan ini.</td></tr>`;
+        htmlMasuk += `<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada pembayaran.</td></tr>`;
       } else {
         masukPekerjaan.forEach(m => {
           htmlMasuk += `<tr class="border-b hover:bg-slate-50">
@@ -612,7 +613,6 @@
       htmlMasuk += `</table>`;
       document.getElementById("detailTabelMasuk").innerHTML = htmlMasuk;
 
-      // Filter Pengeluaran untuk pekerjaan ini saja
       const keluarPekerjaan = dataPengeluaran.filter(k => k.pekerjaanId === pid);
       const totalKeluar = keluarPekerjaan.reduce((s, x) => s + Number(x.nominal || 0), 0);
       document.getElementById("detailValKeluar").textContent = rupiah(totalKeluar);
@@ -620,7 +620,7 @@
       let htmlKeluar = `<table class="w-full text-left text-xs bg-white">
         <tr class="bg-slate-50 text-slate-500 border-b"><th class="p-2.5">Tanggal</th><th class="p-2.5">Kategori</th><th class="p-2.5">Nominal</th><th class="p-2.5">Keterangan</th><th class="p-2.5 text-right">Aksi</th></tr>`;
       if(keluarPekerjaan.length === 0) {
-        htmlKeluar += `<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada pengeluaran/material tercatat untuk pekerjaan ini.</td></tr>`;
+        htmlKeluar += `<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada pengeluaran.</td></tr>`;
       } else {
         keluarPekerjaan.forEach(k => {
           htmlKeluar += `<tr class="border-b hover:bg-slate-50">
@@ -689,7 +689,7 @@
         const pj = dataPekerjaan.find(x => x.id === k.pekerjaanId);
         html += `<tr class="hover:bg-slate-50">
           <td class="p-4 text-slate-600">${k.tanggal || "-"}</td>
-          <td class="p-4 font-mono text-blue-600">${pj ? pj.kode + ' (' + pj.namaCustomer + ')' : '<span class="text-slate-400 italic">Umum / Non-Proyek</span>'}</td>
+          <td class="p-4 font-mono text-blue-600">${pj ? pj.kode + ' (' + pj.namaCustomer + ')' : '<span class="text-slate-400 italic">Umum</span>'}</td>
           <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700">${k.kategori || "-"}</span></td>
           <td class="p-4 font-semibold text-rose-600">-${rupiah(k.nominal)}</td>
           <td class="p-4 text-slate-600">${k.keterangan || "-"}</td>
@@ -713,7 +713,7 @@
           <td class="p-4 font-bold ${s.jumlah <= 2 ? 'text-rose-600' : 'text-slate-800'}">${s.jumlah} ${s.satuan || ''}</td>
           <td class="p-4 text-slate-600">${rupiah(s.harga)}</td>
           <td class="p-4 text-right space-x-2">
-            <button class="bg-amber-50 hover:bg-amber-100 text-amber-700 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="openPakaiBarang('${s.id}', '${s.nama}', ${s.jumlah})">Pakai untuk Pekerjaan</button>
+            <button class="bg-amber-50 hover:bg-amber-100 text-amber-700 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="openPakaiBarang('${s.id}', '${s.nama}', ${s.jumlah})">Pakai</button>
             <button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="hapusData('stok','${s.id}')">Hapus</button>
           </td>
         </tr>`;
@@ -723,16 +723,14 @@
     }
 
     function renderAdminMaster() {
-      const elKat = document.getElementById("listMasterKategori");
-      elKat.innerHTML = masterKategori.map(k => `
+      document.getElementById("listMasterKategori").innerHTML = masterKategori.map(k => `
         <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
           <span class="font-medium text-slate-700">${k.nama}</span>
           <button onclick="hapusMasterData('master_kategori', '${k.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button>
         </div>
       `).join("");
 
-      const elJen = document.getElementById("listMasterJenisPekerjaan");
-      elJen.innerHTML = masterJenisPekerjaan.map(j => `
+      document.getElementById("listMasterJenisPekerjaan").innerHTML = masterJenisPekerjaan.map(j => `
         <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
           <span class="font-medium text-slate-700">${j.nama}</span>
           <button onclick="hapusMasterData('master_jenis_pekerjaan', '${j.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button>
@@ -824,7 +822,7 @@
       const total = Number(document.getElementById("pTotal").value);
       const jenis = document.getElementById("pJenis").value;
       const tipeBayar = document.getElementById("pTipeBayar").value;
-      if (!nama || !total || !jenis) { alert("Nama, jenis pekerjaan, dan total wajib diisi!"); return; }
+      if (!nama || !total || !jenis) { alert("Data wajib diisi!"); return; }
 
       const kode = "PJ-" + Date.now().toString().slice(-8);
       const docRef = await addDoc(collection(db, "pekerjaan"), {
@@ -937,8 +935,6 @@
       await loadAll();
       if(currentDetailPekerjaanId) bukaDetailPekerjaan(currentDetailPekerjaanId);
     };
-
-    loadAll();
   </script>
 </body>
 </html>
