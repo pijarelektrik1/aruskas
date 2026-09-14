@@ -93,7 +93,7 @@
       <!-- STATs -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
         <div class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm flex items-center gap-4">
-          <div class="h-12 w-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+          <div class="h-12 w-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
           </div>
           <div>
@@ -102,7 +102,7 @@
           </div>
         </div>
         <div class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm flex items-center gap-4">
-          <div class="h-12 w-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center">
+          <div class="h-12 w-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
           </div>
           <div>
@@ -111,7 +111,7 @@
           </div>
         </div>
         <div class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm flex items-center gap-4">
-          <div class="h-12 w-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+          <div class="h-12 w-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
           </div>
           <div>
@@ -128,7 +128,7 @@
             <h2 class="font-bold text-base text-slate-900">Daftar Pekerjaan & Keuangan Terpadu</h2>
             <p class="text-xs text-slate-500 mt-0.5">Kelola termin pembayaran, material, dan lihat keuntungan bersih setiap proyek.</p>
           </div>
-          <button onclick="openTambahPekerjaan()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl text-xs font-semibold transition-all shadow-md shadow-blue-600/20 flex items-center gap-2">
+          <button onclick="openTambahPekerjaan()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl text-xs font-semibold transition-all shadow-md shadow-blue-600/20 flex items-center gap-2 shrink-0">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
             Tambah Pekerjaan Baru
           </button>
@@ -195,7 +195,7 @@
     </main>
   </div>
 
-  <!-- MODAL DETAIL / RINCIAN KEUANGAN PROYEK (DENGAN KEUNTUNGAN BERSIH TIAP PROYEK) -->
+  <!-- MODAL DETAIL / RINCIAN KEUANGAN PROYEK -->
   <div class="modal fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalDetailPekerjaan">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-4xl w-full shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-4 border-b border-slate-100">
@@ -232,7 +232,7 @@
           <h3 class="font-bold text-xs text-slate-800 uppercase tracking-wider flex items-center gap-2">
             <span class="h-2 w-2 rounded-full bg-emerald-500"></span> Daftar Pembayaran / Termin Proyek
           </h3>
-          <button onclick="openTambahMasukSub()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5">
+          <button onclick="openTambahMasukSub()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5 shrink-0">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
             Tambah Termin / Bayar
           </button>
@@ -246,7 +246,7 @@
           <h3 class="font-bold text-xs text-slate-800 uppercase tracking-wider flex items-center gap-2">
             <span class="h-2 w-2 rounded-full bg-rose-500"></span> Daftar Pengeluaran & Material Proyek
           </h3>
-          <button onclick="openTambahKeluarSub()" class="bg-rose-600 hover:bg-rose-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5">
+          <button onclick="openTambahKeluarSub()" class="bg-rose-600 hover:bg-rose-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5 shrink-0">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
             Tambah Pengeluaran
           </button>
@@ -492,7 +492,6 @@
         loadAll();
       }
 
-      // Otomatis huruf besar semua pada input yang memiliki kelas uppercase-input
       document.addEventListener("input", (e) => {
         if (e.target.classList.contains("uppercase-input")) {
           const start = e.target.selectionStart;
@@ -594,15 +593,15 @@
         return;
       }
 
-      let html = `<table class="w-full text-left border-collapse text-xs sm:text-sm">
-        <thead><tr class="border-b border-slate-100 bg-slate-50/70 text-slate-400 text-[11px] uppercase font-bold tracking-wider">
-          <th class="p-4">Kode & Customer</th>
-          <th class="p-4">Tipe & Jenis</th>
-          <th class="p-4">Nilai Proyek</th>
-          <th class="p-4 text-emerald-600">Total Masuk</th>
-          <th class="p-4 text-rose-600">Total Keluar</th>
-          <th class="p-4 text-blue-600">Keuntungan Bersih</th>
-          <th class="p-4 text-right">Aksi</th>
+      let html = `<table class="w-full text-left border-collapse text-xs sm:text-sm whitespace-nowrap">
+        <thead><tr class="border-b border-slate-100 bg-slate-50/80 text-slate-400 text-[11px] uppercase font-bold tracking-wider">
+          <th class="py-4 px-6">Kode & Customer</th>
+          <th class="py-4 px-6">Tipe & Jenis</th>
+          <th class="py-4 px-6">Nilai Proyek</th>
+          <th class="py-4 px-6 text-emerald-600">Total Masuk</th>
+          <th class="py-4 px-6 text-rose-600">Total Keluar</th>
+          <th class="py-4 px-6 text-blue-600">Keuntungan Bersih</th>
+          <th class="py-4 px-6 text-right">Aksi</th>
         </tr></thead><tbody class="divide-y divide-slate-100">`;
 
       dataPekerjaan.forEach(p => {
@@ -617,22 +616,24 @@
           : '<span class="px-2.5 py-1 rounded-xl text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">PERORANGAN</span>';
 
         html += `<tr class="hover:bg-slate-50/80 transition-colors">
-          <td class="p-4">
+          <td class="py-4 px-6 align-middle">
             <span class="font-mono font-bold text-blue-600 block">${p.kode || "-"}</span>
-            <span class="font-bold text-slate-900">${p.namaCustomer || "-"}</span>
-            <span class="text-slate-400 block text-[11px]">${p.noHp || ''}</span>
+            <span class="font-bold text-slate-900 block mt-0.5">${p.namaCustomer || "-"}</span>
+            <span class="text-slate-400 block text-[11px] mt-0.5">${p.noHp || ''}</span>
           </td>
-          <td class="p-4">
-            ${badgeTipe}
+          <td class="py-4 px-6 align-middle">
+            <div>${badgeTipe}</div>
             <span class="block text-slate-600 font-medium mt-1.5">${p.jenisPekerjaan || "-"}</span>
           </td>
-          <td class="p-4 font-bold text-slate-900">${rupiah(p.totalHarga)}</td>
-          <td class="p-4 font-bold text-emerald-600">+${rupiah(totalMasukProj)}</td>
-          <td class="p-4 font-bold text-rose-600">-${rupiah(totalKeluarProj)}</td>
-          <td class="p-4 font-extrabold ${labaProj >= 0 ? 'text-blue-600' : 'text-rose-600'}">${rupiah(labaProj)}</td>
-          <td class="p-4 text-right space-x-1.5">
-            <button class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm" onclick="bukaDetailPekerjaan('${p.id}')">📂 Rincian Keuangan</button>
-            <button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm" onclick="hapusPekerjaan('${p.id}')">Hapus</button>
+          <td class="py-4 px-6 align-middle font-bold text-slate-900">${rupiah(p.totalHarga)}</td>
+          <td class="py-4 px-6 align-middle font-bold text-emerald-600">+${rupiah(totalMasukProj)}</td>
+          <td class="py-4 px-6 align-middle font-bold text-rose-600">-${rupiah(totalKeluarProj)}</td>
+          <td class="py-4 px-6 align-middle font-extrabold ${labaProj >= 0 ? 'text-blue-600' : 'text-rose-600'}">${rupiah(labaProj)}</td>
+          <td class="py-4 px-6 align-middle text-right">
+            <div class="inline-flex items-center gap-2">
+              <button class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm" onclick="bukaDetailPekerjaan('${p.id}')">📂 Rincian Keuangan</button>
+              <button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm" onclick="hapusPekerjaan('${p.id}')">Hapus</button>
+            </div>
           </td>
         </tr>`;
       });
@@ -662,40 +663,40 @@
       elUntung.textContent = rupiah(labaBersih);
       elUntung.className = `text-sm sm:text-base font-extrabold mt-1 ${labaBersih >= 0 ? 'text-blue-600' : 'text-rose-600'}`;
 
-      let htmlM = `<table class="w-full text-left text-xs bg-white">
+      let htmlM = `<table class="w-full text-left text-xs bg-white whitespace-nowrap">
         <tr class="bg-slate-50 text-slate-400 border-b border-slate-100 uppercase font-bold text-[10px] tracking-wider">
-          <th class="p-3.5">Tanggal</th><th class="p-3.5">Nominal</th><th class="p-3.5">Metode</th><th class="p-3.5">Keterangan</th><th class="p-3.5 text-right">Aksi</th>
+          <th class="py-3 px-4">Tanggal</th><th class="py-3 px-4">Nominal</th><th class="py-3 px-4">Metode</th><th class="py-3 px-4">Keterangan</th><th class="py-3 px-4 text-right">Aksi</th>
         </tr>`;
       if(arrM.length === 0) {
-        htmlM += `<tr><td colspan="5" class="p-8 text-center text-slate-400">Belum ada catatan pembayaran.</td></tr>`;
+        htmlM += `<tr><td colspan="5" class="py-6 px-4 text-center text-slate-400">Belum ada catatan pembayaran.</td></tr>`;
       } else {
         arrM.forEach((m, idx) => {
           htmlM += `<tr class="border-b border-slate-50 hover:bg-slate-50/50">
-            <td class="p-3.5 text-slate-600">${m.tanggal}</td>
-            <td class="p-3.5 font-bold text-emerald-600">+${rupiah(m.nominal)}</td>
-            <td class="p-3.5 uppercase font-medium">${m.metode || '-'}</td>
-            <td class="p-3.5 font-bold text-slate-800">${m.keterangan || '-'}</td>
-            <td class="p-3.5 text-right"><button onclick="hapusSubItem('pemasukan', ${idx})" class="text-rose-600 font-semibold hover:underline">Hapus</button></td>
+            <td class="py-3 px-4 text-slate-600 align-middle">${m.tanggal}</td>
+            <td class="py-3 px-4 font-bold text-emerald-600 align-middle">+${rupiah(m.nominal)}</td>
+            <td class="py-3 px-4 uppercase font-medium align-middle">${m.metode || '-'}</td>
+            <td class="py-3 px-4 font-bold text-slate-800 align-middle">${m.keterangan || '-'}</td>
+            <td class="py-3 px-4 text-right align-middle"><button onclick="hapusSubItem('pemasukan', ${idx})" class="text-rose-600 font-semibold hover:underline">Hapus</button></td>
           </tr>`;
         });
       }
       htmlM += `</table>`;
       document.getElementById("tabelMasukSub").innerHTML = htmlM;
 
-      let htmlK = `<table class="w-full text-left text-xs bg-white">
+      let htmlK = `<table class="w-full text-left text-xs bg-white whitespace-nowrap">
         <tr class="bg-slate-50 text-slate-400 border-b border-slate-100 uppercase font-bold text-[10px] tracking-wider">
-          <th class="p-3.5">Tanggal</th><th class="p-3.5">Kategori</th><th class="p-3.5">Nominal</th><th class="p-3.5">Keterangan</th><th class="p-3.5 text-right">Aksi</th>
+          <th class="py-3 px-4">Tanggal</th><th class="py-3 px-4">Kategori</th><th class="py-3 px-4">Nominal</th><th class="py-3 px-4">Keterangan</th><th class="py-3 px-4 text-right">Aksi</th>
         </tr>`;
       if(arrK.length === 0) {
-        htmlK += `<tr><td colspan="5" class="p-8 text-center text-slate-400">Belum ada catatan pengeluaran.</td></tr>`;
+        htmlK += `<tr><td colspan="5" class="py-6 px-4 text-center text-slate-400">Belum ada catatan pengeluaran.</td></tr>`;
       } else {
         arrK.forEach((k, idx) => {
           htmlK += `<tr class="border-b border-slate-50 hover:bg-slate-50/50">
-            <td class="p-3.5 text-slate-600">${k.tanggal}</td>
-            <td class="p-3.5 font-semibold text-slate-700">${k.kategori || '-'}</td>
-            <td class="p-3.5 font-bold text-rose-600">-${rupiah(k.nominal)}</td>
-            <td class="p-3.5 font-bold text-slate-800">${k.keterangan || '-'}</td>
-            <td class="p-3.5 text-right"><button onclick="hapusSubItem('pengeluaran', ${idx})" class="text-rose-600 font-semibold hover:underline">Hapus</button></td>
+            <td class="py-3 px-4 text-slate-600 align-middle">${k.tanggal}</td>
+            <td class="py-3 px-4 font-semibold text-slate-700 align-middle">${k.kategori || '-'}</td>
+            <td class="py-3 px-4 font-bold text-rose-600 align-middle">-${rupiah(k.nominal)}</td>
+            <td class="py-3 px-4 font-bold text-slate-800 align-middle">${k.keterangan || '-'}</td>
+            <td class="py-3 px-4 text-right align-middle"><button onclick="hapusSubItem('pengeluaran', ${idx})" class="text-rose-600 font-semibold hover:underline">Hapus</button></td>
           </tr>`;
         });
       }
@@ -788,16 +789,19 @@
     function renderStok() {
       const el = document.getElementById("listStok");
       if (dataStok.length === 0) { el.innerHTML = '<div class="text-center py-16 text-slate-400 text-sm">Belum ada stok barang.</div>'; return; }
-      let html = `<table class="w-full text-left border-collapse text-sm">
-        <thead><tr class="border-b border-slate-100 bg-slate-50/70 text-slate-400 text-[11px] uppercase font-bold tracking-wider">
-          <th class="p-4">Nama Barang</th><th class="p-4">Sisa Stok</th><th class="p-4">Harga Satuan</th><th class="p-4 text-right">Aksi</th>
+      let html = `<table class="w-full text-left border-collapse text-sm whitespace-nowrap">
+        <thead><tr class="border-b border-slate-100 bg-slate-50/80 text-slate-400 text-[11px] uppercase font-bold tracking-wider">
+          <th class="py-4 px-6">Nama Barang</th>
+          <th class="py-4 px-6">Sisa Stok</th>
+          <th class="py-4 px-6">Harga Satuan</th>
+          <th class="py-4 px-6 text-right">Aksi</th>
         </tr></thead><tbody class="divide-y divide-slate-100">`;
       dataStok.forEach(s => {
         html += `<tr class="hover:bg-slate-50/80 transition-colors">
-          <td class="p-4 font-bold text-slate-900">${s.nama}</td>
-          <td class="p-4 font-bold ${s.jumlah <= 2 ? 'text-rose-600' : 'text-slate-800'}">${s.jumlah} ${s.satuan || ''}</td>
-          <td class="p-4 text-slate-600 font-semibold">${rupiah(s.harga)}</td>
-          <td class="p-4 text-right">
+          <td class="py-4 px-6 font-bold text-slate-900 align-middle">${s.nama}</td>
+          <td class="py-4 px-6 font-bold ${s.jumlah <= 2 ? 'text-rose-600' : 'text-slate-800'} align-middle">${s.jumlah} ${s.satuan || ''}</td>
+          <td class="py-4 px-6 text-slate-600 font-semibold align-middle">${rupiah(s.harga)}</td>
+          <td class="py-4 px-6 text-right align-middle">
             <button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm" onclick="hapusStok('${s.id}')">Hapus</button>
           </td>
         </tr>`;
