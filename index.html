@@ -108,7 +108,7 @@
         <div class="p-5 border-b border-slate-100 flex justify-between items-center">
           <div>
             <h2 class="font-bold text-sm sm:text-base text-slate-800">Daftar Pekerjaan & Keuangan Terpadu</h2>
-            <p class="text-xs text-slate-500 mt-0.5">Setiap pekerjaan sudah memuat rincian pemasukan dan pengeluarannya sendiri.</p>
+            <p class="text-xs text-slate-500 mt-0.5">Klik "Rincian Keuangan" untuk tambah Termin (Termin 1, 2, 3) atau banyak Pengeluaran.</p>
           </div>
           <button onclick="openTambahPekerjaan()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm">
             + Tambah Pekerjaan Baru
@@ -172,7 +172,7 @@
     </main>
   </div>
 
-  <!-- MODAL DETAIL KEUANGAN DI DALAM SATU PEKERJAAN -->
+  <!-- MODAL DETAIL / RINCIAN KEUANGAN (UNTUK TAMBAH BANYAK TERMIN & BANYAK PENGELUARAN) -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalDetailPekerjaan">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-4xl w-full shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
@@ -198,31 +198,31 @@
         </div>
       </div>
 
-      <!-- TABEL PEMASUKAN DALAM PROYEK INI -->
+      <!-- TABEL PEMASUKAN / TERMIN (BISA TAMBAH BANYAK) -->
       <div class="space-y-3">
         <div class="flex justify-between items-center">
-          <h3 class="font-bold text-xs text-emerald-700 uppercase tracking-wider">📥 Daftar Pemasukan / Pembayaran Proyek Ini</h3>
-          <button onclick="openTambahMasukSub()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">+ Tambah Pembayaran</button>
+          <h3 class="font-bold text-xs text-emerald-700 uppercase tracking-wider">📥 Daftar Pembayaran / Termin Proyek Ini</h3>
+          <button onclick="openTambahMasukSub()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">+ Tambah Termin / Bayar</button>
         </div>
         <div id="tabelMasukSub" class="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm"></div>
       </div>
 
-      <!-- TABEL PENGELUARAN DALAM PROYEK INI -->
+      <!-- TABEL PENGELUARAN / MATERIAL (BISA TAMBAH BANYAK) -->
       <div class="space-y-3 pt-2">
         <div class="flex justify-between items-center">
           <h3 class="font-bold text-xs text-rose-700 uppercase tracking-wider">📤 Daftar Pengeluaran & Material Proyek Ini</h3>
-          <button onclick="openTambahKeluarSub()" class="bg-rose-600 hover:bg-rose-700 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">+ Tambah Pengeluaran</button>
+          <button onclick="openTambahKeluarSub()" class="bg-rose-600 hover:bg-rose-700 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">+ Tambah Pengeluaran Baru</button>
         </div>
         <div id="tabelKeluarSub" class="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm"></div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL TAMBAH PEMASUKAN DI DALAM DETAIL PROYEK -->
+  <!-- MODAL TAMBAH PEMASUKAN / TERMIN DI DALAM DETAIL -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalTambahMasukSub">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-        <h2 class="font-bold text-base text-slate-900">Catat Pemasukan / Termin Baru</h2>
+        <h2 class="font-bold text-base text-slate-900">Catat Pembayaran / Termin Baru</h2>
         <button onclick="closeModal('modalTambahMasukSub')" class="text-slate-400 hover:text-slate-700">✕</button>
       </div>
       <div>
@@ -241,17 +241,17 @@
         </select>
       </div>
       <div>
-        <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan (Contoh: Termin 1 / DP / Pelunasan)</label>
-        <input id="subMasukKet" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan (Contoh: Termin 1 / Termin 2 / Pelunasan)</label>
+        <input id="subMasukKet" type="text" placeholder="Termin 2" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div class="flex gap-3 pt-3 border-t border-slate-100">
-        <button onclick="simpanPemasukanSub()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Simpan Pemasukan</button>
+        <button onclick="simpanPemasukanSub()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Simpan Pembayaran</button>
         <button onclick="closeModal('modalTambahMasukSub')" class="px-4 bg-slate-100 text-slate-600 font-semibold py-2.5 rounded-xl text-sm">Batal</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL TAMBAH PENGELUARAN DI DALAM DETAIL PROYEK -->
+  <!-- MODAL TAMBAH PENGELUARAN DI DALAM DETAIL -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalTambahKeluarSub">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
@@ -273,8 +273,8 @@
         <input id="subKeluarNominal" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div>
-        <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan (Contoh: Beli Kabel NYM / Ongkos Kerja)</label>
-        <input id="subKeluarKet" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan (Contoh: Beli Pipa AC / Ongkos Tukang)</label>
+        <input id="subKeluarKet" type="text" placeholder="Beli Kabel NYM" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div class="flex gap-3 pt-3 border-t border-slate-100">
         <button onclick="simpanPengeluaranSub()" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Simpan Pengeluaran</button>
@@ -283,11 +283,11 @@
     </div>
   </div>
 
-  <!-- MODAL TAMBAH PEKERJAAN BARU DENGAN RINCIAN LENGKAP -->
+  <!-- MODAL TAMBAH PEKERJAAN BARU -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPekerjaan">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-        <h2 class="font-bold text-base text-slate-900">Tambah Pekerjaan & Rincian Keuangan</h2>
+        <h2 class="font-bold text-base text-slate-900">Tambah Pekerjaan Baru</h2>
         <button onclick="closeModal('modalPekerjaan')" class="text-slate-400 hover:text-slate-700">✕</button>
       </div>
       
@@ -320,37 +320,37 @@
         <input id="pTotal" type="number" placeholder="Contoh: 5000000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900">
       </div>
 
-      <!-- KOTAK RINCIAN PEMASUKAN AWAL / TERMIN -->
-      <div class="bg-emerald-50/60 p-4 rounded-2xl border border-emerald-200 space-y-3">
-        <h3 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">📥 Rincian Pembayaran Awal / Termin</h3>
+      <!-- PEMASUKAN AWAL / DP -->
+      <div class="bg-emerald-50/60 p-3.5 rounded-2xl border border-emerald-200 space-y-2">
+        <h3 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">📥 Pembayaran / Termin 1 (DP)</h3>
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-[11px] font-medium text-emerald-700 mb-1">Nominal Masuk (Rp)</label>
+            <label class="block text-[11px] font-medium text-emerald-700 mb-1">Nominal (Rp)</label>
             <input id="pMasukNominal" type="number" placeholder="0" class="w-full bg-white border border-emerald-200 rounded-xl px-3 py-2 text-sm font-semibold text-emerald-700">
           </div>
           <div>
-            <label class="block text-[11px] font-medium text-emerald-700 mb-1">Keterangan Pembayaran</label>
-            <input id="pMasukKet" type="text" placeholder="Contoh: DP / Termin 1 / Lunas" value="DP / Pembayaran Awal" class="w-full bg-white border border-emerald-200 rounded-xl px-3 py-2 text-sm">
+            <label class="block text-[11px] font-medium text-emerald-700 mb-1">Keterangan</label>
+            <input id="pMasukKet" type="text" value="Termin 1 (DP)" class="w-full bg-white border border-emerald-200 rounded-xl px-3 py-2 text-sm">
           </div>
         </div>
       </div>
 
-      <!-- KOTAK RINCIAN PENGELUARAN / MATERIAL AWAL -->
-      <div class="bg-rose-50/60 p-4 rounded-2xl border border-rose-200 space-y-3">
-        <h3 class="text-xs font-bold text-rose-800 uppercase tracking-wider">📤 Rincian Pengeluaran Awal / Material</h3>
+      <!-- PENGELUARAN AWAL -->
+      <div class="bg-rose-50/60 p-3.5 rounded-2xl border border-rose-200 space-y-2">
+        <h3 class="text-xs font-bold text-rose-800 uppercase tracking-wider">📤 Pengeluaran / Belanja Awal (Opsional)</h3>
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-[11px] font-medium text-rose-700 mb-1">Kategori Pengeluaran</label>
+            <label class="block text-[11px] font-medium text-rose-700 mb-1">Kategori</label>
             <select id="pKategoriKeluar" class="w-full bg-white border border-rose-200 rounded-xl px-3 py-2 text-sm"></select>
           </div>
           <div>
-            <label class="block text-[11px] font-medium text-rose-700 mb-1">Nominal Keluar (Rp)</label>
+            <label class="block text-[11px] font-medium text-rose-700 mb-1">Nominal (Rp)</label>
             <input id="pKeluarNominal" type="number" placeholder="0" class="w-full bg-white border border-rose-200 rounded-xl px-3 py-2 text-sm font-semibold text-rose-700">
           </div>
         </div>
         <div>
-          <label class="block text-[11px] font-medium text-rose-700 mb-1">Keterangan Pengeluaran</label>
-          <input id="pKeluarKet" type="text" placeholder="Contoh: Beli Kabel / Ongkos Kerja" class="w-full bg-white border border-rose-200 rounded-xl px-3 py-2 text-sm">
+          <label class="block text-[11px] font-medium text-rose-700 mb-1">Keterangan</label>
+          <input id="pKeluarKet" type="text" placeholder="Contoh: Beli Kabel Awal" class="w-full bg-white border border-rose-200 rounded-xl px-3 py-2 text-sm">
         </div>
       </div>
 
@@ -358,8 +358,8 @@
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Sistem Bayar</label>
           <select id="pTipeBayar" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
-            <option value="full">💳 Full (Lunas)</option>
             <option value="termin">📑 Termin (Bertahap)</option>
+            <option value="full">💳 Full (Lunas)</option>
           </select>
         </div>
         <div>
@@ -612,12 +612,13 @@
       document.getElementById("detailValMasuk").textContent = rupiah(totalMasuk);
       document.getElementById("detailValKeluar").textContent = rupiah(totalKeluar);
 
+      // Tabel Pemasukan / Termin (Bisa banyak)
       let htmlM = `<table class="w-full text-left text-xs bg-white">
         <tr class="bg-slate-50 text-slate-500 border-b uppercase font-semibold">
-          <th class="p-3">Tanggal</th><th class="p-3">Nominal</th><th class="p-3">Metode</th><th class="p-3">Keterangan</th><th class="p-3 text-right">Aksi</th>
+          <th class="p-3">Tanggal</th><th class="p-3">Nominal</th><th class="p-3">Metode</th><th class="p-3">Keterangan (Termin)</th><th class="p-3 text-right">Aksi</th>
         </tr>`;
       if(arrM.length === 0) {
-        htmlM += `<tr><td colspan="5" class="p-6 text-center text-slate-400">Belum ada catatan pemasukan.</td></tr>`;
+        htmlM += `<tr><td colspan="5" class="p-6 text-center text-slate-400">Belum ada catatan pembayaran.</td></tr>`;
       } else {
         arrM.forEach((m, idx) => {
           htmlM += `<tr class="border-b hover:bg-slate-50">
@@ -632,6 +633,7 @@
       htmlM += `</table>`;
       document.getElementById("tabelMasukSub").innerHTML = htmlM;
 
+      // Tabel Pengeluaran (Bisa banyak)
       let htmlK = `<table class="w-full text-left text-xs bg-white">
         <tr class="bg-slate-50 text-slate-500 border-b uppercase font-semibold">
           <th class="p-3">Tanggal</th><th class="p-3">Kategori</th><th class="p-3">Nominal</th><th class="p-3">Keterangan</th><th class="p-3 text-right">Aksi</th>
@@ -674,7 +676,7 @@
 
     window.simpanPemasukanSub = async () => {
       const nominal = Number(document.getElementById("subMasukNominal").value);
-      if(!nominal) return alert("Masukkan nominal pemasukan!");
+      if(!nominal) return alert("Masukkan nominal pembayaran!");
 
       const pj = dataPekerjaan.find(x => x.id === currentDetailPekerjaanId);
       if(!pj) return;
@@ -683,7 +685,7 @@
         tanggal: document.getElementById("subMasukTgl").value,
         nominal: nominal,
         metode: document.getElementById("subMasukMetode").value,
-        keterangan: document.getElementById("subMasukKet").value || "Pembayaran"
+        keterangan: document.getElementById("subMasukKet").value || "Termin"
       };
 
       const arrM = pj.pemasukan || [];
@@ -831,7 +833,6 @@
       document.getElementById(id).classList.add("hidden");
     };
 
-    // SIMPAN PEKERJAAN BARU DENGAN RINCIAN PEMASUKAN & PENGELUARAN LENGKAP
     window.simpanPekerjaan = async () => {
       const nama = document.getElementById("pNama").value.trim();
       const total = Number(document.getElementById("pTotal").value);
@@ -840,7 +841,7 @@
       const tipeBayar = document.getElementById("pTipeBayar").value;
       
       const masukNominal = Number(document.getElementById("pMasukNominal").value || 0);
-      const masukKet = document.getElementById("pMasukKet").value.trim() || "Pembayaran Awal";
+      const masukKet = document.getElementById("pMasukKet").value.trim() || "Termin 1 (DP)";
 
       const keluarNominal = Number(document.getElementById("pKeluarNominal").value || 0);
       const keluarKategori = document.getElementById("pKategoriKeluar").value;
@@ -854,14 +855,7 @@
       const kode = "PJ-" + Date.now().toString().slice(-8);
       
       let pemasukanArr = [];
-      if (tipeBayar === "full") {
-        pemasukanArr.push({
-          tanggal: tgl,
-          nominal: total,
-          metode: "transfer",
-          keterangan: "Pembayaran Full / Lunas"
-        });
-      } else if (masukNominal > 0) {
+      if (masukNominal > 0) {
         pemasukanArr.push({
           tanggal: tgl,
           nominal: masukNominal,
@@ -896,7 +890,7 @@
 
       closeModal("modalPekerjaan");
       await loadAll();
-      alert("✅ Pekerjaan beserta rincian pembayaran dan pengeluarannya berhasil disimpan!");
+      alert("✅ Pekerjaan baru berhasil disimpan! Anda bisa klik 'Rincian Keuangan' untuk menambah Termin 2, Termin 3, atau pengeluaran tambahan lainnya.");
     };
 
     window.simpanStok = async () => {
