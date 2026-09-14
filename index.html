@@ -23,13 +23,22 @@
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
   .uppercase-input { text-transform: uppercase; }
+  
+  /* Animasi Pop-up Modern */
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-animate {
+    animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
 </style>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex selection:bg-blue-600 selection:text-white">
 
   <!-- GERBANG UTAMA: HALAMAN LOGIN PIN -->
-  <div id="gerbangLogin" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
-    <div class="bg-white border border-slate-200/80 rounded-3xl p-8 max-w-sm w-full shadow-2xl space-y-6 text-center">
+  <div id="gerbangLogin" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-8 max-w-sm w-full shadow-2xl shadow-slate-950/10 space-y-6 text-center modal-animate">
       <div class="h-16 w-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold mx-auto shadow-lg shadow-blue-500/30">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
       </div>
@@ -205,19 +214,19 @@
     </main>
   </div>
 
-  <!-- MODAL DETAIL / RINCIAN KEUANGAN PROYEK -->
-  <div class="modal fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalDetailPekerjaan">
-    <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-4xl w-full shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
+  <!-- MODAL 1: DETAIL / RINCIAN KEUANGAN PROYEK (MODERN SAAS) -->
+  <div class="modal fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 items-center justify-center p-4 hidden" id="modalDetailPekerjaan">
+    <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-8 max-w-4xl w-full shadow-2xl shadow-slate-950/10 space-y-6 max-h-[90vh] overflow-y-auto modal-animate">
       <div class="flex justify-between items-center pb-4 border-b border-slate-100">
         <div>
           <h2 class="font-bold text-lg text-slate-900" id="detailJudulCustomer">Detail Pekerjaan</h2>
           <p class="text-xs text-slate-500 font-mono mt-0.5" id="detailSubKode">-</p>
         </div>
-        <button onclick="closeModal('modalDetailPekerjaan')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold transition-all">✕</button>
+        <button onclick="closeModal('modalDetailPekerjaan')" class="h-10 w-10 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold transition-all">✕</button>
       </div>
 
-      <!-- KOTAK STATISTIK PROYEK & KEUNTUNGAN BERSIHNYA -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50/80 p-5 rounded-3xl border border-slate-200/80 text-center">
+      <!-- KOTAK STATISTIK PROYEK -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-5 rounded-3xl border border-slate-200/80 text-center">
         <div>
           <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Total Nilai Proyek</p>
           <p class="text-sm sm:text-base font-bold text-slate-900 mt-1" id="detailValTotal">Rp 0</p>
@@ -266,12 +275,12 @@
     </div>
   </div>
 
-  <!-- MODAL TAMBAH PEMASUKAN SUB -->
-  <div class="modal fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalTambahMasukSub">
-    <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
+  <!-- MODAL 2: TAMBAH PEMASUKAN SUB -->
+  <div class="modal fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 items-center justify-center p-4 hidden" id="modalTambahMasukSub">
+    <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-8 max-w-md w-full shadow-2xl shadow-slate-950/10 space-y-4 modal-animate">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <h2 class="font-bold text-base text-slate-900">Catat Pembayaran / Termin Baru</h2>
-        <button onclick="closeModal('modalTambahMasukSub')" class="text-slate-400 hover:text-slate-700 font-bold">✕</button>
+        <button onclick="closeModal('modalTambahMasukSub')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">✕</button>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Tanggal</label>
@@ -299,12 +308,12 @@
     </div>
   </div>
 
-  <!-- MODAL TAMBAH PENGELUARAN SUB -->
-  <div class="modal fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalTambahKeluarSub">
-    <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
+  <!-- MODAL 3: TAMBAH PENGELUARAN SUB -->
+  <div class="modal fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 items-center justify-center p-4 hidden" id="modalTambahKeluarSub">
+    <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-8 max-w-md w-full shadow-2xl shadow-slate-950/10 space-y-4 modal-animate">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <h2 class="font-bold text-base text-slate-900">Catat Pengeluaran / Material Baru</h2>
-        <button onclick="closeModal('modalTambahKeluarSub')" class="text-slate-400 hover:text-slate-700 font-bold">✕</button>
+        <button onclick="closeModal('modalTambahKeluarSub')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">✕</button>
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
@@ -331,12 +340,12 @@
     </div>
   </div>
 
-  <!-- MODAL TAMBAH PEKERJAAN BARU -->
-  <div class="modal fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPekerjaan">
-    <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+  <!-- MODAL 4: TAMBAH PEKERJAAN BARU -->
+  <div class="modal fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 items-center justify-center p-4 hidden" id="modalPekerjaan">
+    <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-8 max-w-lg w-full shadow-2xl shadow-slate-950/10 space-y-4 max-h-[90vh] overflow-y-auto modal-animate">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <h2 class="font-bold text-base text-slate-900">Tambah Pekerjaan Baru</h2>
-        <button onclick="closeModal('modalPekerjaan')" class="text-slate-400 hover:text-slate-700 font-bold">✕</button>
+        <button onclick="closeModal('modalPekerjaan')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">✕</button>
       </div>
       
       <div>
@@ -423,12 +432,12 @@
     </div>
   </div>
 
-  <!-- MODAL STOK -->
-  <div class="modal fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalStok">
-    <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
+  <!-- MODAL 5: TAMBAH STOK -->
+  <div class="modal fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 items-center justify-center p-4 hidden" id="modalStok">
+    <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-8 max-w-lg w-full shadow-2xl shadow-slate-950/10 space-y-4 modal-animate">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <h2 class="font-bold text-base text-slate-900">Tambah Stok Barang Baru</h2>
-        <button onclick="closeModal('modalStok')" class="text-slate-400 hover:text-slate-700 font-bold">✕</button>
+        <button onclick="closeModal('modalStok')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">✕</button>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nama Barang / Material</label>
