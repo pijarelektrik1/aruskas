@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PIJAR ELEKTRIK • Dashboard Manajemen</title>
+<title>PIJAR ELEKTRIK • Dashboard Manajemen Profesional</title>
 <!-- Tailwind CSS Play CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -22,49 +22,50 @@
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+  .uppercase-input { text-transform: uppercase; }
 </style>
 </head>
-<body class="bg-slate-100 text-slate-800 min-h-screen flex selection:bg-blue-600 selection:text-white">
+<body class="bg-slate-50 text-slate-900 min-h-screen flex selection:bg-blue-600 selection:text-white">
 
   <!-- GERBANG UTAMA: HALAMAN LOGIN PIN -->
   <div id="gerbangLogin" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
-    <div class="bg-white border border-slate-200 rounded-3xl p-8 max-w-sm w-full shadow-2xl space-y-5 text-center">
-      <div class="h-14 w-14 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 text-2xl font-bold mx-auto shadow-sm">
-        ⚡
+    <div class="bg-white border border-slate-200/80 rounded-3xl p-8 max-w-sm w-full shadow-2xl space-y-6 text-center">
+      <div class="h-16 w-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold mx-auto shadow-lg shadow-blue-500/30">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
       </div>
       <div>
-        <h2 class="font-bold text-lg text-slate-900">PIJAR ELEKTRIK</h2>
-        <p class="text-xs text-slate-500 mt-1">Masukkan PIN untuk masuk ke Dashboard</p>
+        <h2 class="font-bold text-xl text-slate-900">PIJAR ELEKTRIK</h2>
+        <p class="text-xs text-slate-500 mt-1">Masukkan PIN Keamanan Dashboard</p>
       </div>
-      <input id="inputGerbangPin" type="password" placeholder="••••••" class="w-full text-center tracking-widest bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 text-xl font-bold">
-      <button onclick="prosesLoginUtama()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl text-sm shadow-sm">Masuk Dashboard</button>
+      <input id="inputGerbangPin" type="password" placeholder="••••••" class="w-full text-center tracking-widest bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3.5 text-xl font-bold focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all">
+      <button onclick="prosesLoginUtama()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-2xl text-sm shadow-md shadow-blue-600/20 transition-all">Masuk Dashboard</button>
     </div>
   </div>
 
   <!-- SIDEBAR NAVIGATION -->
   <aside class="w-64 bg-white border-r border-slate-200 hidden md:flex flex-col sticky top-0 h-screen z-30 shadow-sm">
     <div class="p-6 border-b border-slate-100 flex items-center gap-3">
-      <div class="h-10 w-10 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 text-xl font-bold shadow-sm">
-        ⚡
+      <div class="h-11 w-11 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-xl font-bold shadow-md shadow-blue-600/20">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
       </div>
       <div>
-        <h1 class="font-bold text-base tracking-tight text-slate-900">PIJAR ELEKTRIK</h1>
-        <p class="text-[11px] text-slate-500">Manajemen & Stok</p>
+        <h1 class="font-bold text-sm tracking-tight text-slate-900">PIJAR ELEKTRIK</h1>
+        <p class="text-[11px] text-slate-400 font-medium">Manajemen Proyek</p>
       </div>
     </div>
 
     <nav class="flex-1 p-4 space-y-1.5 overflow-y-auto">
-      <button onclick="switchTab('pekerjaan', this)" class="nav-btn active w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all bg-blue-600 text-white shadow-sm">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.12 2.12 0 0120 18.25l-5.83-5.83M15 11.25a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg> 
+      <button onclick="switchTab('pekerjaan', this)" class="nav-btn active w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-semibold transition-all bg-blue-600 text-white shadow-md shadow-blue-600/20">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
         Pekerjaan & Keuangan
       </button>
-      <button onclick="switchTab('stok', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-100">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-        Stok & Barang Keluar
+      <button onclick="switchTab('stok', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-50 hover:text-slate-900">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+        Stok & Material
       </button>
-      <button onclick="switchTab('admin', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-100">
+      <button onclick="switchTab('admin', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-50 hover:text-slate-900">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        Admin / Master Data
+        Panel Admin
       </button>
     </nav>
   </aside>
@@ -73,97 +74,119 @@
   <div class="flex-1 flex flex-col min-w-0">
     
     <!-- MOBILE HEADER -->
-    <header class="md:hidden border-b border-slate-200 bg-white px-4 py-3 flex justify-between items-center sticky top-0 z-20">
-      <div class="flex items-center gap-2">
-        <span class="text-xl">⚡</span>
-        <h1 class="font-bold text-sm text-slate-900">PIJAR ELEKTRIK</h1>
+    <header class="md:hidden border-b border-slate-200 bg-white px-4 py-3.5 flex justify-between items-center sticky top-0 z-20 shadow-sm">
+      <div class="flex items-center gap-2.5">
+        <div class="h-8 w-8 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <h1 class="font-bold text-xs text-slate-900 tracking-tight">PIJAR ELEKTRIK</h1>
       </div>
-      <div class="flex gap-1 overflow-x-auto py-1">
-        <button onclick="switchTab('pekerjaan', this)" class="px-2.5 py-1 bg-blue-600 text-white rounded-lg text-[10px] font-semibold">Pekerjaan</button>
-        <button onclick="switchTab('stok', this)" class="px-2.5 py-1 bg-slate-200 text-slate-700 rounded-lg text-[10px] font-semibold">Stok</button>
-        <button onclick="switchTab('admin', this)" class="px-2.5 py-1 bg-slate-200 text-slate-700 rounded-lg text-[10px] font-semibold">Admin</button>
+      <div class="flex gap-1.5">
+        <button onclick="switchTab('pekerjaan', this)" class="px-3 py-1.5 bg-blue-600 text-white rounded-xl text-[11px] font-semibold">Pekerjaan</button>
+        <button onclick="switchTab('stok', this)" class="px-3 py-1.5 bg-slate-100 text-slate-700 rounded-xl text-[11px] font-semibold">Stok</button>
+        <button onclick="switchTab('admin', this)" class="px-3 py-1.5 bg-slate-100 text-slate-700 rounded-xl text-[11px] font-semibold">Admin</button>
       </div>
     </header>
 
     <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 overflow-x-hidden">
 
       <!-- STATs -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Pemasukan Semua Proyek</p>
-          <h3 class="text-xl sm:text-2xl font-bold text-emerald-600 mt-2" id="statMasuk">Rp 0</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm flex items-center gap-4">
+          <div class="h-12 w-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Total Pemasukan</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-emerald-600 mt-1" id="statMasuk">Rp 0</h3>
+          </div>
         </div>
-        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Pengeluaran Semua Proyek</p>
-          <h3 class="text-xl sm:text-2xl font-bold text-rose-600 mt-2" id="statKeluar">Rp 0</h3>
+        <div class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm flex items-center gap-4">
+          <div class="h-12 w-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+          </div>
+          <div>
+            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Total Pengeluaran</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-rose-600 mt-1" id="statKeluar">Rp 0</h3>
+          </div>
         </div>
-        <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
-          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Laba Bersih</p>
-          <h3 class="text-xl sm:text-2xl font-bold text-blue-600 mt-2" id="statLaba">Rp 0</h3>
+        <div class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm flex items-center gap-4">
+          <div class="h-12 w-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+          </div>
+          <div>
+            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Total Keuntungan Bersih</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-blue-600 mt-1" id="statLaba">Rp 0</h3>
+          </div>
         </div>
       </div>
 
       <!-- TAB 1: PEKERJAAN & KEUANGAN TERPADU -->
-      <div class="card-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden" id="tab-pekerjaan">
-        <div class="p-5 border-b border-slate-100 flex justify-between items-center">
+      <div class="card-section bg-white border border-slate-200/80 rounded-3xl shadow-sm overflow-hidden" id="tab-pekerjaan">
+        <div class="p-6 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
-            <h2 class="font-bold text-sm sm:text-base text-slate-800">Daftar Pekerjaan & Keuangan Terpadu</h2>
-            <p class="text-xs text-slate-500 mt-0.5">Klik "Rincian Keuangan" untuk tambah Termin (Termin 1, 2, 3) atau banyak Pengeluaran.</p>
+            <h2 class="font-bold text-base text-slate-900">Daftar Pekerjaan & Keuangan Terpadu</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Kelola termin pembayaran, material, dan lihat keuntungan bersih setiap proyek.</p>
           </div>
-          <button onclick="openTambahPekerjaan()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm">
-            + Tambah Pekerjaan Baru
+          <button onclick="openTambahPekerjaan()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl text-xs font-semibold transition-all shadow-md shadow-blue-600/20 flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            Tambah Pekerjaan Baru
           </button>
         </div>
         <div class="overflow-x-auto">
-          <div id="listPekerjaan"><div class="empty py-12 text-center text-slate-400 text-sm">Memuat data...</div></div>
+          <div id="listPekerjaan"><div class="empty py-16 text-center text-slate-400 text-sm">Memuat data...</div></div>
         </div>
       </div>
 
       <!-- TAB 2: STOK -->
-      <div class="card-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden hidden" id="tab-stok">
-        <div class="p-5 border-b border-slate-100 flex justify-between items-center">
-          <h2 class="font-bold text-sm sm:text-base text-slate-800">Manajemen Stok Barang & Material</h2>
-          <button onclick="openTambahStok()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm">
-            + Tambah Stok Masuk
+      <div class="card-section bg-white border border-slate-200/80 rounded-3xl shadow-sm overflow-hidden hidden" id="tab-stok">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+          <div>
+            <h2 class="font-bold text-base text-slate-900">Manajemen Stok Barang & Material</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Pantau persediaan material kelistrikan gudang.</p>
+          </div>
+          <button onclick="openTambahStok()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-2xl text-xs font-semibold transition-all shadow-md shadow-indigo-600/20 flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            Tambah Stok Masuk
           </button>
         </div>
         <div class="overflow-x-auto">
-          <div id="listStok"><div class="empty py-12 text-center text-slate-400 text-sm">Memuat stok...</div></div>
+          <div id="listStok"><div class="empty py-16 text-center text-slate-400 text-sm">Memuat stok...</div></div>
         </div>
       </div>
 
       <!-- TAB 3: ADMIN -->
-      <div class="card-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden hidden" id="tab-admin">
-        <div class="p-5 border-b border-slate-100 flex justify-between items-center">
+      <div class="card-section bg-white border border-slate-200/80 rounded-3xl shadow-sm overflow-hidden hidden" id="tab-admin">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center">
           <div>
             <h2 class="font-bold text-base text-slate-900">Panel Admin - Master Data & Keamanan</h2>
             <p class="text-xs text-slate-500 mt-0.5">Kelola opsi form input dan ubah PIN akses dashboard.</p>
           </div>
-          <button onclick="lockDashboard()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-3 py-1.5 rounded-xl text-xs font-semibold">Kunci Dashboard</button>
+          <button onclick="lockDashboard()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-4 py-2.5 rounded-2xl text-xs font-semibold transition-all">Kunci Dashboard</button>
         </div>
         <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
-            <h3 class="font-semibold text-sm text-slate-800">📁 Kategori Pengeluaran Baru</h3>
+          <div class="space-y-4 bg-slate-50/70 p-6 rounded-3xl border border-slate-200/70">
+            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-700">📁 Kategori Pengeluaran Baru</h3>
             <div>
-              <input id="adminKategoriBaru" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm mb-2">
-              <button onclick="tambahMasterKategori()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-semibold py-2 rounded-xl text-xs shadow-sm">Tambah Kategori</button>
+              <input id="adminKategoriBaru" class="uppercase-input w-full bg-white border border-slate-200 rounded-2xl px-4 py-3 text-xs mb-2.5 focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="KATEGORI BARU">
+              <button onclick="tambahMasterKategori()" class="w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-2xl text-xs shadow-sm">Tambah Kategori</button>
             </div>
-            <div><div id="listMasterKategori" class="space-y-1.5 max-h-40 overflow-y-auto"></div></div>
+            <div><div id="listMasterKategori" class="space-y-2 max-h-40 overflow-y-auto"></div></div>
           </div>
-          <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
-            <h3 class="font-semibold text-sm text-slate-800">🔧 Jenis Pekerjaan Baru</h3>
+          <div class="space-y-4 bg-slate-50/70 p-6 rounded-3xl border border-slate-200/70">
+            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-700">🔧 Jenis Pekerjaan Baru</h3>
             <div>
-              <input id="adminJenisPekerjaanBaru" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm mb-2">
-              <button onclick="tambahMasterJenisPekerjaan()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-semibold py-2 rounded-xl text-xs shadow-sm">Tambah Jenis Pekerjaan</button>
+              <input id="adminJenisPekerjaanBaru" class="uppercase-input w-full bg-white border border-slate-200 rounded-2xl px-4 py-3 text-xs mb-2.5 focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="JENIS PEKERJAAN BARU">
+              <button onclick="tambahMasterJenisPekerjaan()" class="w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-2xl text-xs shadow-sm">Tambah Jenis Pekerjaan</button>
             </div>
-            <div><div id="listMasterJenisPekerjaan" class="space-y-1.5 max-h-40 overflow-y-auto"></div></div>
+            <div><div id="listMasterJenisPekerjaan" class="space-y-2 max-h-40 overflow-y-auto"></div></div>
           </div>
-          <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
-            <h3 class="font-semibold text-sm text-slate-800">🔐 Ubah PIN Dashboard</h3>
-            <div class="space-y-2">
-              <input id="pinLama" type="password" placeholder="PIN Lama" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-sm">
-              <input id="pinBaru" type="password" placeholder="PIN Baru" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-sm">
-              <button onclick="prosesGantiPin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-xl text-xs shadow-sm">Simpan PIN Baru</button>
+          <div class="space-y-4 bg-slate-50/70 p-6 rounded-3xl border border-slate-200/70">
+            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-700">🔐 Ubah PIN Dashboard</h3>
+            <div class="space-y-3">
+              <input id="pinLama" type="password" placeholder="PIN Lama" class="w-full bg-white border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
+              <input id="pinBaru" type="password" placeholder="PIN Baru (Min 4 Karakter)" class="w-full bg-white border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
+              <button onclick="prosesGantiPin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-2xl text-xs shadow-md shadow-blue-600/20">Simpan PIN Baru</button>
             </div>
           </div>
         </div>
@@ -172,237 +195,252 @@
     </main>
   </div>
 
-  <!-- MODAL DETAIL / RINCIAN KEUANGAN (UNTUK TAMBAH BANYAK TERMIN & BANYAK PENGELUARAN) -->
-  <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalDetailPekerjaan">
-    <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-4xl w-full shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+  <!-- MODAL DETAIL / RINCIAN KEUANGAN PROYEK (DENGAN KEUNTUNGAN BERSIH TIAP PROYEK) -->
+  <div class="modal fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalDetailPekerjaan">
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-4xl w-full shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-4 border-b border-slate-100">
         <div>
           <h2 class="font-bold text-lg text-slate-900" id="detailJudulCustomer">Detail Pekerjaan</h2>
-          <p class="text-xs text-slate-500 font-mono" id="detailSubKode">-</p>
+          <p class="text-xs text-slate-500 font-mono mt-0.5" id="detailSubKode">-</p>
         </div>
-        <button onclick="closeModal('modalDetailPekerjaan')" class="text-slate-400 hover:text-slate-700 font-bold text-lg">✕</button>
+        <button onclick="closeModal('modalDetailPekerjaan')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold transition-all">✕</button>
       </div>
 
-      <div class="grid grid-cols-3 gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center">
+      <!-- KOTAK STATISTIK PROYEK & KEUNTUNGAN BERSIHNYA -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50/80 p-5 rounded-3xl border border-slate-200/80 text-center">
         <div>
-          <p class="text-[11px] text-slate-500 uppercase font-semibold">Total Nilai Proyek</p>
-          <p class="text-base font-bold text-slate-900 mt-1" id="detailValTotal">Rp 0</p>
+          <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Total Nilai Proyek</p>
+          <p class="text-sm sm:text-base font-bold text-slate-900 mt-1" id="detailValTotal">Rp 0</p>
         </div>
         <div>
-          <p class="text-[11px] text-slate-500 uppercase font-semibold">Total Pemasukan Masuk</p>
-          <p class="text-base font-bold text-emerald-600 mt-1" id="detailValMasuk">Rp 0</p>
+          <p class="text-[10px] text-emerald-600 uppercase font-bold tracking-wider">Total Pemasukan</p>
+          <p class="text-sm sm:text-base font-bold text-emerald-600 mt-1" id="detailValMasuk">Rp 0</p>
         </div>
         <div>
-          <p class="text-[11px] text-slate-500 uppercase font-semibold">Total Pengeluaran / Material</p>
-          <p class="text-base font-bold text-rose-600 mt-1" id="detailValKeluar">Rp 0</p>
+          <p class="text-[10px] text-rose-600 uppercase font-bold tracking-wider">Total Pengeluaran</p>
+          <p class="text-sm sm:text-base font-bold text-rose-600 mt-1" id="detailValKeluar">Rp 0</p>
+        </div>
+        <div>
+          <p class="text-[10px] text-blue-600 uppercase font-bold tracking-wider">Keuntungan Bersih</p>
+          <p class="text-sm sm:text-base font-extrabold text-blue-600 mt-1" id="detailValUntung">Rp 0</p>
         </div>
       </div>
 
-      <!-- TABEL PEMASUKAN / TERMIN (BISA TAMBAH BANYAK) -->
+      <!-- TABEL PEMASUKAN / TERMIN -->
       <div class="space-y-3">
         <div class="flex justify-between items-center">
-          <h3 class="font-bold text-xs text-emerald-700 uppercase tracking-wider">📥 Daftar Pembayaran / Termin Proyek Ini</h3>
-          <button onclick="openTambahMasukSub()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">+ Tambah Termin / Bayar</button>
+          <h3 class="font-bold text-xs text-slate-800 uppercase tracking-wider flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-emerald-500"></span> Daftar Pembayaran / Termin Proyek
+          </h3>
+          <button onclick="openTambahMasukSub()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            Tambah Termin / Bayar
+          </button>
         </div>
-        <div id="tabelMasukSub" class="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm"></div>
+        <div id="tabelMasukSub" class="overflow-x-auto border border-slate-200/80 rounded-2xl shadow-sm"></div>
       </div>
 
-      <!-- TABEL PENGELUARAN / MATERIAL (BISA TAMBAH BANYAK) -->
+      <!-- TABEL PENGELUARAN / MATERIAL -->
       <div class="space-y-3 pt-2">
         <div class="flex justify-between items-center">
-          <h3 class="font-bold text-xs text-rose-700 uppercase tracking-wider">📤 Daftar Pengeluaran & Material Proyek Ini</h3>
-          <button onclick="openTambahKeluarSub()" class="bg-rose-600 hover:bg-rose-700 text-white px-3 py-1.5 rounded-xl text-xs font-semibold">+ Tambah Pengeluaran Baru</button>
+          <h3 class="font-bold text-xs text-slate-800 uppercase tracking-wider flex items-center gap-2">
+            <span class="h-2 w-2 rounded-full bg-rose-500"></span> Daftar Pengeluaran & Material Proyek
+          </h3>
+          <button onclick="openTambahKeluarSub()" class="bg-rose-600 hover:bg-rose-700 text-white px-3.5 py-2 rounded-xl text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            Tambah Pengeluaran
+          </button>
         </div>
-        <div id="tabelKeluarSub" class="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm"></div>
+        <div id="tabelKeluarSub" class="overflow-x-auto border border-slate-200/80 rounded-2xl shadow-sm"></div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL TAMBAH PEMASUKAN / TERMIN DI DALAM DETAIL -->
-  <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalTambahMasukSub">
+  <!-- MODAL TAMBAH PEMASUKAN SUB -->
+  <div class="modal fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalTambahMasukSub">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
-      <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <h2 class="font-bold text-base text-slate-900">Catat Pembayaran / Termin Baru</h2>
-        <button onclick="closeModal('modalTambahMasukSub')" class="text-slate-400 hover:text-slate-700">✕</button>
+        <button onclick="closeModal('modalTambahMasukSub')" class="text-slate-400 hover:text-slate-700 font-bold">✕</button>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Tanggal</label>
-        <input id="subMasukTgl" type="date" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="subMasukTgl" type="date" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nominal (Rp)</label>
-        <input id="subMasukNominal" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="subMasukNominal" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="0">
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Metode</label>
-        <select id="subMasukMetode" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
-          <option value="transfer">Transfer Bank</option>
-          <option value="cash">Cash / Tunai</option>
+        <select id="subMasukMetode" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
+          <option value="TRANSFER">TRANSFER</option>
+          <option value="CASH">CASH / TUNAI</option>
         </select>
       </div>
       <div>
-        <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan (Contoh: Termin 1 / Termin 2 / Pelunasan)</label>
-        <input id="subMasukKet" type="text" placeholder="Termin 2" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan / Termin</label>
+        <input id="subMasukKet" type="text" placeholder="TERMIN 2" class="uppercase-input w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
       </div>
       <div class="flex gap-3 pt-3 border-t border-slate-100">
-        <button onclick="simpanPemasukanSub()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Simpan Pembayaran</button>
-        <button onclick="closeModal('modalTambahMasukSub')" class="px-4 bg-slate-100 text-slate-600 font-semibold py-2.5 rounded-xl text-sm">Batal</button>
+        <button onclick="simpanPemasukanSub()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 rounded-2xl text-xs shadow-md shadow-emerald-600/20">Simpan Pembayaran</button>
+        <button onclick="closeModal('modalTambahMasukSub')" class="px-5 bg-slate-100 text-slate-600 font-semibold py-3.5 rounded-2xl text-xs">Batal</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL TAMBAH PENGELUARAN DI DALAM DETAIL -->
-  <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalTambahKeluarSub">
+  <!-- MODAL TAMBAH PENGELUARAN SUB -->
+  <div class="modal fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalTambahKeluarSub">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
-      <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <h2 class="font-bold text-base text-slate-900">Catat Pengeluaran / Material Baru</h2>
-        <button onclick="closeModal('modalTambahKeluarSub')" class="text-slate-400 hover:text-slate-700">✕</button>
+        <button onclick="closeModal('modalTambahKeluarSub')" class="text-slate-400 hover:text-slate-700 font-bold">✕</button>
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
-          <label class="block text-xs font-medium text-slate-600 mb-1">Kategori Pengeluaran</label>
-          <select id="subKeluarKategori" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm"></select>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Kategori</label>
+          <select id="subKeluarKategori" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600"></select>
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Tanggal</label>
-          <input id="subKeluarTgl" type="date" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <input id="subKeluarTgl" type="date" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
         </div>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nominal (Rp)</label>
-        <input id="subKeluarNominal" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="subKeluarNominal" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="0">
       </div>
       <div>
-        <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan (Contoh: Beli Pipa AC / Ongkos Tukang)</label>
-        <input id="subKeluarKet" type="text" placeholder="Beli Kabel NYM" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan</label>
+        <input id="subKeluarKet" type="text" placeholder="BELI KABEL NYM" class="uppercase-input w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
       </div>
       <div class="flex gap-3 pt-3 border-t border-slate-100">
-        <button onclick="simpanPengeluaranSub()" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Simpan Pengeluaran</button>
-        <button onclick="closeModal('modalTambahKeluarSub')" class="px-4 bg-slate-100 text-slate-600 font-semibold py-2.5 rounded-xl text-sm">Batal</button>
+        <button onclick="simpanPengeluaranSub()" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3.5 rounded-2xl text-xs shadow-md shadow-rose-600/20">Simpan Pengeluaran</button>
+        <button onclick="closeModal('modalTambahKeluarSub')" class="px-5 bg-slate-100 text-slate-600 font-semibold py-3.5 rounded-2xl text-xs">Batal</button>
       </div>
     </div>
   </div>
 
   <!-- MODAL TAMBAH PEKERJAAN BARU -->
-  <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPekerjaan">
-    <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
-      <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+  <div class="modal fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPekerjaan">
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <h2 class="font-bold text-base text-slate-900">Tambah Pekerjaan Baru</h2>
-        <button onclick="closeModal('modalPekerjaan')" class="text-slate-400 hover:text-slate-700">✕</button>
+        <button onclick="closeModal('modalPekerjaan')" class="text-slate-400 hover:text-slate-700 font-bold">✕</button>
       </div>
       
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nama Customer</label>
-        <input id="pNama" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm" placeholder="Contoh: Bpk. Budi">
+        <input id="pNama" class="uppercase-input w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="CONTOH: PT MAKMUR JAYA">
       </div>
 
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Tipe Customer</label>
-          <select id="pTipe" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
-            <option value="perorangan">👤 Perorangan</option>
-            <option value="instansi">🏢 Instansi</option>
+          <select id="pTipe" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
+            <option value="perorangan">PERORANGAN</option>
+            <option value="instansi">INSTANSI</option>
           </select>
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">No HP</label>
-          <input id="pHp" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm" placeholder="08xxxxxxxxxx">
+          <input id="pHp" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="08xxxxxxxxxx">
         </div>
       </div>
 
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Jenis Pekerjaan</label>
-        <select id="pJenis" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm"></select>
+        <select id="pJenis" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600"></select>
       </div>
 
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Total Nilai Harga Proyek (Rp)</label>
-        <input id="pTotal" type="number" placeholder="Contoh: 5000000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900">
+        <input id="pTotal" type="number" placeholder="5000000" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600">
       </div>
 
       <!-- PEMASUKAN AWAL / DP -->
-      <div class="bg-emerald-50/60 p-3.5 rounded-2xl border border-emerald-200 space-y-2">
-        <h3 class="text-xs font-bold text-emerald-800 uppercase tracking-wider">📥 Pembayaran / Termin 1 (DP)</h3>
+      <div class="bg-emerald-50/60 p-4 rounded-3xl border border-emerald-200/80 space-y-3">
+        <h3 class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">📥 Pembayaran / Termin 1 (DP)</h3>
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-[11px] font-medium text-emerald-700 mb-1">Nominal (Rp)</label>
-            <input id="pMasukNominal" type="number" placeholder="0" class="w-full bg-white border border-emerald-200 rounded-xl px-3 py-2 text-sm font-semibold text-emerald-700">
+            <label class="block text-[10px] font-bold text-emerald-700 mb-1">Nominal (Rp)</label>
+            <input id="pMasukNominal" type="number" placeholder="0" class="w-full bg-white border border-emerald-200 rounded-2xl px-3.5 py-2.5 text-xs font-semibold text-emerald-700 focus:outline-none">
           </div>
           <div>
-            <label class="block text-[11px] font-medium text-emerald-700 mb-1">Keterangan</label>
-            <input id="pMasukKet" type="text" value="Termin 1 (DP)" class="w-full bg-white border border-emerald-200 rounded-xl px-3 py-2 text-sm">
+            <label class="block text-[10px] font-bold text-emerald-700 mb-1">Keterangan</label>
+            <input id="pMasukKet" type="text" value="TERMIN 1 (DP)" class="uppercase-input w-full bg-white border border-emerald-200 rounded-2xl px-3.5 py-2.5 text-xs font-medium focus:outline-none">
           </div>
         </div>
       </div>
 
       <!-- PENGELUARAN AWAL -->
-      <div class="bg-rose-50/60 p-3.5 rounded-2xl border border-rose-200 space-y-2">
-        <h3 class="text-xs font-bold text-rose-800 uppercase tracking-wider">📤 Pengeluaran / Belanja Awal (Opsional)</h3>
+      <div class="bg-rose-50/60 p-4 rounded-3xl border border-rose-200/80 space-y-3">
+        <h3 class="text-[11px] font-bold text-rose-800 uppercase tracking-wider">📤 Pengeluaran / Belanja Awal (Opsional)</h3>
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-[11px] font-medium text-rose-700 mb-1">Kategori</label>
-            <select id="pKategoriKeluar" class="w-full bg-white border border-rose-200 rounded-xl px-3 py-2 text-sm"></select>
+            <label class="block text-[10px] font-bold text-rose-700 mb-1">Kategori</label>
+            <select id="pKategoriKeluar" class="w-full bg-white border border-rose-200 rounded-2xl px-3.5 py-2.5 text-xs font-medium focus:outline-none"></select>
           </div>
           <div>
-            <label class="block text-[11px] font-medium text-rose-700 mb-1">Nominal (Rp)</label>
-            <input id="pKeluarNominal" type="number" placeholder="0" class="w-full bg-white border border-rose-200 rounded-xl px-3 py-2 text-sm font-semibold text-rose-700">
+            <label class="block text-[10px] font-bold text-rose-700 mb-1">Nominal (Rp)</label>
+            <input id="pKeluarNominal" type="number" placeholder="0" class="w-full bg-white border border-rose-200 rounded-2xl px-3.5 py-2.5 text-xs font-semibold text-rose-700 focus:outline-none">
           </div>
         </div>
         <div>
-          <label class="block text-[11px] font-medium text-rose-700 mb-1">Keterangan</label>
-          <input id="pKeluarKet" type="text" placeholder="Contoh: Beli Kabel Awal" class="w-full bg-white border border-rose-200 rounded-xl px-3 py-2 text-sm">
+          <label class="block text-[10px] font-bold text-rose-700 mb-1">Keterangan</label>
+          <input id="pKeluarKet" type="text" placeholder="BELI KABEL AWAL" class="uppercase-input w-full bg-white border border-rose-200 rounded-2xl px-3.5 py-2.5 text-xs font-medium focus:outline-none">
         </div>
       </div>
 
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Sistem Bayar</label>
-          <select id="pTipeBayar" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
-            <option value="termin">📑 Termin (Bertahap)</option>
-            <option value="full">💳 Full (Lunas)</option>
+          <select id="pTipeBayar" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
+            <option value="termin">TERMIN BERTAHAP</option>
+            <option value="full">FULL (LUNAS)</option>
           </select>
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Tanggal Mulai</label>
-          <input id="pTgl" type="date" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <input id="pTgl" type="date" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
         </div>
       </div>
 
       <div class="flex gap-3 pt-3 border-t border-slate-100">
-        <button onclick="simpanPekerjaan()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Simpan Pekerjaan</button>
-        <button onclick="closeModal('modalPekerjaan')" class="px-4 bg-slate-100 text-slate-600 font-semibold py-2.5 rounded-xl text-sm">Batal</button>
+        <button onclick="simpanPekerjaan()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-2xl text-xs shadow-md shadow-blue-600/20">Simpan Pekerjaan</button>
+        <button onclick="closeModal('modalPekerjaan')" class="px-5 bg-slate-100 text-slate-600 font-semibold py-3.5 rounded-2xl text-xs">Batal</button>
       </div>
     </div>
   </div>
 
   <!-- MODAL STOK -->
-  <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalStok">
+  <div class="modal fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalStok">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
-      <div class="flex justify-between items-center pb-2 border-b border-slate-100">
+      <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <h2 class="font-bold text-base text-slate-900">Tambah Stok Barang Baru</h2>
-        <button onclick="closeModal('modalStok')" class="text-slate-400 hover:text-slate-700">✕</button>
+        <button onclick="closeModal('modalStok')" class="text-slate-400 hover:text-slate-700 font-bold">✕</button>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nama Barang / Material</label>
-        <input id="sNama" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="sNama" class="uppercase-input w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="KABEL NYM 2X1.5">
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Jumlah Stok</label>
-          <input id="sJumlah" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <input id="sJumlah" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="10">
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Satuan</label>
-          <input id="sSatuan" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <input id="sSatuan" class="uppercase-input w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="ROLL / PCS">
         </div>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Harga Satuan (Rp)</label>
-        <input id="sHarga" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="sHarga" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="150000">
       </div>
       <div class="flex gap-3 pt-3 border-t border-slate-100">
-        <button onclick="simpanStok()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Simpan Stok</button>
-        <button onclick="closeModal('modalStok')" class="px-4 bg-slate-100 text-slate-600 font-semibold py-2.5 rounded-xl text-sm">Batal</button>
+        <button onclick="simpanStok()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3.5 rounded-2xl text-xs shadow-md shadow-indigo-600/20">Simpan Stok</button>
+        <button onclick="closeModal('modalStok')" class="px-5 bg-slate-100 text-slate-600 font-semibold py-3.5 rounded-2xl text-xs">Batal</button>
       </div>
     </div>
   </div>
@@ -453,6 +491,16 @@
         document.getElementById("gerbangLogin").classList.add("hidden");
         loadAll();
       }
+
+      // Otomatis huruf besar semua pada input yang memiliki kelas uppercase-input
+      document.addEventListener("input", (e) => {
+        if (e.target.classList.contains("uppercase-input")) {
+          const start = e.target.selectionStart;
+          const end = e.target.selectionEnd;
+          e.target.value = e.target.value.toUpperCase();
+          e.target.setSelectionRange(start, end);
+        }
+      });
     });
 
     window.prosesLoginUtama = async () => {
@@ -542,19 +590,19 @@
     function renderPekerjaan() {
       const el = document.getElementById("listPekerjaan");
       if (dataPekerjaan.length === 0) {
-        el.innerHTML = '<div class="text-center py-12 text-slate-400 text-sm">Belum ada pekerjaan. Silakan buat pekerjaan baru.</div>';
+        el.innerHTML = '<div class="text-center py-16 text-slate-400 text-sm">Belum ada pekerjaan. Silakan buat pekerjaan baru.</div>';
         return;
       }
 
       let html = `<table class="w-full text-left border-collapse text-xs sm:text-sm">
-        <thead><tr class="border-b border-slate-200 bg-slate-50 text-slate-500 uppercase font-semibold">
-          <th class="p-3.5">Kode & Customer</th>
-          <th class="p-3.5">Tipe & Jenis</th>
-          <th class="p-3.5">Nilai Proyek</th>
-          <th class="p-3.5 text-emerald-700">Total Masuk</th>
-          <th class="p-3.5 text-rose-700">Total Keluar</th>
-          <th class="p-3.5">Sistem Bayar</th>
-          <th class="p-3.5 text-right">Aksi</th>
+        <thead><tr class="border-b border-slate-100 bg-slate-50/70 text-slate-400 text-[11px] uppercase font-bold tracking-wider">
+          <th class="p-4">Kode & Customer</th>
+          <th class="p-4">Tipe & Jenis</th>
+          <th class="p-4">Nilai Proyek</th>
+          <th class="p-4 text-emerald-600">Total Masuk</th>
+          <th class="p-4 text-rose-600">Total Keluar</th>
+          <th class="p-4 text-blue-600">Keuntungan Bersih</th>
+          <th class="p-4 text-right">Aksi</th>
         </tr></thead><tbody class="divide-y divide-slate-100">`;
 
       dataPekerjaan.forEach(p => {
@@ -562,32 +610,29 @@
         const arrK = p.pengeluaran || [];
         const totalMasukProj = arrM.reduce((s, x) => s + Number(x.nominal || 0), 0);
         const totalKeluarProj = arrK.reduce((s, x) => s + Number(x.nominal || 0), 0);
+        const labaProj = totalMasukProj - totalKeluarProj;
 
         const badgeTipe = p.tipe === 'instansi' 
-          ? '<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-blue-50 text-blue-700 border border-blue-200">🏢 Instansi</span>' 
-          : '<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-amber-50 text-amber-700 border border-amber-200">👤 Perorangan</span>';
+          ? '<span class="px-2.5 py-1 rounded-xl text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">INSTANSI</span>' 
+          : '<span class="px-2.5 py-1 rounded-xl text-[10px] font-bold bg-amber-50 text-amber-700 border border-amber-200">PERORANGAN</span>';
 
-        const badgeBayar = p.tipeBayar === 'full'
-          ? '<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">💳 Full</span>'
-          : '<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-indigo-50 text-indigo-700 border border-indigo-200">📑 Termin</span>';
-
-        html += `<tr class="hover:bg-slate-50">
-          <td class="p-3.5">
+        html += `<tr class="hover:bg-slate-50/80 transition-colors">
+          <td class="p-4">
             <span class="font-mono font-bold text-blue-600 block">${p.kode || "-"}</span>
-            <span class="font-semibold text-slate-900">${p.namaCustomer || "-"}</span>
+            <span class="font-bold text-slate-900">${p.namaCustomer || "-"}</span>
             <span class="text-slate-400 block text-[11px]">${p.noHp || ''}</span>
           </td>
-          <td class="p-3.5">
+          <td class="p-4">
             ${badgeTipe}
-            <span class="block text-slate-600 mt-1">${p.jenisPekerjaan || "-"}</span>
+            <span class="block text-slate-600 font-medium mt-1.5">${p.jenisPekerjaan || "-"}</span>
           </td>
-          <td class="p-3.5 font-bold text-slate-900">${rupiah(p.totalHarga)}</td>
-          <td class="p-3.5 font-bold text-emerald-600">+${rupiah(totalMasukProj)}</td>
-          <td class="p-3.5 font-bold text-rose-600">-${rupiah(totalKeluarProj)}</td>
-          <td class="p-3.5">${badgeBayar}</td>
-          <td class="p-3.5 text-right space-x-1">
-            <button class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-2.5 py-1.5 rounded-lg text-xs font-semibold" onclick="bukaDetailPekerjaan('${p.id}')">📂 Rincian Keuangan</button>
-            <button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-2.5 py-1.5 rounded-lg text-xs font-semibold" onclick="hapusPekerjaan('${p.id}')">Hapus</button>
+          <td class="p-4 font-bold text-slate-900">${rupiah(p.totalHarga)}</td>
+          <td class="p-4 font-bold text-emerald-600">+${rupiah(totalMasukProj)}</td>
+          <td class="p-4 font-bold text-rose-600">-${rupiah(totalKeluarProj)}</td>
+          <td class="p-4 font-extrabold ${labaProj >= 0 ? 'text-blue-600' : 'text-rose-600'}">${rupiah(labaProj)}</td>
+          <td class="p-4 text-right space-x-1.5">
+            <button class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm" onclick="bukaDetailPekerjaan('${p.id}')">📂 Rincian Keuangan</button>
+            <button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm" onclick="hapusPekerjaan('${p.id}')">Hapus</button>
           </td>
         </tr>`;
       });
@@ -608,46 +653,49 @@
       const arrK = pj.pengeluaran || [];
       const totalMasuk = arrM.reduce((s, x) => s + Number(x.nominal || 0), 0);
       const totalKeluar = arrK.reduce((s, x) => s + Number(x.nominal || 0), 0);
+      const labaBersih = totalMasuk - totalKeluar;
 
       document.getElementById("detailValMasuk").textContent = rupiah(totalMasuk);
       document.getElementById("detailValKeluar").textContent = rupiah(totalKeluar);
+      
+      const elUntung = document.getElementById("detailValUntung");
+      elUntung.textContent = rupiah(labaBersih);
+      elUntung.className = `text-sm sm:text-base font-extrabold mt-1 ${labaBersih >= 0 ? 'text-blue-600' : 'text-rose-600'}`;
 
-      // Tabel Pemasukan / Termin (Bisa banyak)
       let htmlM = `<table class="w-full text-left text-xs bg-white">
-        <tr class="bg-slate-50 text-slate-500 border-b uppercase font-semibold">
-          <th class="p-3">Tanggal</th><th class="p-3">Nominal</th><th class="p-3">Metode</th><th class="p-3">Keterangan (Termin)</th><th class="p-3 text-right">Aksi</th>
+        <tr class="bg-slate-50 text-slate-400 border-b border-slate-100 uppercase font-bold text-[10px] tracking-wider">
+          <th class="p-3.5">Tanggal</th><th class="p-3.5">Nominal</th><th class="p-3.5">Metode</th><th class="p-3.5">Keterangan</th><th class="p-3.5 text-right">Aksi</th>
         </tr>`;
       if(arrM.length === 0) {
-        htmlM += `<tr><td colspan="5" class="p-6 text-center text-slate-400">Belum ada catatan pembayaran.</td></tr>`;
+        htmlM += `<tr><td colspan="5" class="p-8 text-center text-slate-400">Belum ada catatan pembayaran.</td></tr>`;
       } else {
         arrM.forEach((m, idx) => {
-          htmlM += `<tr class="border-b hover:bg-slate-50">
-            <td class="p-3 text-slate-600">${m.tanggal}</td>
-            <td class="p-3 font-bold text-emerald-600">+${rupiah(m.nominal)}</td>
-            <td class="p-3 uppercase">${m.metode || '-'}</td>
-            <td class="p-3 font-medium text-slate-800">${m.keterangan || '-'}</td>
-            <td class="p-3 text-right"><button onclick="hapusSubItem('pemasukan', ${idx})" class="text-rose-600 font-semibold hover:underline">Hapus</button></td>
+          htmlM += `<tr class="border-b border-slate-50 hover:bg-slate-50/50">
+            <td class="p-3.5 text-slate-600">${m.tanggal}</td>
+            <td class="p-3.5 font-bold text-emerald-600">+${rupiah(m.nominal)}</td>
+            <td class="p-3.5 uppercase font-medium">${m.metode || '-'}</td>
+            <td class="p-3.5 font-bold text-slate-800">${m.keterangan || '-'}</td>
+            <td class="p-3.5 text-right"><button onclick="hapusSubItem('pemasukan', ${idx})" class="text-rose-600 font-semibold hover:underline">Hapus</button></td>
           </tr>`;
         });
       }
       htmlM += `</table>`;
       document.getElementById("tabelMasukSub").innerHTML = htmlM;
 
-      // Tabel Pengeluaran (Bisa banyak)
       let htmlK = `<table class="w-full text-left text-xs bg-white">
-        <tr class="bg-slate-50 text-slate-500 border-b uppercase font-semibold">
-          <th class="p-3">Tanggal</th><th class="p-3">Kategori</th><th class="p-3">Nominal</th><th class="p-3">Keterangan</th><th class="p-3 text-right">Aksi</th>
+        <tr class="bg-slate-50 text-slate-400 border-b border-slate-100 uppercase font-bold text-[10px] tracking-wider">
+          <th class="p-3.5">Tanggal</th><th class="p-3.5">Kategori</th><th class="p-3.5">Nominal</th><th class="p-3.5">Keterangan</th><th class="p-3.5 text-right">Aksi</th>
         </tr>`;
       if(arrK.length === 0) {
-        htmlK += `<tr><td colspan="5" class="p-6 text-center text-slate-400">Belum ada catatan pengeluaran.</td></tr>`;
+        htmlK += `<tr><td colspan="5" class="p-8 text-center text-slate-400">Belum ada catatan pengeluaran.</td></tr>`;
       } else {
         arrK.forEach((k, idx) => {
-          htmlK += `<tr class="border-b hover:bg-slate-50">
-            <td class="p-3 text-slate-600">${k.tanggal}</td>
-            <td class="p-3 font-medium text-slate-700">${k.kategori || '-'}</td>
-            <td class="p-3 font-bold text-rose-600">-${rupiah(k.nominal)}</td>
-            <td class="p-3 font-medium text-slate-800">${k.keterangan || '-'}</td>
-            <td class="p-3 text-right"><button onclick="hapusSubItem('pengeluaran', ${idx})" class="text-rose-600 font-semibold hover:underline">Hapus</button></td>
+          htmlK += `<tr class="border-b border-slate-50 hover:bg-slate-50/50">
+            <td class="p-3.5 text-slate-600">${k.tanggal}</td>
+            <td class="p-3.5 font-semibold text-slate-700">${k.kategori || '-'}</td>
+            <td class="p-3.5 font-bold text-rose-600">-${rupiah(k.nominal)}</td>
+            <td class="p-3.5 font-bold text-slate-800">${k.keterangan || '-'}</td>
+            <td class="p-3.5 text-right"><button onclick="hapusSubItem('pengeluaran', ${idx})" class="text-rose-600 font-semibold hover:underline">Hapus</button></td>
           </tr>`;
         });
       }
@@ -685,7 +733,7 @@
         tanggal: document.getElementById("subMasukTgl").value,
         nominal: nominal,
         metode: document.getElementById("subMasukMetode").value,
-        keterangan: document.getElementById("subMasukKet").value || "Termin"
+        keterangan: document.getElementById("subMasukKet").value.toUpperCase() || "TERMIN"
       };
 
       const arrM = pj.pemasukan || [];
@@ -709,7 +757,7 @@
         tanggal: document.getElementById("subKeluarTgl").value,
         kategori: kategori,
         nominal: nominal,
-        keterangan: document.getElementById("subKeluarKet").value || "Material"
+        keterangan: document.getElementById("subKeluarKet").value.toUpperCase() || "MATERIAL"
       };
 
       const arrK = pj.pengeluaran || [];
@@ -739,18 +787,18 @@
 
     function renderStok() {
       const el = document.getElementById("listStok");
-      if (dataStok.length === 0) { el.innerHTML = '<div class="text-center py-12 text-slate-400 text-sm">Belum ada stok.</div>'; return; }
+      if (dataStok.length === 0) { el.innerHTML = '<div class="text-center py-16 text-slate-400 text-sm">Belum ada stok barang.</div>'; return; }
       let html = `<table class="w-full text-left border-collapse text-sm">
-        <thead><tr class="border-b border-slate-200 bg-slate-50 text-slate-500 text-xs uppercase font-semibold">
+        <thead><tr class="border-b border-slate-100 bg-slate-50/70 text-slate-400 text-[11px] uppercase font-bold tracking-wider">
           <th class="p-4">Nama Barang</th><th class="p-4">Sisa Stok</th><th class="p-4">Harga Satuan</th><th class="p-4 text-right">Aksi</th>
         </tr></thead><tbody class="divide-y divide-slate-100">`;
       dataStok.forEach(s => {
-        html += `<tr class="hover:bg-slate-50">
-          <td class="p-4 font-medium text-slate-900">${s.nama}</td>
+        html += `<tr class="hover:bg-slate-50/80 transition-colors">
+          <td class="p-4 font-bold text-slate-900">${s.nama}</td>
           <td class="p-4 font-bold ${s.jumlah <= 2 ? 'text-rose-600' : 'text-slate-800'}">${s.jumlah} ${s.satuan || ''}</td>
-          <td class="p-4 text-slate-600">${rupiah(s.harga)}</td>
+          <td class="p-4 text-slate-600 font-semibold">${rupiah(s.harga)}</td>
           <td class="p-4 text-right">
-            <button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="hapusStok('${s.id}')">Hapus</button>
+            <button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm" onclick="hapusStok('${s.id}')">Hapus</button>
           </td>
         </tr>`;
       });
@@ -760,15 +808,15 @@
 
     function renderAdminMaster() {
       document.getElementById("listMasterKategori").innerHTML = masterKategori.map(k => `
-        <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
-          <span class="font-medium text-slate-700">${k.nama}</span>
+        <div class="flex justify-between items-center bg-white border border-slate-200/80 px-4 py-2.5 rounded-2xl text-xs">
+          <span class="font-bold text-slate-700">${k.nama}</span>
           <button onclick="hapusMasterData('master_kategori', '${k.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button>
         </div>
       `).join("");
 
       document.getElementById("listMasterJenisPekerjaan").innerHTML = masterJenisPekerjaan.map(j => `
-        <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
-          <span class="font-medium text-slate-700">${j.nama}</span>
+        <div class="flex justify-between items-center bg-white border border-slate-200/80 px-4 py-2.5 rounded-2xl text-xs">
+          <span class="font-bold text-slate-700">${j.nama}</span>
           <button onclick="hapusMasterData('master_jenis_pekerjaan', '${j.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button>
         </div>
       `).join("");
@@ -784,7 +832,7 @@
     }
 
     window.tambahMasterKategori = async () => {
-      const val = document.getElementById("adminKategoriBaru").value.trim();
+      const val = document.getElementById("adminKategoriBaru").value.trim().toUpperCase();
       if(!val) return alert("Masukkan nama kategori!");
       await addDoc(collection(db, "master_kategori"), { nama: val });
       document.getElementById("adminKategoriBaru").value = "";
@@ -792,7 +840,7 @@
     };
 
     window.tambahMasterJenisPekerjaan = async () => {
-      const val = document.getElementById("adminJenisPekerjaanBaru").value.trim();
+      const val = document.getElementById("adminJenisPekerjaanBaru").value.trim().toUpperCase();
       if(!val) return alert("Masukkan jenis pekerjaan!");
       await addDoc(collection(db, "master_jenis_pekerjaan"), { nama: val });
       document.getElementById("adminJenisPekerjaanBaru").value = "";
@@ -806,8 +854,8 @@
     };
 
     window.switchTab = (tab, el) => {
-      document.querySelectorAll(".nav-btn").forEach(t => t.className = "nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-100");
-      if(el) el.className = "nav-btn active w-full flex items-center gap-3 px-4 py-3 rounded-xl text-xs font-semibold transition-all bg-blue-600 text-white shadow-sm";
+      document.querySelectorAll(".nav-btn").forEach(t => t.className = "nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-50 hover:text-slate-900");
+      if(el) el.className = "nav-btn active w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-semibold transition-all bg-blue-600 text-white shadow-md shadow-blue-600/20";
       ["pekerjaan", "stok", "admin"].forEach(t => {
         document.getElementById("tab-" + t).classList.toggle("hidden", t !== tab);
       });
@@ -834,18 +882,18 @@
     };
 
     window.simpanPekerjaan = async () => {
-      const nama = document.getElementById("pNama").value.trim();
+      const nama = document.getElementById("pNama").value.trim().toUpperCase();
       const total = Number(document.getElementById("pTotal").value);
       const jenis = document.getElementById("pJenis").value;
       const tgl = document.getElementById("pTgl").value;
       const tipeBayar = document.getElementById("pTipeBayar").value;
       
       const masukNominal = Number(document.getElementById("pMasukNominal").value || 0);
-      const masukKet = document.getElementById("pMasukKet").value.trim() || "Termin 1 (DP)";
+      const masukKet = document.getElementById("pMasukKet").value.trim().toUpperCase() || "TERMIN 1 (DP)";
 
       const keluarNominal = Number(document.getElementById("pKeluarNominal").value || 0);
       const keluarKategori = document.getElementById("pKategoriKeluar").value;
-      const keluarKet = document.getElementById("pKeluarKet").value.trim() || "Belanja Material";
+      const keluarKet = document.getElementById("pKeluarKet").value.trim().toUpperCase() || "BELANJA MATERIAL";
 
       if (!nama || !total || !jenis) {
         alert("Nama Customer, Jenis Pekerjaan, dan Total Nilai Harga wajib diisi!");
@@ -859,7 +907,7 @@
         pemasukanArr.push({
           tanggal: tgl,
           nominal: masukNominal,
-          metode: "transfer",
+          metode: "TRANSFER",
           keterangan: masukKet
         });
       }
@@ -868,7 +916,7 @@
       if (keluarNominal > 0) {
         pengeluaranArr.push({
           tanggal: tgl,
-          kategori: keluarKategori || "Material",
+          kategori: keluarKategori || "MATERIAL",
           nominal: keluarNominal,
           keterangan: keluarKet
         });
@@ -890,13 +938,13 @@
 
       closeModal("modalPekerjaan");
       await loadAll();
-      alert("✅ Pekerjaan baru berhasil disimpan! Anda bisa klik 'Rincian Keuangan' untuk menambah Termin 2, Termin 3, atau pengeluaran tambahan lainnya.");
+      alert("✅ Pekerjaan baru berhasil disimpan!");
     };
 
     window.simpanStok = async () => {
-      const nama = document.getElementById("sNama").value.trim();
+      const nama = document.getElementById("sNama").value.trim().toUpperCase();
       const jumlah = Number(document.getElementById("sJumlah").value);
-      const satuan = document.getElementById("sSatuan").value.trim();
+      const satuan = document.getElementById("sSatuan").value.trim().toUpperCase();
       const harga = Number(document.getElementById("sHarga").value);
       if (!nama || isNaN(jumlah)) { alert("Nama dan jumlah wajib diisi!"); return; }
 
