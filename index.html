@@ -214,7 +214,7 @@
     </main>
   </div>
 
-  <!-- MODAL 1: DETAIL / RINCIAN KEUANGAN PROYEK (MODERN SAAS) -->
+  <!-- MODAL 1: DETAIL / RINCIAN KEUANGAN PROYEK -->
   <div class="modal fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 items-center justify-center p-4 hidden" id="modalDetailPekerjaan">
     <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-8 max-w-4xl w-full shadow-2xl shadow-slate-950/10 space-y-6 max-h-[90vh] overflow-y-auto modal-animate">
       <div class="flex justify-between items-center pb-4 border-b border-slate-100">
@@ -486,6 +486,22 @@
 
     const rupiah = (n) => "Rp " + Number(n || 0).toLocaleString("id-ID");
 
+    // Fungsi konverter tanggal ke format Indonesia (Contoh: 14 September 2026)
+    const formatTanggalIndo = (tglStr) => {
+      if (!tglStr) return "-";
+      const parts = tglStr.split("-");
+      if (parts.length !== 3) return tglStr;
+      const tahun = parts[0];
+      const bulanIndex = parseInt(parts[1], 10) - 1;
+      const hari = parseInt(parts[2], 10);
+      const namaBulan = [
+        "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+        "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+      ];
+      if (isNaN(bulanIndex) || bulanIndex < 0 || bulanIndex > 11) return tglStr;
+      return `${hari} ${namaBulan[bulanIndex]} ${tahun}`;
+    };
+
     let dataPekerjaan = [];
     let dataStok = [];
     let masterKategori = [];
@@ -700,7 +716,7 @@
       } else {
         arrM.forEach((m, idx) => {
           htmlM += `<tr class="border-b border-slate-50 hover:bg-slate-50/50">
-            <td class="py-3 px-4 text-slate-600 align-middle">${m.tanggal}</td>
+            <td class="py-3 px-4 text-slate-600 align-middle">${formatTanggalIndo(m.tanggal)}</td>
             <td class="py-3 px-4 font-bold text-emerald-600 align-middle">+${rupiah(m.nominal)}</td>
             <td class="py-3 px-4 uppercase font-medium align-middle">${m.metode || '-'}</td>
             <td class="py-3 px-4 font-bold text-slate-800 align-middle">${m.keterangan || '-'}</td>
@@ -720,7 +736,7 @@
       } else {
         arrK.forEach((k, idx) => {
           htmlK += `<tr class="border-b border-slate-50 hover:bg-slate-50/50">
-            <td class="py-3 px-4 text-slate-600 align-middle">${k.tanggal}</td>
+            <td class="py-3 px-4 text-slate-600 align-middle">${formatTanggalIndo(k.tanggal)}</td>
             <td class="py-3 px-4 font-semibold text-slate-700 align-middle">${k.kategori || '-'}</td>
             <td class="py-3 px-4 font-bold text-rose-600 align-middle">-${rupiah(k.nominal)}</td>
             <td class="py-3 px-4 font-bold text-slate-800 align-middle">${k.keterangan || '-'}</td>
