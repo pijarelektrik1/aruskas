@@ -165,7 +165,7 @@
           <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
             <h3 class="font-semibold text-sm text-slate-800">📁 Kategori Pengeluaran Baru</h3>
             <div>
-              <input id="adminKategoriBaru" placeholder="Nama Kategori (Cth: Konsumsi)" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm mb-2">
+              <input id="adminKategoriBaru" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm mb-2">
               <button onclick="tambahMasterKategori()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-semibold py-2 rounded-xl text-xs shadow-sm">Tambah Kategori</button>
             </div>
             <div>
@@ -178,7 +178,7 @@
           <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
             <h3 class="font-semibold text-sm text-slate-800">🔧 Jenis Pekerjaan Baru</h3>
             <div>
-              <input id="adminJenisPekerjaanBaru" placeholder="Nama Jenis (Cth: Pasang Penangkal Petir)" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm mb-2">
+              <input id="adminJenisPekerjaanBaru" class="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm mb-2">
               <button onclick="tambahMasterJenisPekerjaan()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-semibold py-2 rounded-xl text-xs shadow-sm">Tambah Jenis Pekerjaan</button>
             </div>
             <div>
@@ -201,7 +201,7 @@
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nama Customer</label>
-        <input id="pNama" placeholder="Nama lengkap" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="pNama" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
@@ -213,7 +213,7 @@
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">No HP</label>
-          <input id="pHp" placeholder="08xx" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <input id="pHp" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
         </div>
       </div>
       <div>
@@ -224,7 +224,7 @@
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Total Harga (Rp)</label>
-        <input id="pTotal" type="number" placeholder="0" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="pTotal" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
@@ -236,7 +236,7 @@
         </div>
         <div id="wrapTermin" style="display:none;">
           <label class="block text-xs font-medium text-slate-600 mb-1">Rincian Termin (Rp)</label>
-          <input id="pNominalTermin" placeholder="cth: 500000, 1000000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <input id="pNominalTermin" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
         </div>
       </div>
       <div>
@@ -268,7 +268,7 @@
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Nominal (Rp)</label>
-          <input id="mNominal" type="number" placeholder="0" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <input id="mNominal" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
         </div>
       </div>
       <div>
@@ -280,7 +280,7 @@
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan</label>
-        <input id="mKet" placeholder="Contoh: Pelunasan" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="mKet" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div class="flex gap-3 pt-3 border-t border-slate-100">
         <button onclick="simpanMasuk()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Simpan</button>
@@ -310,11 +310,11 @@
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nominal (Rp)</label>
-        <input id="kNominal" type="number" placeholder="0" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="kNominal" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Keterangan</label>
-        <input id="kKet" placeholder="Beli peralatan..." class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="kKet" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div class="flex gap-3 pt-3 border-t border-slate-100">
         <button onclick="simpanKeluar()" class="flex-1 bg-rose-600 hover:bg-rose-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Simpan</button>
@@ -332,21 +332,21 @@
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nama Barang / Material</label>
-        <input id="sNama" placeholder="Cth: Pipa AC 1/4 inch" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="sNama" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Jumlah Stok</label>
-          <input id="sJumlah" type="number" placeholder="0" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <input id="sJumlah" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Satuan</label>
-          <input id="sSatuan" placeholder="Meter / Pcs" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <input id="sSatuan" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
         </div>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Harga Satuan (Rp)</label>
-        <input id="sHarga" type="number" placeholder="0" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="sHarga" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div class="flex gap-3 pt-3 border-t border-slate-100">
         <button onclick="simpanStok()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Simpan Stok</button>
@@ -369,7 +369,7 @@
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Jumlah yang Dipakai</label>
-        <input id="pakaiQty" type="number" placeholder="1" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="pakaiQty" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
       <div class="flex gap-3 pt-3 border-t border-slate-100">
         <button onclick="prosesPakaiBarang()" class="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Kurangi Stok</button>
@@ -422,7 +422,6 @@
         const st = await getDocs(query(collection(db, "stok"), orderBy("nama", "asc")));
         dataStok = st.docs.map(d => ({ id: d.id, ...d.data() }));
 
-        // Load master data admin (Murni dari database tanpa default statis)
         const mk = await getDocs(collection(db, "master_kategori"));
         masterKategori = mk.docs.map(d => ({ id: d.id, ...d.data() }));
 
@@ -547,7 +546,6 @@
     }
 
     function renderAdminMaster() {
-      // List Kategori
       const elKat = document.getElementById("listMasterKategori");
       if (masterKategori.length === 0) {
         elKat.innerHTML = '<p class="text-xs text-slate-400 italic">Belum ada kategori. Tambahkan di atas.</p>';
@@ -560,7 +558,6 @@
         `).join("");
       }
 
-      // List Jenis Pekerjaan
       const elJen = document.getElementById("listMasterJenisPekerjaan");
       if (masterJenisPekerjaan.length === 0) {
         elJen.innerHTML = '<p class="text-xs text-slate-400 italic">Belum ada jenis pekerjaan. Tambahkan di atas.</p>';
