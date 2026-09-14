@@ -103,7 +103,7 @@
         </div>
       </div>
 
-      <!-- TAB 1: PEKERJAAN & KEUANGAN MENJADI SATU -->
+      <!-- TAB 1: PEKERJAAN & KEUANGAN TERPADU -->
       <div class="card-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden" id="tab-pekerjaan">
         <div class="p-5 border-b border-slate-100 flex justify-between items-center">
           <div>
@@ -172,7 +172,7 @@
     </main>
   </div>
 
-  <!-- MODAL DETAIL KEUANGAN LENGKAP DALAM SATU PEKERJAAN -->
+  <!-- MODAL DETAIL KEUANGAN DI DALAM SATU PEKERJAAN -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalDetailPekerjaan">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-4xl w-full shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
@@ -283,11 +283,11 @@
     </div>
   </div>
 
-  <!-- MODAL TAMBAH PEKERJAAN BARU -->
+  <!-- MODAL TAMBAH PEKERJAAN BARU (DILENGKAPI INPUT PEMASUKAN AWAL & PENGELUARAN AWAL) -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPekerjaan">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-        <h2 class="font-bold text-base text-slate-900">Tambah Pekerjaan Baru</h2>
+        <h2 class="font-bold text-base text-slate-900">Tambah Pekerjaan & Keuangan Awal</h2>
         <button onclick="closeModal('modalPekerjaan')" class="text-slate-400 hover:text-slate-700">✕</button>
       </div>
       <div>
@@ -315,6 +315,19 @@
         <label class="block text-xs font-medium text-slate-600 mb-1">Total Nilai Harga Proyek (Rp)</label>
         <input id="pTotal" type="number" placeholder="Contoh: 5000000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
       </div>
+
+      <!-- KOTAK INPUT PEMASUKAN AWAL & PENGELUARAN AWAL -->
+      <div class="grid grid-cols-2 gap-3 bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
+        <div>
+          <label class="block text-[11px] font-bold text-emerald-700 mb-1 uppercase">📥 Pemasukan Awal / DP (Rp)</label>
+          <input id="pMasukAwal" type="number" placeholder="0" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-emerald-600">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-rose-700 mb-1 uppercase">📤 Pengeluaran Awal (Rp)</label>
+          <input id="pKeluarAwal" type="number" placeholder="0" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-rose-600">
+        </div>
+      </div>
+
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Sistem Bayar</label>
@@ -499,7 +512,6 @@
       document.getElementById("statLaba").textContent = rupiah(totalMasukGlobal - totalKeluarGlobal);
     }
 
-    // RENDER TABEL UTAMA PEKERJAAN (MASING-MASING PROYEK SUDAH MEMUAT TOTAL MASUK & KELUARNYA SENDIRI)
     function renderPekerjaan() {
       const el = document.getElementById("listPekerjaan");
       if (dataPekerjaan.length === 0) {
@@ -556,7 +568,6 @@
       el.innerHTML = html;
     }
 
-    // MODAL DETAIL KEUANGAN DI DALAM SATU PEKERJAAN
     window.bukaDetailPekerjaan = (pid) => {
       currentDetailPekerjaanId = pid;
       const pj = dataPekerjaan.find(x => x.id === pid);
@@ -574,7 +585,6 @@
       document.getElementById("detailValMasuk").textContent = rupiah(totalMasuk);
       document.getElementById("detailValKeluar").textContent = rupiah(totalKeluar);
 
-      // Tabel Pemasukan di dalam Proyek
       let htmlM = `<table class="w-full text-left text-xs bg-white">
         <tr class="bg-slate-50 text-slate-500 border-b uppercase font-semibold">
           <th class="p-3">Tanggal</th><th class="p-3">Nominal</th><th class="p-3">Metode</th><th class="p-3">Keterangan</th><th class="p-3 text-right">Aksi</th>
@@ -595,7 +605,6 @@
       htmlM += `</table>`;
       document.getElementById("tabelMasukSub").innerHTML = htmlM;
 
-      // Tabel Pengeluaran di dalam Proyek
       let htmlK = `<table class="w-full text-left text-xs bg-white">
         <tr class="bg-slate-50 text-slate-500 border-b uppercase font-semibold">
           <th class="p-3">Tanggal</th><th class="p-3">Kategori</th><th class="p-3">Nominal</th><th class="p-3">Keterangan</th><th class="p-3 text-right">Aksi</th>
@@ -774,6 +783,8 @@
     window.openTambahPekerjaan = () => {
       document.getElementById("pTgl").value = new Date().toISOString().split("T")[0];
       document.getElementById("pTotal").value = "";
+      document.getElementById("pMasukAwal").value = "";
+      document.getElementById("pKeluarAwal").value = "";
       document.getElementById("modalPekerjaan").classList.remove("hidden");
       document.getElementById("modalPekerjaan").classList.add("flex");
     };
@@ -788,13 +799,15 @@
       document.getElementById(id).classList.add("hidden");
     };
 
-    // SIMPAN PEKERJAAN BARU DENGAN ARRAY PEMASUKAN & PENGELUARAN KOSONG/DEFAULT
+    // SIMPAN PEKERJAAN BARU DENGAN PEMASUKAN & PENGELUARAN AWAL SEKALIGUS
     window.simpanPekerjaan = async () => {
       const nama = document.getElementById("pNama").value.trim();
       const total = Number(document.getElementById("pTotal").value);
       const jenis = document.getElementById("pJenis").value;
       const tgl = document.getElementById("pTgl").value;
       const tipeBayar = document.getElementById("pTipeBayar").value;
+      const masukAwal = Number(document.getElementById("pMasukAwal").value || 0);
+      const keluarAwal = Number(document.getElementById("pKeluarAwal").value || 0);
 
       if (!nama || !total || !jenis) {
         alert("Nama Customer, Jenis Pekerjaan, dan Total Nilai Harga wajib diisi!");
@@ -803,14 +816,30 @@
 
       const kode = "PJ-" + Date.now().toString().slice(-8);
       
-      // Jika sistem bayar Full, otomatis masukkan 1 record pemasukan senilai total harga
-      let pemasukanAwal = [];
+      let pemasukanArr = [];
       if (tipeBayar === "full") {
-        pemasukanAwal.push({
+        pemasukanArr.push({
           tanggal: tgl,
           nominal: total,
           metode: "transfer",
           keterangan: "Pembayaran Full / Lunas"
+        });
+      } else if (masukAwal > 0) {
+        pemasukanArr.push({
+          tanggal: tgl,
+          nominal: masukAwal,
+          metode: "transfer",
+          keterangan: "Pembayaran / DP Awal"
+        });
+      }
+
+      let pengeluaranArr = [];
+      if (keluarAwal > 0) {
+        pengeluaranArr.push({
+          tanggal: tgl,
+          kategori: masterKategori[0] ? masterKategori[0].nama : "Material Awal",
+          nominal: keluarAwal,
+          keterangan: "Pengeluaran / Belanja Awal Proyek"
         });
       }
 
@@ -823,14 +852,14 @@
         totalHarga: total,
         tipeBayar,
         tanggalMulai: tgl,
-        pemasukan: pemasukanAwal,
-        pengeluaran: [],
+        pemasukan: pemasukanArr,
+        pengeluaran: pengeluaranArr,
         createdAt: serverTimestamp(),
       });
 
       closeModal("modalPekerjaan");
       await loadAll();
-      alert("✅ Pekerjaan baru berhasil dibuat!");
+      alert("✅ Pekerjaan beserta rincian keuangan awal berhasil disimpan!");
     };
 
     window.simpanStok = async () => {
