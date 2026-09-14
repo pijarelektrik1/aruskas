@@ -26,7 +26,7 @@
 </head>
 <body class="bg-slate-100 text-slate-800 min-h-screen flex selection:bg-blue-600 selection:text-white">
 
-  <!-- GERBANG UTAMA: HALAMAN LOGIN PIN (MUNCUL PERTAMA KALI) -->
+  <!-- GERBANG UTAMA: HALAMAN LOGIN PIN -->
   <div id="gerbangLogin" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
     <div class="bg-white border border-slate-200 rounded-3xl p-8 max-w-sm w-full shadow-2xl space-y-5 text-center">
       <div class="h-14 w-14 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 text-2xl font-bold mx-auto shadow-sm">
@@ -462,7 +462,6 @@
     let selectedStokId = null;
     let currentDetailPekerjaanId = null;
 
-    // HASH PIN ACAK TERENKRISI (Default PIN Gerbang: "123456")
     const TARGET_DASHBOARD_HASH = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
 
     async function hashPin(pin) {
@@ -472,7 +471,6 @@
       return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
-    // Cek apakah sudah login sebelumnya di sesi ini
     window.addEventListener("DOMContentLoaded", () => {
       if (sessionStorage.getItem("dashboard_logged") === "true") {
         document.getElementById("gerbangLogin").classList.add("hidden");
@@ -496,9 +494,9 @@
 
     window.lockDashboard = () => {
       sessionStorage.removeItem("dashboard_logged");
-      document.getElementById("gerbangLogin").classList.remove("flex");
-      document.getElementById("gerbangLogin").classList.remove("hidden");
-      document.getElementById("gerbangLogin").style.display = "flex";
+      const gerbang = document.getElementById("gerbangLogin");
+      gerbang.classList.remove("hidden");
+      gerbang.classList.add("flex");
       document.getElementById("inputGerbangPin").value = "";
     };
 
