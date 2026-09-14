@@ -422,29 +422,12 @@
         const st = await getDocs(query(collection(db, "stok"), orderBy("nama", "asc")));
         dataStok = st.docs.map(d => ({ id: d.id, ...d.data() }));
 
-        // Load master data admin
+        // Load master data admin (Murni dari database tanpa default statis)
         const mk = await getDocs(collection(db, "master_kategori"));
         masterKategori = mk.docs.map(d => ({ id: d.id, ...d.data() }));
-        if(masterKategori.length === 0) {
-          // Default jika kosong
-          masterKategori = [
-            { id: '1', nama: 'material' },
-            { id: '2', nama: 'gaji' },
-            { id: '3', nama: 'transport' },
-            { id: '4', nama: 'operasional' }
-          ];
-        }
 
         const mj = await getDocs(collection(db, "master_jenis_pekerjaan"));
         masterJenisPekerjaan = mj.docs.map(d => ({ id: d.id, ...d.data() }));
-        if(masterJenisPekerjaan.length === 0) {
-          masterJenisPekerjaan = [
-            { id: '1', nama: 'Instalasi AC' },
-            { id: '2', nama: 'Service AC' },
-            { id: '3', nama: 'Instalasi Listrik' },
-            { id: '4', nama: 'Perbaikan Listrik' }
-          ];
-        }
 
         hitungStats();
         renderPekerjaan();
@@ -566,31 +549,45 @@
     function renderAdminMaster() {
       // List Kategori
       const elKat = document.getElementById("listMasterKategori");
-      elKat.innerHTML = masterKategori.map(k => `
-        <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
-          <span class="font-medium text-slate-700">${k.nama}</span>
-          ${k.id.length > 1 ? `<button onclick="hapusMasterData('master_kategori', '${k.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button>` : '<span class="text-[10px] text-slate-400">Default</span>'}
-        </div>
-      `).join("");
+      if (masterKategori.length === 0) {
+        elKat.innerHTML = '<p class="text-xs text-slate-400 italic">Belum ada kategori. Tambahkan di atas.</p>';
+      } else {
+        elKat.innerHTML = masterKategori.map(k => `
+          <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
+            <span class="font-medium text-slate-700">${k.nama}</span>
+            <button onclick="hapusMasterData('master_kategori', '${k.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button>
+          </div>
+        `).join("");
+      }
 
       // List Jenis Pekerjaan
       const elJen = document.getElementById("listMasterJenisPekerjaan");
-      elJen.innerHTML = masterJenisPekerjaan.map(j => `
-        <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
-          <span class="font-medium text-slate-700">${j.nama}</span>
-          ${j.id.length > 1 ? `<button onclick="hapusMasterData('master_jenis_pekerjaan', '${j.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button>` : '<span class="text-[10px] text-slate-400">Default</span>'}
-        </div>
-      `).join("");
+      if (masterJenisPekerjaan.length === 0) {
+        elJen.innerHTML = '<p class="text-xs text-slate-400 italic">Belum ada jenis pekerjaan. Tambahkan di atas.</p>';
+      } else {
+        elJen.innerHTML = masterJenisPekerjaan.map(j => `
+          <div class="flex justify-between items-center bg-white border border-slate-200 px-3 py-2 rounded-xl text-xs">
+            <span class="font-medium text-slate-700">${j.nama}</span>
+            <button onclick="hapusMasterData('master_jenis_pekerjaan', '${j.id}')" class="text-rose-600 font-semibold hover:underline">Hapus</button>
+          </div>
+        `).join("");
+      }
     }
 
     function isiDropdownAdmin() {
-      // Dropdown jenis pekerjaan di form tambah pekerjaan
-      const optJenis = masterJenisPekerjaan.map(j => `<option value="${j.nama}">${j.nama}</option>`).join("");
-      document.getElementById("pJenis").innerHTML = optJenis;
+      const elJenis = document.getElementById("pJenis");
+      if(masterJenisPekerjaan.length === 0) {
+        elJenis.innerHTML = '<option value="">-- Harap Tambah Jenis Pekerjaan di Menu Admin --</option>';
+      } else {
+        elJenis.innerHTML = masterJenisPekerjaan.map(j => `<option value="${j.nama}">${j.nama}</option>`).join("");
+      }
 
-      // Dropdown kategori di form tambah pengeluaran
-      const optKat = masterKategori.map(k => `<option value="${k.nama}">${k.nama}</option>`).join("");
-      document.getElementById("kKategori").innerHTML = optKat;
+      const elKat = document.getElementById("kKategori");
+      if(masterKategori.length === 0) {
+        elKat.innerHTML = '<option value="">-- Harap Tambah Kategori di Menu Admin --</option>';
+      } else {
+        elKat.innerHTML = masterKategori.map(k => `<option value="${k.nama}">${k.nama}</option>`).join("");
+      }
     }
 
     window.tambahMasterKategori = async () => {
@@ -670,8 +667,9 @@
     window.simpanPekerjaan = async () => {
       const nama = document.getElementById("pNama").value.trim();
       const total = Number(document.getElementById("pTotal").value);
+      const jenis = document.getElementById("pJenis").value;
       const tipeBayar = document.getElementById("pTipeBayar").value;
-      if (!nama || !total) { alert("Nama dan total wajib diisi!"); return; }
+      if (!nama || !total || !jenis) { alert("Nama, jenis pekerjaan, dan total wajib diisi!"); return; }
 
       const kode = "PJ-" + Date.now().toString().slice(-8);
       const docRef = await addDoc(collection(db, "pekerjaan"), {
@@ -679,7 +677,7 @@
         tipe: document.getElementById("pTipe").value,
         namaCustomer: nama,
         noHp: document.getElementById("pHp").value,
-        jenisPekerjaan: document.getElementById("pJenis").value,
+        jenisPekerjaan: jenis,
         totalHarga: total,
         tipeBayar,
         tanggalMulai: document.getElementById("pTgl").value,
@@ -720,11 +718,12 @@
     };
 
     window.simpanKeluar = async () => {
+      const kategori = document.getElementById("kKategori").value;
       const nominal = Number(document.getElementById("kNominal").value);
-      if (!nominal) { alert("Nominal wajib diisi!"); return; }
+      if (!kategori || !nominal) { alert("Kategori dan nominal wajib diisi!"); return; }
 
       await addDoc(collection(db, "pengeluaran"), {
-        kategori: document.getElementById("kKategori").value,
+        kategori: kategori,
         tanggal: document.getElementById("kTanggal").value,
         nominal,
         keterangan: document.getElementById("kKet").value,
@@ -760,7 +759,7 @@
       });
 
       await addDoc(collection(db, "pengeluaran"), {
-        kategori: "material",
+        kategori: masterKategori[0] ? masterKategori[0].nama : "Material",
         tanggal: new Date().toISOString().split("T")[0],
         nominal: qty * (barang.harga || 0),
         keterangan: `Pemakaian material: ${qty} ${barang.satuan || ''} ${barang.nama}`,
@@ -769,7 +768,7 @@
 
       closeModal("modalPakaiBarang");
       await loadAll();
-      alert("✅ Stok berhasil dikurangi dan tercatat ke pengeluaran material!");
+      alert("✅ Stok berhasil dikurangi dan tercatat ke pengeluaran!");
     };
 
     window.hapusData = async (coll, id) => {
