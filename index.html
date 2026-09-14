@@ -1,475 +1,581 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AC & Listrik - Dashboard</title>
+<title>Dashboard • AC & Listrik Pro</title>
+<!-- Tailwind CSS Play CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'Segoe UI', sans-serif],
+        },
+      }
+    }
+  }
+</script>
+<!-- Google Font Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',sans-serif; }
-  body { background:#f1f5f9; color:#1e293b; }
-  .container { max-width:1000px; margin:0 auto; padding:20px; }
-  .header { display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; }
-  .header h1 { font-size:22px; }
-  .btn { padding:10px 16px; border:none; border-radius:8px; cursor:pointer; font-size:14px; font-weight:500; }
-  .btn-blue { background:#2563eb; color:#fff; }
-  .btn-green { background:#16a34a; color:#fff; }
-  .btn-red { background:#dc2626; color:#fff; }
-  .btn:hover { opacity:.9; }
-
-  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:24px; }
-  .stat { padding:20px; border-radius:12px; color:#fff; }
-  .stat.green { background:#16a34a; }
-  .stat.red { background:#dc2626; }
-  .stat.blue { background:#2563eb; }
-  .stat.orange { background:#ea580c; }
-  .stat p { font-size:13px; opacity:.9; }
-  .stat .val { font-size:22px; font-weight:bold; margin-top:6px; }
-
-  .card { background:#fff; border-radius:12px; padding:20px; box-shadow:0 2px 8px rgba(0,0,0,.05); margin-bottom:20px; }
-  .card h2 { font-size:16px; margin-bottom:16px; }
-
-  .tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
-  .tab { padding:8px 16px; background:#fff; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer; font-size:14px; }
-  .tab.active { background:#2563eb; color:#fff; border-color:#2563eb; }
-
-  table { width:100%; border-collapse:collapse; font-size:14px; }
-  th, td { padding:10px; text-align:left; border-bottom:1px solid #f1f5f9; }
-  th { background:#f8fafc; font-weight:600; font-size:13px; color:#64748b; }
-
-  input, select, textarea { width:100%; padding:10px; border:1px solid #e2e8f0; border-radius:8px; font-size:14px; margin-bottom:12px; }
-  label { display:block; font-size:13px; margin-bottom:6px; color:#475569; font-weight:500; }
-
-  .badge { padding:3px 10px; border-radius:12px; font-size:11px; font-weight:600; }
-  .badge-blue { background:#dbeafe; color:#1e40af; }
-  .badge-orange { background:#fed7aa; color:#9a3412; }
-  .badge-green { background:#dcfce7; color:#166534; }
-  .badge-red { background:#fee2e2; color:#991b1b; }
-
-  .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:100; align-items:center; justify-content:center; padding:20px; }
-  .modal.show { display:flex; }
-  .modal-content { background:#fff; padding:24px; border-radius:12px; max-width:500px; width:100%; max-height:90vh; overflow-y:auto; }
-
-  .hidden { display:none; }
-  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-  .empty { text-align:center; padding:40px; color:#94a3b8; font-size:14px; }
+  body { font-family: 'Inter', sans-serif; }
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+  .dark ::-webkit-scrollbar-thumb { background: #334155; }
 </style>
 </head>
-<body>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-blue-500 selection:text-white">
 
-<div class="container">
   <!-- HEADER -->
-  <div class="header">
-    <h1>⚡ AC & Listrik</h1>
-    <div>
-      <button class="btn btn-blue" onclick="openTambah()">+ Pekerjaan</button>
-    </div>
-  </div>
-
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stat green">
-      <p>Pemasukan</p>
-      <div class="val" id="statMasuk">Rp 0</div>
-    </div>
-    <div class="stat red">
-      <p>Pengeluaran</p>
-      <div class="val" id="statKeluar">Rp 0</div>
-    </div>
-    <div class="stat blue">
-      <p>Laba Bersih</p>
-      <div class="val" id="statLaba">Rp 0</div>
-    </div>
-    <div class="stat orange">
-      <p>Pekerjaan Aktif</p>
-      <div class="val" id="statAktif">0</div>
-    </div>
-  </div>
-
-  <!-- TAB MENU -->
-  <div class="tabs">
-    <div class="tab active" onclick="switchTab('pekerjaan', this)">🔧 Pekerjaan</div>
-    <div class="tab" onclick="switchTab('pemasukan', this)">💰 Pemasukan</div>
-    <div class="tab" onclick="switchTab('pengeluaran', this)">💸 Pengeluaran</div>
-  </div>
-
-  <!-- TAB: PEKERJAAN -->
-  <div class="card" id="tab-pekerjaan">
-    <h2>Daftar Pekerjaan</h2>
-    <div id="listPekerjaan">
-      <div class="empty">Memuat data...</div>
-    </div>
-  </div>
-
-  <!-- TAB: PEMASUKAN -->
-  <div class="card hidden" id="tab-pemasukan">
-    <h2>Daftar Pemasukan</h2>
-    <button class="btn btn-green" onclick="openTambahMasuk()" style="margin-bottom:16px;">+ Tambah Pemasukan</button>
-    <div id="listPemasukan">
-      <div class="empty">Memuat data...</div>
-    </div>
-  </div>
-
-  <!-- TAB: PENGELUARAN -->
-  <div class="card hidden" id="tab-pengeluaran">
-    <h2>Daftar Pengeluaran</h2>
-    <button class="btn btn-red" onclick="openTambahKeluar()" style="margin-bottom:16px;">+ Tambah Pengeluaran</button>
-    <div id="listPengeluaran">
-      <div class="empty">Memuat data...</div>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL TAMBAH PEKERJAAN -->
-<div class="modal" id="modalPekerjaan">
-  <div class="modal-content">
-    <h2 style="margin-bottom:16px;">Tambah Pekerjaan</h2>
-    <label>Nama Customer</label>
-    <input id="pNama" placeholder="Nama lengkap">
-
-    <label>Tipe Customer</label>
-    <select id="pTipe">
-      <option value="perorangan">👤 Perorangan</option>
-      <option value="instansi">🏢 Instansi</option>
-    </select>
-
-    <label>No HP</label>
-    <input id="pHp" placeholder="08xx">
-
-    <label>Jenis Pekerjaan</label>
-    <select id="pJenis">
-      <option>Instalasi AC</option>
-      <option>Service AC</option>
-      <option>Instalasi Listrik</option>
-      <option>Perbaikan Listrik</option>
-    </select>
-
-    <label>Total Harga (Rp)</label>
-    <input id="pTotal" type="number" placeholder="0">
-
-    <div class="grid2">
+  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-xl font-bold shadow-inner">
+          ⚡
+        </div>
+        <div>
+          <h1 class="font-bold text-base sm:text-lg tracking-tight text-white">AC & Listrik</h1>
+          <p class="text-xs text-slate-400">Sistem Manajemen & Keuangan Proyek</p>
+        </div>
+      </div>
       <div>
-        <label>Jumlah Termin</label>
-        <select id="pTermin">
-          <option value="2">2 x (50%-50%)</option>
-          <option value="3">3 x (30%-40%-30%)</option>
+        <button onclick="openTambah()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all shadow-lg shadow-blue-600/20 flex items-center gap-2 active:scale-95">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+          Tambah Pekerjaan
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTAINER UTAMA -->
+  <main class="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8 space-y-6">
+
+    <!-- STATS GRID -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <!-- Card Pemasukan -->
+      <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 relative overflow-hidden shadow-xl backdrop-blur-sm">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Total Pemasukan</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-emerald-400 mt-2" id="statMasuk">Rp 0</h3>
+          </div>
+          <div class="p-2.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Pengeluaran -->
+      <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 relative overflow-hidden shadow-xl backdrop-blur-sm">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Total Pengeluaran</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-rose-400 mt-2" id="statKeluar">Rp 0</h3>
+          </div>
+          <div class="p-2.5 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-xl">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.25 6L9 12.75l4.306-4.307a11.95 11.95 0 015.814 5.519l2.74 1.22m0 0l-5.94 2.28m5.94-2.28l-2.28-5.941"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Laba Bersih -->
+      <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 relative overflow-hidden shadow-xl backdrop-blur-sm">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Laba Bersih</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-blue-400 mt-2" id="statLaba">Rp 0</h3>
+          </div>
+          <div class="p-2.5 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-xl">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.17-.879 1.17-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Pekerjaan Aktif -->
+      <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-5 relative overflow-hidden shadow-xl backdrop-blur-sm">
+        <div class="flex justify-between items-start">
+          <div>
+            <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Pekerjaan Aktif</p>
+            <h3 class="text-xl sm:text-2xl font-bold text-amber-400 mt-2" id="statAktif">0</h3>
+          </div>
+          <div class="p-2.5 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-xl">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.42 15.17L17.25 21A2.12 2.12 0 0120 18.25l-5.83-5.83M15 11.25a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB NAVIGATION BAR -->
+    <div class="flex items-center gap-2 border-b border-slate-800 pb-3 overflow-x-auto">
+      <button onclick="switchTab('pekerjaan', this)" class="tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-blue-600 text-white shadow-md shadow-blue-600/20 flex items-center gap-2">
+        <span>🔧</span> Pekerjaan
+      </button>
+      <button onclick="switchTab('pemasukan', this)" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white hover:bg-slate-900 flex items-center gap-2">
+        <span>💰</span> Pemasukan
+      </button>
+      <button onclick="switchTab('pengeluaran', this)" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white hover:bg-slate-900 flex items-center gap-2">
+        <span>💸</span> Pengeluaran
+      </button>
+    </div>
+
+    <!-- TAB KONTEN: PEKERJAAN -->
+    <div class="card-section bg-slate-900/60 border border-slate-800/80 rounded-2xl shadow-xl overflow-hidden" id="tab-pekerjaan">
+      <div class="p-5 border-b border-slate-800 flex justify-between items-center">
+        <h2 class="font-bold text-sm sm:text-base text-slate-200">Daftar Pekerjaan Proyek</h2>
+      </div>
+      <div class="overflow-x-auto">
+        <div id="listPekerjaan"><div class="empty py-12 text-center text-slate-500 text-sm">Memuat data...</div></div>
+      </div>
+    </div>
+
+    <!-- TAB KONTEN: PEMASUKAN -->
+    <div class="card-section bg-slate-900/60 border border-slate-800/80 rounded-2xl shadow-xl overflow-hidden hidden" id="tab-pemasukan">
+      <div class="p-5 border-b border-slate-800 flex justify-between items-center">
+        <h2 class="font-bold text-sm sm:text-base text-slate-200">Riwayat Pemasukan</h2>
+        <button onclick="openTambahMasuk()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5">
+          + Tambah Pemasukan
+        </button>
+      </div>
+      <div class="overflow-x-auto">
+        <div id="listPemasukan"><div class="empty py-12 text-center text-slate-500 text-sm">Memuat data...</div></div>
+      </div>
+    </div>
+
+    <!-- TAB KONTEN: PENGELUARAN -->
+    <div class="card-section bg-slate-900/60 border border-slate-800/80 rounded-2xl shadow-xl overflow-hidden hidden" id="tab-pengeluaran">
+      <div class="p-5 border-b border-slate-800 flex justify-between items-center">
+        <h2 class="font-bold text-sm sm:text-base text-slate-200">Riwayat Pengeluaran</h2>
+        <button onclick="openTambahKeluar()" class="bg-rose-600 hover:bg-rose-500 text-white px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5">
+          + Tambah Pengeluaran
+        </button>
+      </div>
+      <div class="overflow-x-auto">
+        <div id="listPengeluaran"><div class="empty py-12 text-center text-slate-500 text-sm">Memuat data...</div></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL TAMBAH PEKERJAAN -->
+  <div class="modal fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPekerjaan">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-7 max-w-lg w-full shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-2 border-b border-slate-800">
+        <h2 class="font-bold text-base sm:text-lg text-white">Tambah Pekerjaan Baru</h2>
+        <button onclick="closeModal('modalPekerjaan')" class="text-slate-400 hover:text-white p-1 rounded-lg">✕</button>
+      </div>
+
+      <div>
+        <label class="block text-xs font-medium text-slate-400 mb-1.5">Nama Customer</label>
+        <input id="pNama" placeholder="Nama lengkap customer" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 transition-colors">
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1.5">Tipe Customer</label>
+          <select id="pTipe" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 transition-colors">
+            <option value="perorangan">👤 Perorangan</option>
+            <option value="instansi">🏢 Instansi</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1.5">No HP</label>
+          <input id="pHp" placeholder="08xxxxxxxxxx" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 transition-colors">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-medium text-slate-400 mb-1.5">Jenis Pekerjaan</label>
+        <select id="pJenis" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 transition-colors">
+          <option>Instalasi AC</option>
+          <option>Service AC</option>
+          <option>Instalasi Listrik</option>
+          <option>Perbaikan Listrik</option>
         </select>
       </div>
+
       <div>
-        <label>Tanggal Mulai</label>
-        <input id="pTgl" type="date">
+        <label class="block text-xs font-medium text-slate-400 mb-1.5">Total Harga (Rp)</label>
+        <input id="pTotal" type="number" placeholder="Contoh: 1500000" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 transition-colors">
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1.5">Jumlah Termin</label>
+          <select id="pTermin" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 transition-colors">
+            <option value="2">2 x (50%-50%)</option>
+            <option value="3">3 x (30%-40%-30%)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1.5">Tanggal Mulai</label>
+          <input id="pTgl" type="date" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-blue-500 transition-colors">
+        </div>
+      </div>
+
+      <div class="flex gap-3 pt-3 border-t border-slate-800 mt-4">
+        <button onclick="simpanPekerjaan()" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 rounded-xl text-sm transition-all shadow-lg shadow-blue-600/20">Simpan Data</button>
+        <button onclick="closeModal('modalPekerjaan')" class="px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold py-2.5 rounded-xl text-sm transition-all">Batal</button>
       </div>
     </div>
+  </div>
 
-    <div style="display:flex; gap:10px; margin-top:16px;">
-      <button class="btn btn-green" onclick="simpanPekerjaan()">💾 Simpan</button>
-      <button class="btn" style="background:#e2e8f0;" onclick="closeModal('modalPekerjaan')">Batal</button>
+  <!-- MODAL TAMBAH PEMASUKAN -->
+  <div class="modal fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalMasuk">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-7 max-w-lg w-full shadow-2xl space-y-4">
+      <div class="flex justify-between items-center pb-2 border-b border-slate-800">
+        <h2 class="font-bold text-base sm:text-lg text-white">Tambah Pemasukan</h2>
+        <button onclick="closeModal('modalMasuk')" class="text-slate-400 hover:text-white p-1 rounded-lg">✕</button>
+      </div>
+
+      <div>
+        <label class="block text-xs font-medium text-slate-400 mb-1.5">Pekerjaan Terkait</label>
+        <select id="mPekerjaan" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
+          <option value="">-- Pilih Pekerjaan --</option>
+        </select>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1.5">Tanggal</label>
+          <input id="mTanggal" type="date" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1.5">Nominal (Rp)</label>
+          <input id="mNominal" type="number" placeholder="0" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-medium text-slate-400 mb-1.5">Metode Pembayaran</label>
+        <select id="mMetode" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
+          <option value="cash">💵 Cash / Tunai</option>
+          <option value="transfer">🏦 Transfer Bank</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-xs font-medium text-slate-400 mb-1.5">Keterangan</label>
+        <input id="mKet" placeholder="Contoh: DP Termin 1" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors">
+      </div>
+
+      <div class="flex gap-3 pt-3 border-t border-slate-800 mt-4">
+        <button onclick="simpanMasuk()" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2.5 rounded-xl text-sm transition-all shadow-lg shadow-emerald-600/20">Simpan Pemasukan</button>
+        <button onclick="closeModal('modalMasuk')" class="px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold py-2.5 rounded-xl text-sm transition-all">Batal</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- MODAL TAMBAH PEMASUKAN -->
-<div class="modal" id="modalMasuk">
-  <div class="modal-content">
-    <h2 style="margin-bottom:16px;">Tambah Pemasukan</h2>
-    <label>Pekerjaan</label>
-    <select id="mPekerjaan"><option value="">-- Pilih --</option></select>
+  <!-- MODAL TAMBAH PENGELUARAN -->
+  <div class="modal fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalKeluar">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-7 max-w-lg w-full shadow-2xl space-y-4">
+      <div class="flex justify-between items-center pb-2 border-b border-slate-800">
+        <h2 class="font-bold text-base sm:text-lg text-white">Tambah Pengeluaran</h2>
+        <button onclick="closeModal('modalKeluar')" class="text-slate-400 hover:text-white p-1 rounded-lg">✕</button>
+      </div>
 
-    <label>Tanggal</label>
-    <input id="mTanggal" type="date">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1.5">Kategori</label>
+          <select id="kKategori" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-rose-500 transition-colors">
+            <option value="material">📦 Material</option>
+            <option value="gaji">👷 Gaji Teknisi</option>
+            <option value="transport">🚗 Transport</option>
+            <option value="operasional">⚙️ Operasional</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1.5">Tanggal</label>
+          <input id="kTanggal" type="date" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-rose-500 transition-colors">
+        </div>
+      </div>
 
-    <label>Nominal (Rp)</label>
-    <input id="mNominal" type="number" placeholder="0">
+      <div>
+        <label class="block text-xs font-medium text-slate-400 mb-1.5">Nominal (Rp)</label>
+        <input id="kNominal" type="number" placeholder="0" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-rose-500 transition-colors">
+      </div>
 
-    <label>Metode</label>
-    <select id="mMetode">
-      <option value="cash">Cash</option>
-      <option value="transfer">Transfer</option>
-    </select>
+      <div>
+        <label class="block text-xs font-medium text-slate-400 mb-1.5">Keterangan</label>
+        <input id="kKet" placeholder="Contoh: Beli pipa AC merk Daikin" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-rose-500 transition-colors">
+      </div>
 
-    <label>Keterangan</label>
-    <input id="mKet" placeholder="Contoh: DP Termin 1">
-
-    <div style="display:flex; gap:10px; margin-top:16px;">
-      <button class="btn btn-green" onclick="simpanMasuk()">💾 Simpan</button>
-      <button class="btn" style="background:#e2e8f0;" onclick="closeModal('modalMasuk')">Batal</button>
+      <div class="flex gap-3 pt-3 border-t border-slate-800 mt-4">
+        <button onclick="simpanKeluar()" class="flex-1 bg-rose-600 hover:bg-rose-500 text-white font-semibold py-2.5 rounded-xl text-sm transition-all shadow-lg shadow-rose-600/20">Simpan Pengeluaran</button>
+        <button onclick="closeModal('modalKeluar')" class="px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold py-2.5 rounded-xl text-sm transition-all">Batal</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- MODAL TAMBAH PENGELUARAN -->
-<div class="modal" id="modalKeluar">
-  <div class="modal-content">
-    <h2 style="margin-bottom:16px;">Tambah Pengeluaran</h2>
-    <label>Kategori</label>
-    <select id="kKategori">
-      <option value="material">Material</option>
-      <option value="gaji">Gaji Teknisi</option>
-      <option value="transport">Transport</option>
-      <option value="operasional">Operasional</option>
-    </select>
+  <!-- FIREBASE SDK & SKrip Logika -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+    import {
+      getFirestore, collection, addDoc, getDocs, deleteDoc, doc,
+      query, orderBy, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
-    <label>Tanggal</label>
-    <input id="kTanggal" type="date">
+    // ====================== CONFIG FIREBASE ANDA ======================
+    const firebaseConfig = {
+      apiKey: "AIzaSyBooALcu7HOl-yDij4U-qwFwGa6Q7LZ41c",
+      authDomain: "pijar-elektrik.firebaseapp.com",
+      projectId: "pijar-elektrik",
+      storageBucket: "pijar-elektrik.firebasestorage.app",
+      messagingSenderId: "803265339764",
+      appId: "1:803265339764:web:a26c89561640c8e1384c21"
+    };
 
-    <label>Nominal (Rp)</label>
-    <input id="kNominal" type="number" placeholder="0">
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-    <label>Keterangan</label>
-    <input id="kKet" placeholder="Contoh: Beli pipa AC">
+    const rupiah = (n) => "Rp " + Number(n || 0).toLocaleString("id-ID");
 
-    <div style="display:flex; gap:10px; margin-top:16px;">
-      <button class="btn btn-red" onclick="simpanKeluar()">💾 Simpan</button>
-      <button class="btn" style="background:#e2e8f0;" onclick="closeModal('modalKeluar')">Batal</button>
-    </div>
-  </div>
-</div>
+    let dataPekerjaan = [];
+    let dataPemasukan = [];
+    let dataPengeluaran = [];
 
-<!-- FIREBASE SDK (v10 Modular via CDN) -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-import {
-  getFirestore, collection, addDoc, getDocs, deleteDoc, doc,
-  query, orderBy, serverTimestamp, updateDoc
-} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+    async function loadAll() {
+      try {
+        const pj = await getDocs(query(collection(db, "pekerjaan"), orderBy("createdAt", "desc")));
+        dataPekerjaan = pj.docs.map(d => ({ id: d.id, ...d.data() }));
 
-// ====================== CONFIG FIREBASE ======================
-// GANTI dengan config Firebase Anda
-const firebaseConfig = {
- apiKey: "AIzaSyBooALcu7HOl-yDij4U-qwFwGa6Q7LZ41c",
-  authDomain: "pijar-elektrik.firebaseapp.com",
-  projectId: "pijar-elektrik",
-  storageBucket: "pijar-elektrik.firebasestorage.app",
-  messagingSenderId: "803265339764",
-  appId: "1:803265339764:web:a26c89561640c8e1384c21"
-};
+        const pm = await getDocs(query(collection(db, "pemasukan"), orderBy("tanggal", "desc")));
+        dataPemasukan = pm.docs.map(d => ({ id: d.id, ...d.data() }));
 
+        const pk = await getDocs(query(collection(db, "pengeluaran"), orderBy("tanggal", "desc")));
+        dataPengeluaran = pk.docs.map(d => ({ id: d.id, ...d.data() }));
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+        hitungStats();
+        renderPekerjaan();
+        renderPemasukan();
+        renderPengeluaran();
+        isiDropdownPekerjaan();
+      } catch (err) {
+        console.error(err);
+        alert("Gagal load data. Cek Firebase config & Rules.");
+      }
+    }
 
-// ====================== FORMAT RUPIAH ======================
-const rupiah = (n) => "Rp " + Number(n || 0).toLocaleString("id-ID");
+    function hitungStats() {
+      const masuk = dataPemasukan.reduce((s, x) => s + Number(x.nominal || 0), 0);
+      const keluar = dataPengeluaran.reduce((s, x) => s + Number(x.nominal || 0), 0);
+      const aktif = dataPekerjaan.filter(p => p.status !== "lunas").length;
 
-// ====================== GLOBAL STATE ======================
-let dataPekerjaan = [];
-let dataPemasukan = [];
-let dataPengeluaran = [];
+      document.getElementById("statMasuk").textContent = rupiah(masuk);
+      document.getElementById("statKeluar").textContent = rupiah(keluar);
+      document.getElementById("statLaba").textContent = rupiah(masuk - keluar);
+      document.getElementById("statAktif").textContent = aktif;
+    }
 
-// ====================== LOAD SEMUA DATA ======================
-async function loadAll() {
-  try {
-    const pj = await getDocs(query(collection(db, "pekerjaan"), orderBy("createdAt", "desc")));
-    dataPekerjaan = pj.docs.map(d => ({ id: d.id, ...d.data() }));
+    function renderPekerjaan() {
+      const el = document.getElementById("listPekerjaan");
+      if (dataPekerjaan.length === 0) {
+        el.innerHTML = '<div class="text-center py-12 text-slate-500 text-sm">Belum ada pekerjaan. Klik "+ Tambah Pekerjaan" untuk memulai.</div>';
+        return;
+      }
+      let html = `<table class="w-full text-left border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-slate-800 bg-slate-950/45 text-slate-400 text-xs uppercase tracking-wider font-semibold">
+            <th class="p-4">Kode</th>
+            <th class="p-4">Tipe</th>
+            <th class="p-4">Customer</th>
+            <th class="p-4">Jenis</th>
+            <th class="p-4">Total</th>
+            <th class="p-4">Status</th>
+            <th class="p-4 text-right">Aksi</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-800/60">`;
+      
+      dataPekerjaan.forEach(p => {
+        html += `<tr class="hover:bg-slate-800/30 transition-colors">
+          <td class="p-4 font-mono font-semibold text-blue-400">${p.kode || "-"}</td>
+          <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-medium ${p.tipe === "instansi" ? "bg-blue-500/10 text-blue-400 border border-blue-500/20" : "bg-amber-500/10 text-amber-400 border border-amber-500/20"}">${p.tipe}</span></td>
+          <td class="p-4 font-medium text-slate-200">${p.namaCustomer || "-"}</td>
+          <td class="p-4 text-slate-300">${p.jenisPekerjaan || "-"}</td>
+          <td class="p-4 font-semibold text-slate-100">${rupiah(p.totalHarga)}</td>
+          <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-medium ${p.status === "lunas" ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" : "bg-rose-500/10 text-rose-400 border border-rose-500/20"}">${p.status}</span></td>
+          <td class="p-4 text-right"><button class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all" onclick="hapusData('pekerjaan','${p.id}')">Hapus</button></td>
+        </tr>`;
+      });
+      html += "</tbody></table>";
+      el.innerHTML = html;
+    }
 
-    const pm = await getDocs(query(collection(db, "pemasukan"), orderBy("tanggal", "desc")));
-    dataPemasukan = pm.docs.map(d => ({ id: d.id, ...d.data() }));
+    function renderPemasukan() {
+      const el = document.getElementById("listPemasukan");
+      if (dataPemasukan.length === 0) {
+        el.innerHTML = '<div class="text-center py-12 text-slate-500 text-sm">Belum ada data pemasukan.</div>';
+        return;
+      }
+      let html = `<table class="w-full text-left border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-slate-800 bg-slate-950/45 text-slate-400 text-xs uppercase tracking-wider font-semibold">
+            <th class="p-4">Tanggal</th>
+            <th class="p-4">Pekerjaan</th>
+            <th class="p-4">Nominal</th>
+            <th class="p-4">Metode</th>
+            <th class="p-4">Keterangan</th>
+            <th class="p-4 text-right">Aksi</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-800/60">`;
+      
+      dataPemasukan.forEach(m => {
+        const pj = dataPekerjaan.find(x => x.id === m.pekerjaanId);
+        html += `<tr class="hover:bg-slate-800/30 transition-colors">
+          <td class="p-4 text-slate-300">${m.tanggal || "-"}</td>
+          <td class="p-4 font-mono text-blue-400">${pj ? pj.kode : "-"}</td>
+          <td class="p-4 font-semibold text-emerald-400">+${rupiah(m.nominal)}</td>
+          <td class="p-4 uppercase text-xs text-slate-400 font-semibold">${m.metode || "-"}</td>
+          <td class="p-4 text-slate-300">${m.keterangan || "-"}</td>
+          <td class="p-4 text-right"><button class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all" onclick="hapusData('pemasukan','${m.id}')">Hapus</button></td>
+        </tr>`;
+      });
+      html += "</tbody></table>";
+      el.innerHTML = html;
+    }
 
-    const pk = await getDocs(query(collection(db, "pengeluaran"), orderBy("tanggal", "desc")));
-    dataPengeluaran = pk.docs.map(d => ({ id: d.id, ...d.data() }));
+    function renderPengeluaran() {
+      const el = document.getElementById("listPengeluaran");
+      if (dataPengeluaran.length === 0) {
+        el.innerHTML = '<div class="text-center py-12 text-slate-500 text-sm">Belum ada data pengeluaran.</div>';
+        return;
+      }
+      let html = `<table class="w-full text-left border-collapse text-sm">
+        <thead>
+          <tr class="border-b border-slate-800 bg-slate-950/45 text-slate-400 text-xs uppercase tracking-wider font-semibold">
+            <th class="p-4">Tanggal</th>
+            <th class="p-4">Kategori</th>
+            <th class="p-4">Nominal</th>
+            <th class="p-4">Keterangan</th>
+            <th class="p-4 text-right">Aksi</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-800/60">`;
+      
+      dataPengeluaran.forEach(k => {
+        html += `<tr class="hover:bg-slate-800/30 transition-colors">
+          <td class="p-4 text-slate-300">${k.tanggal || "-"}</td>
+          <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300 border border-slate-700">${k.kategori || "-"}</span></td>
+          <td class="p-4 font-semibold text-rose-400">-${rupiah(k.nominal)}</td>
+          <td class="p-4 text-slate-300">${k.keterangan || "-"}</td>
+          <td class="p-4 text-right"><button class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/20 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all" onclick="hapusData('pengeluaran','${k.id}')">Hapus</button></td>
+        </tr>`;
+      });
+      html += "</tbody></table>";
+      el.innerHTML = html;
+    }
 
-    hitungStats();
-    renderPekerjaan();
-    renderPemasukan();
-    renderPengeluaran();
-    isiDropdownPekerjaan();
-  } catch (err) {
-    console.error(err);
-    alert("Gagal load data. Cek Firebase config & Rules.");
-  }
-}
+    function isiDropdownPekerjaan() {
+      const sel = document.getElementById("mPekerjaan");
+      sel.innerHTML = '<option value="">-- Pilih Pekerjaan --</option>' +
+        dataPekerjaan.map(p => `<option value="${p.id}">${p.kode} - ${p.namaCustomer}</option>`).join("");
+    }
 
-// ====================== HITUNG STATISTIK ======================
-function hitungStats() {
-  const masuk = dataPemasukan.reduce((s, x) => s + Number(x.nominal || 0), 0);
-  const keluar = dataPengeluaran.reduce((s, x) => s + Number(x.nominal || 0), 0);
-  const aktif = dataPekerjaan.filter(p => p.status !== "lunas").length;
+    window.switchTab = (tab, el) => {
+      document.querySelectorAll(".tab-btn").forEach(t => {
+        t.className = "tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all text-slate-400 hover:text-white hover:bg-slate-900 flex items-center gap-2";
+      });
+      el.className = "tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-blue-600 text-white shadow-md shadow-blue-600/20 flex items-center gap-2";
+      
+      ["pekerjaan", "pemasukan", "pengeluaran"].forEach(t => {
+        document.getElementById("tab-" + t).classList.toggle("hidden", t !== tab);
+      });
+    };
 
-  document.getElementById("statMasuk").textContent = rupiah(masuk);
-  document.getElementById("statKeluar").textContent = rupiah(keluar);
-  document.getElementById("statLaba").textContent = rupiah(masuk - keluar);
-  document.getElementById("statAktif").textContent = aktif;
-}
+    window.openTambah = () => {
+      document.getElementById("pTgl").value = new Date().toISOString().split("T")[0];
+      document.getElementById("modalPekerjaan").classList.remove("hidden");
+      document.getElementById("modalPekerjaan").classList.add("flex");
+    };
+    window.openTambahMasuk = () => {
+      document.getElementById("mTanggal").value = new Date().toISOString().split("T")[0];
+      document.getElementById("modalMasuk").classList.remove("hidden");
+      document.getElementById("modalMasuk").classList.add("flex");
+    };
+    window.openTambahKeluar = () => {
+      document.getElementById("kTanggal").value = new Date().toISOString().split("T")[0];
+      document.getElementById("modalKeluar").classList.remove("hidden");
+      document.getElementById("modalKeluar").classList.add("flex");
+    };
+    window.closeModal = (id) => {
+      const modal = document.getElementById(id);
+      modal.classList.remove("flex");
+      modal.classList.add("hidden");
+    };
 
-// ====================== RENDER PEKERJAAN ======================
-function renderPekerjaan() {
-  const el = document.getElementById("listPekerjaan");
-  if (dataPekerjaan.length === 0) {
-    el.innerHTML = '<div class="empty">Belum ada pekerjaan. Klik "+ Pekerjaan" untuk tambah.</div>';
-    return;
-  }
-  let html = `<table><thead><tr>
-    <th>Kode</th><th>Tipe</th><th>Customer</th><th>Jenis</th>
-    <th>Total</th><th>Status</th><th></th></tr></thead><tbody>`;
-  dataPekerjaan.forEach(p => {
-    html += `<tr>
-      <td><b>${p.kode || "-"}</b></td>
-      <td><span class="badge ${p.tipe === "instansi" ? "badge-blue" : "badge-orange"}">${p.tipe}</span></td>
-      <td>${p.namaCustomer || "-"}</td>
-      <td>${p.jenisPekerjaan || "-"}</td>
-      <td>${rupiah(p.totalHarga)}</td>
-      <td><span class="badge ${p.status === "lunas" ? "badge-green" : "badge-red"}">${p.status}</span></td>
-      <td><button class="btn btn-red" style="padding:4px 10px;font-size:12px;" onclick="hapusData('pekerjaan','${p.id}')">Hapus</button></td>
-    </tr>`;
-  });
-  html += "</tbody></table>";
-  el.innerHTML = html;
-}
+    window.simpanPekerjaan = async () => {
+      const nama = document.getElementById("pNama").value.trim();
+      const total = Number(document.getElementById("pTotal").value);
+      if (!nama || !total) { alert("Nama dan total wajib diisi!"); return; }
 
-// ====================== RENDER PEMASUKAN ======================
-function renderPemasukan() {
-  const el = document.getElementById("listPemasukan");
-  if (dataPemasukan.length === 0) {
-    el.innerHTML = '<div class="empty">Belum ada pemasukan.</div>';
-    return;
-  }
-  let html = `<table><thead><tr>
-    <th>Tanggal</th><th>Pekerjaan</th><th>Nominal</th>
-    <th>Metode</th><th>Keterangan</th><th></th></tr></thead><tbody>`;
-  dataPemasukan.forEach(m => {
-    const pj = dataPekerjaan.find(x => x.id === m.pekerjaanId);
-    html += `<tr>
-      <td>${m.tanggal || "-"}</td>
-      <td>${pj ? pj.kode : "-"}</td>
-      <td style="color:#16a34a;font-weight:600;">+${rupiah(m.nominal)}</td>
-      <td>${m.metode || "-"}</td>
-      <td>${m.keterangan || "-"}</td>
-      <td><button class="btn btn-red" style="padding:4px 10px;font-size:12px;" onclick="hapusData('pemasukan','${m.id}')">Hapus</button></td>
-    </tr>`;
-  });
-  html += "</tbody></table>";
-  el.innerHTML = html;
-}
+      const kode = "PJ-" + Date.now().toString().slice(-8);
+      await addDoc(collection(db, "pekerjaan"), {
+        kode,
+        tipe: document.getElementById("pTipe").value,
+        namaCustomer: nama,
+        noHp: document.getElementById("pHp").value,
+        jenisPekerjaan: document.getElementById("pJenis").value,
+        totalHarga: total,
+        jumlahTermin: Number(document.getElementById("pTermin").value),
+        tanggalMulai: document.getElementById("pTgl").value,
+        status: "dikerjakan",
+        createdAt: serverTimestamp(),
+      });
 
-// ====================== RENDER PENGELUARAN ======================
-function renderPengeluaran() {
-  const el = document.getElementById("listPengeluaran");
-  if (dataPengeluaran.length === 0) {
-    el.innerHTML = '<div class="empty">Belum ada pengeluaran.</div>';
-    return;
-  }
-  let html = `<table><thead><tr>
-    <th>Tanggal</th><th>Kategori</th><th>Nominal</th>
-    <th>Keterangan</th><th></th></tr></thead><tbody>`;
-  dataPengeluaran.forEach(k => {
-    html += `<tr>
-      <td>${k.tanggal || "-"}</td>
-      <td>${k.kategori || "-"}</td>
-      <td style="color:#dc2626;font-weight:600;">-${rupiah(k.nominal)}</td>
-      <td>${k.keterangan || "-"}</td>
-      <td><button class="btn btn-red" style="padding:4px 10px;font-size:12px;" onclick="hapusData('pengeluaran','${k.id}')">Hapus</button></td>
-    </tr>`;
-  });
-  html += "</tbody></table>";
-  el.innerHTML = html;
-}
+      closeModal("modalPekerjaan");
+      ["pNama","pHp","pTotal"].forEach(id => document.getElementById(id).value = "");
+      await loadAll();
+    };
 
-// ====================== DROPDOWN PEKERJAAN ======================
-function isiDropdownPekerjaan() {
-  const sel = document.getElementById("mPekerjaan");
-  sel.innerHTML = '<option value="">-- Pilih --</option>' +
-    dataPekerjaan.map(p => `<option value="${p.id}">${p.kode} - ${p.namaCustomer}</option>`).join("");
-}
+    window.simpanMasuk = async () => {
+      const pid = document.getElementById("mPekerjaan").value;
+      const nominal = Number(document.getElementById("mNominal").value);
+      if (!pid || !nominal) { alert("Pekerjaan dan nominal wajib diisi!"); return; }
 
-// ====================== TAB SWITCH ======================
-window.switchTab = (tab, el) => {
-  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-  el.classList.add("active");
-  ["pekerjaan", "pemasukan", "pengeluaran"].forEach(t => {
-    document.getElementById("tab-" + t).classList.toggle("hidden", t !== tab);
-  });
-};
+      await addDoc(collection(db, "pemasukan"), {
+        pekerjaanId: pid,
+        tanggal: document.getElementById("mTanggal").value,
+        nominal,
+        metode: document.getElementById("mMetode").value,
+        keterangan: document.getElementById("mKet").value,
+        createdAt: serverTimestamp(),
+      });
 
-// ====================== MODAL ======================
-window.openTambah = () => {
-  document.getElementById("pTgl").value = new Date().toISOString().split("T")[0];
-  document.getElementById("modalPekerjaan").classList.add("show");
-};
-window.openTambahMasuk = () => {
-  document.getElementById("mTanggal").value = new Date().toISOString().split("T")[0];
-  document.getElementById("modalMasuk").classList.add("show");
-};
-window.openTambahKeluar = () => {
-  document.getElementById("kTanggal").value = new Date().toISOString().split("T")[0];
-  document.getElementById("modalKeluar").classList.add("show");
-};
-window.closeModal = (id) => document.getElementById(id).classList.remove("show");
+      closeModal("modalMasuk");
+      ["mNominal","mKet"].forEach(id => document.getElementById(id).value = "");
+      await loadAll();
+    };
 
-// ====================== SIMPAN PEKERJAAN ======================
-window.simpanPekerjaan = async () => {
-  const nama = document.getElementById("pNama").value.trim();
-  const total = Number(document.getElementById("pTotal").value);
-  if (!nama || !total) { alert("Nama dan total wajib diisi!"); return; }
+    window.simpanKeluar = async () => {
+      const nominal = Number(document.getElementById("kNominal").value);
+      if (!nominal) { alert("Nominal wajib diisi!"); return; }
 
-  const kode = "PJ-" + Date.now().toString().slice(-8);
-  await addDoc(collection(db, "pekerjaan"), {
-    kode,
-    tipe: document.getElementById("pTipe").value,
-    namaCustomer: nama,
-    noHp: document.getElementById("pHp").value,
-    jenisPekerjaan: document.getElementById("pJenis").value,
-    totalHarga: total,
-    jumlahTermin: Number(document.getElementById("pTermin").value),
-    tanggalMulai: document.getElementById("pTgl").value,
-    status: "dikerjakan",
-    createdAt: serverTimestamp(),
-  });
+      await addDoc(collection(db, "pengeluaran"), {
+        kategori: document.getElementById("kKategori").value,
+        tanggal: document.getElementById("kTanggal").value,
+        nominal,
+        keterangan: document.getElementById("kKet").value,
+        createdAt: serverTimestamp(),
+      });
 
-  closeModal("modalPekerjaan");
-  ["pNama","pHp","pTotal"].forEach(id => document.getElementById(id).value = "");
-  await loadAll();
-  alert("✅ Pekerjaan berhasil disimpan!");
-};
+      closeModal("modalKeluar");
+      ["kNominal","kKet"].forEach(id => document.getElementById(id).value = "");
+      await loadAll();
+    };
 
-// ====================== SIMPAN PEMASUKAN ======================
-window.simpanMasuk = async () => {
-  const pid = document.getElementById("mPekerjaan").value;
-  const nominal = Number(document.getElementById("mNominal").value);
-  if (!pid || !nominal) { alert("Pekerjaan dan nominal wajib diisi!"); return; }
+    window.hapusData = async (coll, id) => {
+      if (!confirm("Yakin ingin menghapus data ini?")) return;
+      await deleteDoc(doc(db, coll, id));
+      await loadAll();
+    };
 
-  await addDoc(collection(db, "pemasukan"), {
-    pekerjaanId: pid,
-    tanggal: document.getElementById("mTanggal").value,
-    nominal,
-    metode: document.getElementById("mMetode").value,
-    keterangan: document.getElementById("mKet").value,
-    createdAt: serverTimestamp(),
-  });
-
-  closeModal("modalMasuk");
-  ["mNominal","mKet"].forEach(id => document.getElementById(id).value = "");
-  await loadAll();
-  alert("✅ Pemasukan berhasil disimpan!");
-};
-
-// ====================== SIMPAN PENGELUARAN ======================
-window.simpanKeluar = async () => {
-  const nominal = Number(document.getElementById("kNominal").value);
-  if (!nominal) { alert("Nominal wajib diisi!"); return; }
-
-  await addDoc(collection(db, "pengeluaran"), {
-    kategori: document.getElementById("kKategori").value,
-    tanggal: document.getElementById("kTanggal").value,
-    nominal,
-    keterangan: document.getElementById("kKet").value,
-    createdAt: serverTimestamp(),
-  });
-
-  closeModal("modalKeluar");
-  ["kNominal","kKet"].forEach(id => document.getElementById(id).value = "");
-  await loadAll();
-  alert("✅ Pengeluaran berhasil disimpan!");
-};
-
-// ====================== HAPUS ======================
-window.hapusData = async (coll, id) => {
-  if (!confirm("Yakin hapus data ini?")) return;
-  await deleteDoc(doc(db, coll, id));
-  await loadAll();
-};
-
-// ====================== START ======================
-loadAll();
-</script>
-
+    loadAll();
+  </script>
 </body>
 </html>
