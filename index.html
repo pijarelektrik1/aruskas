@@ -120,7 +120,10 @@
       <!-- TAB 1: PEKERJAAN -->
       <div class="card-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden" id="tab-pekerjaan">
         <div class="p-5 border-b border-slate-100 flex justify-between items-center">
-          <h2 class="font-bold text-sm sm:text-base text-slate-800">Daftar Pekerjaan</h2>
+          <div>
+            <h2 class="font-bold text-sm sm:text-base text-slate-800">Daftar Pekerjaan & Keuangan Proyek</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Semua data nilai, total masuk, dan pengeluaran terangkum otomatis.</p>
+          </div>
           <button onclick="openTambahPekerjaan()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm">
             + Tambah Pekerjaan
           </button>
@@ -209,7 +212,7 @@
     </main>
   </div>
 
-  <!-- MODAL DETAIL PEKERJAAN (DIPISAH KEMBALI: TABEL MASUK & TABEL KELUAR TERPISAH) -->
+  <!-- MODAL DETAIL KEUANGAN PER PROYEK -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalDetailPekerjaan">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-4xl w-full shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
@@ -235,7 +238,7 @@
         </div>
       </div>
 
-      <!-- TABEL 1: PEMASUKAN KHUSUS PROYEK INI -->
+      <!-- TABEL PEMASUKAN PROYEK -->
       <div class="space-y-3">
         <div class="flex justify-between items-center">
           <h3 class="font-bold text-xs text-emerald-700 uppercase tracking-wider">📥 Daftar Pemasukan / Pembayaran Proyek</h3>
@@ -244,7 +247,7 @@
         <div id="detailTabelMasuk" class="overflow-x-auto border border-slate-200 rounded-2xl shadow-sm"></div>
       </div>
 
-      <!-- TABEL 2: PENGELUARAN KHUSUS PROYEK INI -->
+      <!-- TABEL PENGELUARAN PROYEK -->
       <div class="space-y-3 pt-2">
         <div class="flex justify-between items-center">
           <h3 class="font-bold text-xs text-rose-700 uppercase tracking-wider">📤 Daftar Pengeluaran & Material Proyek</h3>
@@ -255,57 +258,67 @@
     </div>
   </div>
 
-  <!-- MODAL TAMBAH PEKERJAAN -->
+  <!-- MODAL TAMBAH PEKERJAAN (DILENGKAPI INPUT PEMASUKAN AWAL & PENGELUARAN AWAL) -->
   <div class="modal fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 items-center justify-center p-4 hidden" id="modalPekerjaan">
     <div class="bg-white border border-slate-200 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-2 border-b border-slate-100">
-        <h2 class="font-bold text-base text-slate-900">Tambah Pekerjaan Baru</h2>
+        <h2 class="font-bold text-base text-slate-900">Tambah Pekerjaan & Keuangan Awal</h2>
         <button onclick="closeModal('modalPekerjaan')" class="text-slate-400 hover:text-slate-700">✕</button>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nama Customer</label>
-        <input id="pNama" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <input id="pNama" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm">
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Tipe Customer</label>
-          <select id="pTipe" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <select id="pTipe" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm">
             <option value="perorangan">👤 Perorangan</option>
             <option value="instansi">🏢 Instansi</option>
           </select>
         </div>
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">No HP</label>
-          <input id="pHp" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <input id="pHp" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm">
         </div>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Jenis Pekerjaan</label>
-        <select id="pJenis" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm"></select>
+        <select id="pJenis" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm"></select>
       </div>
       <div>
-        <label class="block text-xs font-medium text-slate-600 mb-1">Total Harga (Rp)</label>
-        <input id="pTotal" type="number" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <label class="block text-xs font-medium text-slate-600 mb-1">Total Nilai Harga Proyek (Rp)</label>
+        <input id="pTotal" type="number" placeholder="Contoh: 5000000" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm">
       </div>
+
+      <!-- INPUT TAMBAHAN: PEMASUKAN AWAL & PENGELUARAN AWAL LANGSUNG DI SINI -->
+      <div class="grid grid-cols-2 gap-3 bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
+        <div>
+          <label class="block text-[11px] font-bold text-emerald-700 mb-1 uppercase">📥 Pemasukan Awal / DP (Rp)</label>
+          <input id="pMasukAwal" type="number" placeholder="0" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-emerald-600">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-rose-700 mb-1 uppercase">📤 Pengeluaran Awal (Rp)</label>
+          <input id="pKeluarAwal" type="number" placeholder="0" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-rose-600">
+        </div>
+      </div>
+
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Sistem Bayar</label>
-          <select id="pTipeBayar" onchange="toggleTermin()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+          <select id="pTipeBayar" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm">
             <option value="full">💳 Full (Lunas)</option>
-            <option value="termin">📑 Termin Nominal</option>
+            <option value="termin">📑 Termin (Bertahap)</option>
           </select>
         </div>
-        <div id="wrapTermin" style="display:none;">
-          <label class="block text-xs font-medium text-slate-600 mb-1">Rincian Termin (Rp)</label>
-          <input id="pNominalTermin" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Tanggal Mulai</label>
+          <input id="pTgl" type="date" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 text-sm">
         </div>
       </div>
-      <div>
-        <label class="block text-xs font-medium text-slate-600 mb-1">Tanggal Mulai</label>
-        <input id="pTgl" type="date" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm">
-      </div>
+
       <div class="flex gap-3 pt-3 border-t border-slate-100">
-        <button onclick="simpanPekerjaan()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Simpan</button>
+        <button onclick="simpanPekerjaan()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 rounded-xl text-sm shadow-sm">Simpan Pekerjaan</button>
         <button onclick="closeModal('modalPekerjaan')" class="px-4 bg-slate-100 text-slate-600 font-semibold py-2.5 rounded-xl text-sm">Batal</button>
       </div>
     </div>
@@ -586,25 +599,47 @@
         el.innerHTML = '<div class="text-center py-12 text-slate-400 text-sm">Belum ada pekerjaan.</div>';
         return;
       }
-      let html = `<table class="w-full text-left border-collapse text-sm">
-        <thead><tr class="border-b border-slate-200 bg-slate-50 text-slate-500 text-xs uppercase font-semibold">
-          <th class="p-4">Kode</th><th class="p-4">Customer</th><th class="p-4">Tipe</th><th class="p-4">Jenis</th><th class="p-4">Total</th><th class="p-4">Status</th><th class="p-4 text-right">Aksi</th>
+
+      let html = `<table class="w-full text-left border-collapse text-xs sm:text-sm">
+        <thead><tr class="border-b border-slate-200 bg-slate-50 text-slate-500 uppercase font-semibold">
+          <th class="p-3.5">Kode & Customer</th>
+          <th class="p-3.5">Tipe & Jenis</th>
+          <th class="p-3.5">Nilai Proyek</th>
+          <th class="p-3.5 text-emerald-700">Total Masuk</th>
+          <th class="p-3.5 text-rose-700">Total Keluar</th>
+          <th class="p-3.5">Sistem Bayar</th>
+          <th class="p-3.5 text-right">Aksi</th>
         </tr></thead><tbody class="divide-y divide-slate-100">`;
+
       dataPekerjaan.forEach(p => {
+        const masukProj = dataPemasukan.filter(m => m.pekerjaanId === p.id).reduce((s, x) => s + Number(x.nominal || 0), 0);
+        const keluarProj = dataPengeluaran.filter(k => k.pekerjaanId === p.id).reduce((s, x) => s + Number(x.nominal || 0), 0);
+
         const badgeTipe = p.tipe === 'instansi' 
-          ? '<span class="px-2.5 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">🏢 Instansi</span>' 
-          : '<span class="px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-200">👤 Perorangan</span>';
+          ? '<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-blue-50 text-blue-700 border border-blue-200">🏢 Instansi</span>' 
+          : '<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-amber-50 text-amber-700 border border-amber-200">👤 Perorangan</span>';
+
+        const badgeBayar = p.tipeBayar === 'full'
+          ? '<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">💳 Full</span>'
+          : '<span class="px-2 py-0.5 rounded text-[11px] font-medium bg-indigo-50 text-indigo-700 border border-indigo-200">📑 Termin</span>';
 
         html += `<tr class="hover:bg-slate-50">
-          <td class="p-4 font-mono font-semibold text-blue-600">${p.kode || "-"}</td>
-          <td class="p-4 font-medium text-slate-900">${p.namaCustomer || "-"}</td>
-          <td class="p-4">${badgeTipe}</td>
-          <td class="p-4 text-slate-600">${p.jenisPekerjaan || "-"}</td>
-          <td class="p-4 font-semibold text-slate-900">${rupiah(p.totalHarga)}</td>
-          <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-medium ${p.status === "lunas" ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-700"}">${p.status}</span></td>
-          <td class="p-4 text-right space-x-2">
-            <button class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="bukaDetailPekerjaan('${p.id}')">📂 Detail</button>
-            <button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-1.5 rounded-lg text-xs font-semibold" onclick="hapusData('pekerjaan','${p.id}')">Hapus</button>
+          <td class="p-3.5">
+            <span class="font-mono font-bold text-blue-600 block">${p.kode || "-"}</span>
+            <span class="font-semibold text-slate-900">${p.namaCustomer || "-"}</span>
+            <span class="text-slate-400 block text-[11px]">${p.noHp || ''}</span>
+          </td>
+          <td class="p-3.5">
+            ${badgeTipe}
+            <span class="block text-slate-600 mt-1">${p.jenisPekerjaan || "-"}</span>
+          </td>
+          <td class="p-3.5 font-bold text-slate-900">${rupiah(p.totalHarga)}</td>
+          <td class="p-3.5 font-bold text-emerald-600">+${rupiah(masukProj)}</td>
+          <td class="p-3.5 font-bold text-rose-600">-${rupiah(keluarProj)}</td>
+          <td class="p-3.5">${badgeBayar}</td>
+          <td class="p-3.5 text-right space-x-1">
+            <button class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-2.5 py-1.5 rounded-lg text-xs font-semibold" onclick="bukaDetailPekerjaan('${p.id}')">📂 Rincian</button>
+            <button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-2.5 py-1.5 rounded-lg text-xs font-semibold" onclick="hapusData('pekerjaan','${p.id}')">Hapus</button>
           </td>
         </tr>`;
       });
@@ -612,7 +647,6 @@
       el.innerHTML = html;
     }
 
-    // DETAIL PEKERJAAN DENGAN 2 TABEL TERPISAH (PEMASUKAN & PENGELUARAN)
     window.bukaDetailPekerjaan = (pid) => {
       currentDetailPekerjaanId = pid;
       const pj = dataPekerjaan.find(x => x.id === pid);
@@ -630,13 +664,12 @@
       const totalKeluar = keluarPekerjaan.reduce((s, x) => s + Number(x.nominal || 0), 0);
       document.getElementById("detailValKeluar").textContent = rupiah(totalKeluar);
 
-      // TABEL 1: PEMASUKAN PROYEK
       let htmlMasuk = `<table class="w-full text-left text-xs bg-white">
         <tr class="bg-slate-50 text-slate-500 border-b uppercase font-semibold">
           <th class="p-3">Tanggal</th><th class="p-3">Nominal</th><th class="p-3">Metode</th><th class="p-3">Keterangan</th><th class="p-3 text-right">Aksi</th>
         </tr>`;
       if(masukPekerjaan.length === 0) {
-        htmlMasuk += `<tr><td colspan="5" class="p-6 text-center text-slate-400">Belum ada catatan pemasukan untuk pekerjaan ini.</td></tr>`;
+        htmlMasuk += `<tr><td colspan="5" class="p-6 text-center text-slate-400">Belum ada pemasukan.</td></tr>`;
       } else {
         masukPekerjaan.forEach(m => {
           htmlMasuk += `<tr class="border-b hover:bg-slate-50">
@@ -651,13 +684,12 @@
       htmlMasuk += `</table>`;
       document.getElementById("detailTabelMasuk").innerHTML = htmlMasuk;
 
-      // TABEL 2: PENGELUARAN PROYEK
       let htmlKeluar = `<table class="w-full text-left text-xs bg-white">
         <tr class="bg-slate-50 text-slate-500 border-b uppercase font-semibold">
           <th class="p-3">Tanggal</th><th class="p-3">Kategori</th><th class="p-3">Nominal</th><th class="p-3">Keterangan</th><th class="p-3 text-right">Aksi</th>
         </tr>`;
       if(keluarPekerjaan.length === 0) {
-        htmlKeluar += `<tr><td colspan="5" class="p-6 text-center text-slate-400">Belum ada catatan pengeluaran/material untuk pekerjaan ini.</td></tr>`;
+        htmlKeluar += `<tr><td colspan="5" class="p-6 text-center text-slate-400">Belum ada pengeluaran.</td></tr>`;
       } else {
         keluarPekerjaan.forEach(k => {
           htmlKeluar += `<tr class="border-b hover:bg-slate-50">
@@ -802,11 +834,6 @@
       loadAll();
     };
 
-    window.toggleTermin = () => {
-      const val = document.getElementById("pTipeBayar").value;
-      document.getElementById("wrapTermin").style.display = val === "termin" ? "block" : "none";
-    }
-
     function isiDropdownPekerjaan() {
       const opts = '<option value="">-- Pilih Pekerjaan --</option>' + dataPekerjaan.map(p => `<option value="${p.id}">${p.kode} - ${p.namaCustomer}</option>`).join("");
       document.getElementById("mPekerjaan").innerHTML = opts;
@@ -824,6 +851,8 @@
 
     window.openTambahPekerjaan = () => {
       document.getElementById("pTgl").value = new Date().toISOString().split("T")[0];
+      document.getElementById("pMasukAwal").value = "";
+      document.getElementById("pKeluarAwal").value = "";
       document.getElementById("modalPekerjaan").classList.remove("hidden");
       document.getElementById("modalPekerjaan").classList.add("flex");
     };
@@ -854,12 +883,19 @@
       document.getElementById(id).classList.add("hidden");
     };
 
+    // SIMPAN PEKERJAAN BESERTA PEMASUKAN AWAL & PENGELUARAN AWAL SEKALIGUS
     window.simpanPekerjaan = async () => {
       const nama = document.getElementById("pNama").value.trim();
       const total = Number(document.getElementById("pTotal").value);
       const jenis = document.getElementById("pJenis").value;
-      const tipeBayar = document.getElementById("pTipeBayar").value;
-      if (!nama || !total || !jenis) { alert("Data wajib diisi!"); return; }
+      const tgl = document.getElementById("pTgl").value;
+      const masukAwal = Number(document.getElementById("pMasukAwal").value || 0);
+      const keluarAwal = Number(document.getElementById("pKeluarAwal").value || 0);
+
+      if (!nama || !total || !jenis) {
+        alert("Nama Customer, Jenis Pekerjaan, dan Total Nilai Harga wajib diisi!");
+        return;
+      }
 
       const kode = "PJ-" + Date.now().toString().slice(-8);
       const docRef = await addDoc(collection(db, "pekerjaan"), {
@@ -869,25 +905,39 @@
         noHp: document.getElementById("pHp").value,
         jenisPekerjaan: jenis,
         totalHarga: total,
-        tipeBayar,
-        tanggalMulai: document.getElementById("pTgl").value,
+        tipeBayar: document.getElementById("pTipeBayar").value,
+        tanggalMulai: tgl,
         status: "dikerjakan",
         createdAt: serverTimestamp(),
       });
 
-      if (tipeBayar === "full") {
+      // Jika diisi pemasukan awal/DP, langsung buat record pemasukan terikat ke proyek ini
+      if (masukAwal > 0) {
         await addDoc(collection(db, "pemasukan"), {
           pekerjaanId: docRef.id,
-          tanggal: document.getElementById("pTgl").value,
-          nominal: total,
+          tanggal: tgl,
+          nominal: masukAwal,
           metode: "transfer",
-          keterangan: "Pelunasan Full",
+          keterangan: "Pembayaran / DP Awal Pekerjaan",
+          createdAt: serverTimestamp(),
+        });
+      }
+
+      // Jika diisi pengeluaran awal, langsung buat record pengeluaran terikat ke proyek ini
+      if (keluarAwal > 0) {
+        await addDoc(collection(db, "pengeluaran"), {
+          pekerjaanId: docRef.id,
+          kategori: masterKategori[0] ? masterKategori[0].nama : "Material Awal",
+          tanggal: tgl,
+          nominal: keluarAwal,
+          keterangan: "Pengeluaran / Belanja Awal Pekerjaan",
           createdAt: serverTimestamp(),
         });
       }
 
       closeModal("modalPekerjaan");
       await loadAll();
+      alert("✅ Data pekerjaan beserta keuangan awal berhasil disimpan!");
     };
 
     window.simpanMasuk = async () => {
