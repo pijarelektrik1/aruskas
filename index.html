@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PIJAR ELEKTRIK • Dashboard Manajemen Profesional</title>
-<!-- Tailwind CSS Play CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -15,7 +14,6 @@
     }
   }
 </script>
-<!-- Google Font Inter -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   body { font-family: 'Inter', sans-serif; }
@@ -23,8 +21,6 @@
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
   .uppercase-input { text-transform: uppercase; }
-  
-  /* Animasi Pop-up Modern */
   @keyframes modalIn {
     from { opacity: 0; transform: scale(0.95) translateY(10px); }
     to { opacity: 1; transform: scale(1) translateY(0); }
@@ -36,18 +32,30 @@
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex selection:bg-blue-600 selection:text-white">
 
-  <!-- GERBANG UTAMA: HALAMAN LOGIN PIN -->
+  <!-- GERBANG LOGIN: EMAIL + PASSWORD -->
   <div id="gerbangLogin" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
-    <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-8 max-w-sm w-full shadow-2xl shadow-slate-950/10 space-y-6 text-center modal-animate">
+    <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-8 max-w-sm w-full shadow-2xl shadow-slate-950/10 space-y-5 text-center modal-animate">
       <div class="h-16 w-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold mx-auto shadow-lg shadow-blue-500/30">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
       </div>
       <div>
         <h2 class="font-bold text-xl text-slate-900">PIJAR ELEKTRIK</h2>
-        <p class="text-xs text-slate-500 mt-1">Masukkan PIN Keamanan Dashboard</p>
+        <p class="text-xs text-slate-500 mt-1">Login Dashboard Admin</p>
       </div>
-      <input id="inputGerbangPin" type="password" placeholder="••••••" class="w-full text-center tracking-widest bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3.5 text-xl font-bold focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all">
-      <button onclick="prosesLoginUtama()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-2xl text-sm shadow-md shadow-blue-600/20 transition-all">Masuk Dashboard</button>
+      <div class="space-y-3 text-left">
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Email</label>
+          <input id="inputEmail" type="email" placeholder="admin@pijarelektrik.com" autocomplete="email" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all">
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-600 mb-1">Password</label>
+          <input id="inputPassword" type="password" placeholder="••••••••" autocomplete="current-password" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all">
+        </div>
+      </div>
+      <p id="loginError" class="text-xs text-rose-600 font-semibold hidden"></p>
+      <button onclick="prosesLoginUtama()" id="btnLogin" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-2xl text-sm shadow-md shadow-blue-600/20 transition-all disabled:opacity-60 disabled:cursor-not-allowed">
+        Masuk Dashboard
+      </button>
     </div>
   </div>
 
@@ -130,7 +138,7 @@
         </div>
       </div>
 
-      <!-- TAB 1: PEKERJAAN & KEUANGAN TERPADU -->
+      <!-- TAB 1: PEKERJAAN -->
       <div class="card-section bg-white border border-slate-200/80 rounded-3xl shadow-sm overflow-hidden" id="tab-pekerjaan">
         <div class="p-6 border-b border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
@@ -138,14 +146,12 @@
             <p class="text-xs text-slate-500 mt-0.5">Kelola termin pembayaran, material, dan lihat keuntungan bersih setiap proyek.</p>
           </div>
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
-            <!-- SEARCH BAR -->
             <div class="relative flex-1 sm:w-64">
               <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
               </span>
               <input id="inputPencarian" type="text" oninput="renderPekerjaan()" placeholder="Cari nama customer / kode..." class="uppercase-input w-full bg-slate-50 border border-slate-200 rounded-2xl pl-10 pr-4 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all">
             </div>
-            <!-- TOMBOL TAMBAH -->
             <button onclick="openTambahPekerjaan()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-2xl text-xs font-semibold transition-all shadow-md shadow-blue-600/20 flex items-center justify-center gap-2 shrink-0">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
               Tambah Pekerjaan Baru
@@ -179,9 +185,9 @@
         <div class="p-6 border-b border-slate-100 flex justify-between items-center">
           <div>
             <h2 class="font-bold text-base text-slate-900">Panel Admin - Master Data & Keamanan</h2>
-            <p class="text-xs text-slate-500 mt-0.5">Kelola opsi form input dan ubah PIN akses dashboard.</p>
+            <p class="text-xs text-slate-500 mt-0.5">Kelola opsi form input dan informasi akun.</p>
           </div>
-          <button onclick="lockDashboard()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-4 py-2.5 rounded-2xl text-xs font-semibold transition-all">Kunci Dashboard</button>
+          <button onclick="lockDashboard()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-4 py-2.5 rounded-2xl text-xs font-semibold transition-all">🔒 Logout</button>
         </div>
         <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="space-y-4 bg-slate-50/70 p-6 rounded-3xl border border-slate-200/70">
@@ -201,11 +207,14 @@
             <div><div id="listMasterJenisPekerjaan" class="space-y-2 max-h-40 overflow-y-auto"></div></div>
           </div>
           <div class="space-y-4 bg-slate-50/70 p-6 rounded-3xl border border-slate-200/70">
-            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-700">🔐 Ubah PIN Dashboard</h3>
+            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-700">👤 Info Akun</h3>
             <div class="space-y-3">
-              <input id="pinLama" type="password" placeholder="PIN Lama" class="w-full bg-white border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
-              <input id="pinBaru" type="password" placeholder="PIN Baru (Min 4 Karakter)" class="w-full bg-white border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
-              <button onclick="prosesGantiPin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-2xl text-xs shadow-md shadow-blue-600/20">Simpan PIN Baru</button>
+              <div class="bg-white border border-slate-200 rounded-2xl px-4 py-3">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Login Sebagai</p>
+                <p id="infoEmailUser" class="text-xs font-bold text-slate-800 mt-1">-</p>
+              </div>
+              <p class="text-[11px] text-slate-500 leading-relaxed">Untuk mengubah password atau menambah user admin, buka <span class="font-semibold text-slate-700">Firebase Console → Authentication → Users</span>.</p>
+              <button onclick="lockDashboard()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 rounded-2xl text-xs shadow-md shadow-rose-600/20">Logout Sekarang</button>
             </div>
           </div>
         </div>
@@ -214,7 +223,7 @@
     </main>
   </div>
 
-  <!-- MODAL 1: DETAIL / RINCIAN KEUANGAN PROYEK -->
+  <!-- MODAL 1: DETAIL PEKERJAAN -->
   <div class="modal fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 items-center justify-center p-4 hidden" id="modalDetailPekerjaan">
     <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-8 max-w-4xl w-full shadow-2xl shadow-slate-950/10 space-y-6 max-h-[90vh] overflow-y-auto modal-animate">
       <div class="flex justify-between items-center pb-4 border-b border-slate-100">
@@ -225,7 +234,6 @@
         <button onclick="closeModal('modalDetailPekerjaan')" class="h-10 w-10 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold transition-all">✕</button>
       </div>
 
-      <!-- KOTAK STATISTIK PROYEK -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-5 rounded-3xl border border-slate-200/80 text-center">
         <div>
           <p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Total Nilai Proyek</p>
@@ -245,7 +253,6 @@
         </div>
       </div>
 
-      <!-- TABEL PEMASUKAN / TERMIN -->
       <div class="space-y-3">
         <div class="flex justify-between items-center">
           <h3 class="font-bold text-xs text-slate-800 uppercase tracking-wider flex items-center gap-2">
@@ -259,7 +266,6 @@
         <div id="tabelMasukSub" class="overflow-x-auto border border-slate-200/80 rounded-2xl shadow-sm"></div>
       </div>
 
-      <!-- TABEL PENGELUARAN / MATERIAL -->
       <div class="space-y-3 pt-2">
         <div class="flex justify-between items-center">
           <h3 class="font-bold text-xs text-slate-800 uppercase tracking-wider flex items-center gap-2">
@@ -347,12 +353,10 @@
         <h2 class="font-bold text-base text-slate-900">Tambah Pekerjaan Baru</h2>
         <button onclick="closeModal('modalPekerjaan')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">✕</button>
       </div>
-      
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nama Customer</label>
         <input id="pNama" class="uppercase-input w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="CONTOH: PT MAKMUR JAYA">
       </div>
-
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Tipe Customer</label>
@@ -366,18 +370,14 @@
           <input id="pHp" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="08xxxxxxxxxx">
         </div>
       </div>
-
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Jenis Pekerjaan</label>
         <select id="pJenis" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600"></select>
       </div>
-
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Total Nilai Harga Proyek (Rp)</label>
         <input id="pTotal" type="number" placeholder="5000000" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600">
       </div>
-
-      <!-- PEMASUKAN AWAL / DP -->
       <div class="bg-emerald-50/60 p-4 rounded-3xl border border-emerald-200/80 space-y-3">
         <h3 class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">📥 Pembayaran / Termin 1 (DP)</h3>
         <div class="grid grid-cols-2 gap-3">
@@ -391,8 +391,6 @@
           </div>
         </div>
       </div>
-
-      <!-- PENGELUARAN AWAL -->
       <div class="bg-rose-50/60 p-4 rounded-3xl border border-rose-200/80 space-y-3">
         <h3 class="text-[11px] font-bold text-rose-800 uppercase tracking-wider">📤 Pengeluaran / Belanja Awal (Opsional)</h3>
         <div class="grid grid-cols-2 gap-3">
@@ -410,7 +408,6 @@
           <input id="pKeluarKet" type="text" placeholder="BELI KABEL AWAL" class="uppercase-input w-full bg-white border border-rose-200 rounded-2xl px-3.5 py-2.5 text-xs font-medium focus:outline-none">
         </div>
       </div>
-
       <div class="grid grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-medium text-slate-600 mb-1">Sistem Bayar</label>
@@ -424,7 +421,6 @@
           <input id="pTgl" type="date" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
         </div>
       </div>
-
       <div class="flex gap-3 pt-3 border-t border-slate-100">
         <button onclick="simpanPekerjaan()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-2xl text-xs shadow-md shadow-blue-600/20">Simpan Pekerjaan</button>
         <button onclick="closeModal('modalPekerjaan')" class="px-5 bg-slate-100 text-slate-600 font-semibold py-3.5 rounded-2xl text-xs">Batal</button>
@@ -471,6 +467,9 @@
       getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc,
       query, orderBy, serverTimestamp
     } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+    import {
+      getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyBooALcu7HOl-yDij4U-qwFwGa6Q7LZ41c",
@@ -483,10 +482,10 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    const auth = getAuth(app);
 
     const rupiah = (n) => "Rp " + Number(n || 0).toLocaleString("id-ID");
 
-    // Fungsi konverter tanggal ke format Indonesia (Contoh: 14 September 2026)
     const formatTanggalIndo = (tglStr) => {
       if (!tglStr) return "-";
       const parts = tglStr.split("-");
@@ -508,25 +507,25 @@
     let masterJenisPekerjaan = [];
     let currentDetailPekerjaanId = null;
 
-    const DEFAULT_HASH = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92";
-    
-    function getStoredPinHash() {
-      return localStorage.getItem("pijar_custom_pin_hash") || DEFAULT_HASH;
-    }
-
-    async function hashPin(pin) {
-      const msgUint8 = new TextEncoder().encode(pin);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-
     window.addEventListener("DOMContentLoaded", () => {
-      if (sessionStorage.getItem("dashboard_logged") === "true") {
-        document.getElementById("gerbangLogin").classList.add("hidden");
-        loadAll();
-      }
+      // Pantau status login Firebase Auth
+      onAuthStateChanged(auth, (user) => {
+        const gerbang = document.getElementById("gerbangLogin");
+        if (user) {
+          console.log("✅ Login OK:", user.email);
+          gerbang.classList.add("hidden");
+          gerbang.classList.remove("flex");
+          const infoEmail = document.getElementById("infoEmailUser");
+          if (infoEmail) infoEmail.textContent = user.email;
+          loadAll();
+        } else {
+          console.log("🔒 Belum login");
+          gerbang.classList.remove("hidden");
+          gerbang.classList.add("flex");
+        }
+      });
 
+      // Auto uppercase input
       document.addEventListener("input", (e) => {
         if (e.target.classList.contains("uppercase-input")) {
           const start = e.target.selectionStart;
@@ -535,46 +534,69 @@
           e.target.setSelectionRange(start, end);
         }
       });
+
+      // Enter untuk submit login
+      ["inputEmail", "inputPassword"].forEach(id => {
+        document.getElementById(id).addEventListener("keypress", (e) => {
+          if (e.key === "Enter") window.prosesLoginUtama();
+        });
+      });
     });
 
     window.prosesLoginUtama = async () => {
-      const inputVal = document.getElementById("inputGerbangPin").value.trim();
-      const hashedInput = await hashPin(inputVal);
+      const email = document.getElementById("inputEmail").value.trim();
+      const password = document.getElementById("inputPassword").value;
+      const errEl = document.getElementById("loginError");
+      const btn = document.getElementById("btnLogin");
 
-      if (hashedInput === getStoredPinHash()) {
-        sessionStorage.setItem("dashboard_logged", "true");
-        document.getElementById("gerbangLogin").classList.add("hidden");
-        loadAll();
-      } else {
-        alert("❌ PIN yang Anda masukkan salah!");
-        document.getElementById("inputGerbangPin").value = "";
+      errEl.classList.add("hidden");
+
+      if (!email || !password) {
+        errEl.textContent = "Email dan password wajib diisi!";
+        errEl.classList.remove("hidden");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Memproses...";
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        // onAuthStateChanged akan otomatis handle redirect ke dashboard
+        document.getElementById("inputPassword").value = "";
+        errEl.classList.add("hidden");
+      } catch (err) {
+        console.error(err);
+        let msg = "Login gagal!";
+        if (err.code === "auth/invalid-credential" || err.code === "auth/wrong-password") {
+          msg = "Email atau password salah!";
+        } else if (err.code === "auth/user-not-found") {
+          msg = "Akun tidak ditemukan!";
+        } else if (err.code === "auth/invalid-email") {
+          msg = "Format email tidak valid!";
+        } else if (err.code === "auth/too-many-requests") {
+          msg = "Terlalu banyak percobaan. Coba lagi nanti.";
+        } else if (err.code === "auth/network-request-failed") {
+          msg = "Koneksi internet bermasalah.";
+        }
+        errEl.textContent = msg;
+        errEl.classList.remove("hidden");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Masuk Dashboard";
       }
     };
 
-    window.lockDashboard = () => {
-      sessionStorage.removeItem("dashboard_logged");
-      const gerbang = document.getElementById("gerbangLogin");
-      gerbang.classList.remove("hidden");
-      gerbang.classList.add("flex");
-      document.getElementById("inputGerbangPin").value = "";
-    };
-
-    window.prosesGantiPin = async () => {
-      const lama = document.getElementById("pinLama").value.trim();
-      const baru = document.getElementById("pinBaru").value.trim();
-
-      if (!lama || !baru) { alert("PIN lama dan PIN baru wajib diisi!"); return; }
-
-      const hashedLama = await hashPin(lama);
-      if (hashedLama !== getStoredPinHash()) { alert("❌ PIN lama salah!"); return; }
-      if (baru.length < 4) { alert("PIN baru minimal 4 karakter!"); return; }
-
-      const hashedBaru = await hashPin(baru);
-      localStorage.setItem("pijar_custom_pin_hash", hashedBaru);
-      
-      alert("✅ PIN dashboard berhasil diubah!");
-      document.getElementById("pinLama").value = "";
-      document.getElementById("pinBaru").value = "";
+    window.lockDashboard = async () => {
+      if (!confirm("Yakin ingin logout dari dashboard?")) return;
+      try {
+        await signOut(auth);
+        document.getElementById("inputEmail").value = "";
+        document.getElementById("inputPassword").value = "";
+      } catch (err) {
+        console.error(err);
+        alert("Gagal logout: " + err.message);
+      }
     };
 
     async function loadAll() {
