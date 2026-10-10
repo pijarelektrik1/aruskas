@@ -25,13 +25,7 @@
     from { opacity: 0; transform: scale(0.95) translateY(10px); }
     to { opacity: 1; transform: scale(1) translateY(0); }
   }
-  .modal-animate {
-    animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-  .sub-tab-btn.active {
-    background-color: #4f46e5;
-    color: white;
-  }
+  .modal-animate { animation: modalIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 </style>
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex selection:bg-blue-600 selection:text-white">
@@ -39,7 +33,7 @@
   <!-- GERBANG LOGIN -->
   <div id="gerbangLogin" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
     <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-8 max-w-sm w-full shadow-2xl shadow-slate-950/10 space-y-5 text-center modal-animate">
-      <div class="h-16 w-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-3xl font-bold mx-auto shadow-lg shadow-blue-500/30">
+      <div class="h-16 w-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white mx-auto shadow-lg shadow-blue-500/30">
         <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
       </div>
       <div>
@@ -63,10 +57,10 @@
     </div>
   </div>
 
-  <!-- SIDEBAR NAVIGATION -->
+  <!-- SIDEBAR -->
   <aside class="w-64 bg-white border-r border-slate-200 hidden md:flex flex-col sticky top-0 h-screen z-30 shadow-sm">
     <div class="p-6 border-b border-slate-100 flex items-center gap-3">
-      <div class="h-11 w-11 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white text-xl font-bold shadow-md shadow-blue-600/20">
+      <div class="h-11 w-11 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-600/20">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
       </div>
       <div>
@@ -81,7 +75,7 @@
         Pekerjaan & Keuangan
       </button>
       <button onclick="switchTab('toko', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-50 hover:text-slate-900">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
         Toko
       </button>
       <button onclick="switchTab('admin', this)" class="nav-btn w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-semibold transition-all text-slate-600 hover:bg-slate-50 hover:text-slate-900">
@@ -94,10 +88,9 @@
   <!-- KONTEN UTAMA -->
   <div class="flex-1 flex flex-col min-w-0">
     
-    <!-- MOBILE HEADER -->
     <header class="md:hidden border-b border-slate-200 bg-white px-4 py-3.5 flex justify-between items-center sticky top-0 z-20 shadow-sm">
       <div class="flex items-center gap-2.5">
-        <div class="h-8 w-8 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold">
+        <div class="h-8 w-8 rounded-xl bg-blue-600 flex items-center justify-center text-white">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
         </div>
         <h1 class="font-bold text-xs text-slate-900 tracking-tight">PIJAR ELEKTRIK</h1>
@@ -111,7 +104,6 @@
 
     <main class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 overflow-x-hidden">
 
-      <!-- STATs -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
         <div class="bg-white border border-slate-200/80 rounded-3xl p-6 shadow-sm flex items-center gap-4">
           <div class="h-12 w-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
@@ -172,14 +164,29 @@
         <div class="p-6 border-b border-slate-100">
           <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <h2 class="font-bold text-base text-slate-900">🏪 Manajemen Toko</h2>
+              <h2 class="font-bold text-base text-slate-900 flex items-center gap-2">
+                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                Manajemen Toko
+              </h2>
               <p class="text-xs text-slate-500 mt-0.5">Kelola stok barang, pembelian, penjualan, dan laporan toko.</p>
             </div>
             <div class="flex flex-wrap gap-2">
-              <button onclick="switchSubTab('stok')" id="subtbtn-stok" class="sub-tab-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">📦 Stok Barang</button>
-              <button onclick="switchSubTab('pembelian')" id="subtbtn-pembelian" class="sub-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">🛒 Pembelian</button>
-              <button onclick="switchSubTab('penjualan')" id="subtbtn-penjualan" class="sub-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">💰 Penjualan</button>
-              <button onclick="switchSubTab('laporan')" id="subtbtn-laporan" class="sub-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">📈 Laporan</button>
+              <button onclick="switchSubTab('stok')" id="subtbtn-stok" class="sub-tab-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 text-white transition-all flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                Stok Barang
+              </button>
+              <button onclick="switchSubTab('pembelian')" id="subtbtn-pembelian" class="sub-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                Pembelian
+              </button>
+              <button onclick="switchSubTab('penjualan')" id="subtbtn-penjualan" class="sub-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Penjualan
+              </button>
+              <button onclick="switchSubTab('laporan')" id="subtbtn-laporan" class="sub-tab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                Laporan
+              </button>
             </div>
           </div>
         </div>
@@ -188,7 +195,10 @@
         <div id="subtab-stok" class="subtab-content">
           <div class="p-6 border-b border-slate-100 flex justify-between items-center">
             <div>
-              <h3 class="font-bold text-sm text-slate-900">📦 Stok Barang</h3>
+              <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                Stok Barang
+              </h3>
               <p class="text-xs text-slate-500 mt-0.5">Daftar semua barang yang dijual di toko.</p>
             </div>
             <button onclick="openTambahStok()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-2xl text-xs font-semibold transition-all shadow-md shadow-indigo-600/20 flex items-center gap-2">
@@ -205,7 +215,10 @@
         <div id="subtab-pembelian" class="subtab-content hidden">
           <div class="p-6 border-b border-slate-100 flex justify-between items-center">
             <div>
-              <h3 class="font-bold text-sm text-slate-900">🛒 Pembelian Barang</h3>
+              <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                Pembelian Barang
+              </h3>
               <p class="text-xs text-slate-500 mt-0.5">Catat pembelian dari supplier. Stok otomatis bertambah.</p>
             </div>
             <button onclick="openTambahPembelian()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-3 rounded-2xl text-xs font-semibold transition-all shadow-md shadow-emerald-600/20 flex items-center gap-2">
@@ -222,7 +235,10 @@
         <div id="subtab-penjualan" class="subtab-content hidden">
           <div class="p-6 border-b border-slate-100 flex justify-between items-center">
             <div>
-              <h3 class="font-bold text-sm text-slate-900">💰 Penjualan Barang</h3>
+              <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Penjualan Barang
+              </h3>
               <p class="text-xs text-slate-500 mt-0.5">Catat penjualan ke pelanggan. Stok otomatis berkurang.</p>
             </div>
             <button onclick="openTambahPenjualan()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-2xl text-xs font-semibold transition-all shadow-md shadow-blue-600/20 flex items-center gap-2">
@@ -239,11 +255,13 @@
         <div id="subtab-laporan" class="subtab-content hidden">
           <div class="p-6 space-y-6">
             <div>
-              <h3 class="font-bold text-sm text-slate-900">📈 Laporan Toko</h3>
+              <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                Laporan Toko
+              </h3>
               <p class="text-xs text-slate-500 mt-0.5">Rekap penjualan, pembelian, dan laba.</p>
             </div>
 
-            <!-- FILTER -->
             <div class="flex flex-wrap gap-2 bg-slate-50 p-4 rounded-2xl border border-slate-200">
               <button onclick="setFilterLaporan('hariini')" id="fbtn-hariini" class="filter-btn active px-4 py-2 rounded-xl text-xs font-semibold bg-indigo-600 text-white transition-all">Hari Ini</button>
               <button onclick="setFilterLaporan('minggu')" id="fbtn-minggu" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition-all">Minggu Ini</button>
@@ -251,8 +269,7 @@
               <button onclick="setFilterLaporan('semua')" id="fbtn-semua" class="filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 transition-all">Semua</button>
             </div>
 
-            <!-- RINGKASAN -->
-            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4" id="laporanRingkasan">
+            <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
               <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-5">
                 <p class="text-[10px] font-bold text-emerald-700 uppercase tracking-wider">Total Penjualan</p>
                 <p class="text-lg font-bold text-emerald-700 mt-1" id="lapTotalJual">Rp 0</p>
@@ -271,14 +288,19 @@
               </div>
             </div>
 
-            <!-- DAFTAR TRANSAKSI -->
             <div class="space-y-3">
-              <h4 class="font-bold text-xs uppercase tracking-wider text-slate-700">📋 Daftar Transaksi Penjualan</h4>
+              <h4 class="font-bold text-xs uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                Daftar Transaksi Penjualan
+              </h4>
               <div id="lapListPenjualan" class="overflow-x-auto border border-slate-200/80 rounded-2xl shadow-sm"></div>
             </div>
 
             <div class="space-y-3">
-              <h4 class="font-bold text-xs uppercase tracking-wider text-slate-700">📋 Daftar Transaksi Pembelian</h4>
+              <h4 class="font-bold text-xs uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                Daftar Transaksi Pembelian
+              </h4>
               <div id="lapListPembelian" class="overflow-x-auto border border-slate-200/80 rounded-2xl shadow-sm"></div>
             </div>
           </div>
@@ -292,11 +314,17 @@
             <h2 class="font-bold text-base text-slate-900">Panel Admin - Master Data & Keamanan</h2>
             <p class="text-xs text-slate-500 mt-0.5">Kelola opsi form input dan informasi akun.</p>
           </div>
-          <button onclick="lockDashboard()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-4 py-2.5 rounded-2xl text-xs font-semibold transition-all">🔒 Logout</button>
+          <button onclick="lockDashboard()" class="bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-4 py-2.5 rounded-2xl text-xs font-semibold transition-all flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            Logout
+          </button>
         </div>
         <div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="space-y-4 bg-slate-50/70 p-6 rounded-3xl border border-slate-200/70">
-            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-700">📁 Kategori Pengeluaran Baru</h3>
+            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+              Kategori Pengeluaran Baru
+            </h3>
             <div>
               <input id="adminKategoriBaru" class="uppercase-input w-full bg-white border border-slate-200 rounded-2xl px-4 py-3 text-xs mb-2.5 focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="KATEGORI BARU">
               <button onclick="tambahMasterKategori()" class="w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-2xl text-xs shadow-sm">Tambah Kategori</button>
@@ -304,7 +332,10 @@
             <div><div id="listMasterKategori" class="space-y-2 max-h-40 overflow-y-auto"></div></div>
           </div>
           <div class="space-y-4 bg-slate-50/70 p-6 rounded-3xl border border-slate-200/70">
-            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-700">🔧 Jenis Pekerjaan Baru</h3>
+            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              Jenis Pekerjaan Baru
+            </h3>
             <div>
               <input id="adminJenisPekerjaanBaru" class="uppercase-input w-full bg-white border border-slate-200 rounded-2xl px-4 py-3 text-xs mb-2.5 focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="JENIS PEKERJAAN BARU">
               <button onclick="tambahMasterJenisPekerjaan()" class="w-full bg-slate-900 hover:bg-black text-white font-semibold py-3 rounded-2xl text-xs shadow-sm">Tambah Jenis Pekerjaan</button>
@@ -312,14 +343,16 @@
             <div><div id="listMasterJenisPekerjaan" class="space-y-2 max-h-40 overflow-y-auto"></div></div>
           </div>
           <div class="space-y-4 bg-slate-50/70 p-6 rounded-3xl border border-slate-200/70">
-            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-700">👤 Info Akun</h3>
+            <h3 class="font-bold text-xs uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+              Info Akun
+            </h3>
             <div class="space-y-3">
               <div class="bg-white border border-slate-200 rounded-2xl px-4 py-3">
                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Login Sebagai</p>
                 <p id="infoEmailUser" class="text-xs font-bold text-slate-800 mt-1">-</p>
               </div>
               <p class="text-[11px] text-slate-500 leading-relaxed">Untuk mengubah password atau menambah user admin, buka <span class="font-semibold text-slate-700">Firebase Console → Authentication → Users</span>.</p>
-              <button onclick="lockDashboard()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-semibold py-3 rounded-2xl text-xs shadow-md shadow-rose-600/20">Logout Sekarang</button>
             </div>
           </div>
         </div>
@@ -335,7 +368,9 @@
           <h2 class="font-bold text-lg text-slate-900" id="detailJudulCustomer">Detail Pekerjaan</h2>
           <p class="text-xs text-slate-500 font-mono mt-0.5" id="detailSubKode">-</p>
         </div>
-        <button onclick="closeModal('modalDetailPekerjaan')" class="h-10 w-10 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold transition-all">✕</button>
+        <button onclick="closeModal('modalDetailPekerjaan')" class="h-10 w-10 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold transition-all">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-slate-50 p-5 rounded-3xl border border-slate-200/80 text-center">
@@ -390,7 +425,9 @@
     <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-8 max-w-md w-full shadow-2xl shadow-slate-950/10 space-y-4 modal-animate">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <h2 class="font-bold text-base text-slate-900">Catat Pembayaran / Termin Baru</h2>
-        <button onclick="closeModal('modalTambahMasukSub')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">✕</button>
+        <button onclick="closeModal('modalTambahMasukSub')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Tanggal</label>
@@ -423,7 +460,9 @@
     <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-8 max-w-md w-full shadow-2xl shadow-slate-950/10 space-y-4 modal-animate">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <h2 class="font-bold text-base text-slate-900">Catat Pengeluaran / Material Baru</h2>
-        <button onclick="closeModal('modalTambahKeluarSub')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">✕</button>
+        <button onclick="closeModal('modalTambahKeluarSub')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
       </div>
       <div class="grid grid-cols-2 gap-3">
         <div>
@@ -455,7 +494,9 @@
     <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-8 max-w-lg w-full shadow-2xl shadow-slate-950/10 space-y-4 max-h-[90vh] overflow-y-auto modal-animate">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
         <h2 class="font-bold text-base text-slate-900">Tambah Pekerjaan Baru</h2>
-        <button onclick="closeModal('modalPekerjaan')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">✕</button>
+        <button onclick="closeModal('modalPekerjaan')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nama Customer</label>
@@ -483,7 +524,7 @@
         <input id="pTotal" type="number" placeholder="5000000" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600">
       </div>
       <div class="bg-emerald-50/60 p-4 rounded-3xl border border-emerald-200/80 space-y-3">
-        <h3 class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">📥 Pembayaran / Termin 1 (DP)</h3>
+        <h3 class="text-[11px] font-bold text-emerald-800 uppercase tracking-wider">Pembayaran / Termin 1 (DP)</h3>
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-[10px] font-bold text-emerald-700 mb-1">Nominal (Rp)</label>
@@ -496,7 +537,7 @@
         </div>
       </div>
       <div class="bg-rose-50/60 p-4 rounded-3xl border border-rose-200/80 space-y-3">
-        <h3 class="text-[11px] font-bold text-rose-800 uppercase tracking-wider">📤 Pengeluaran / Belanja Awal (Opsional)</h3>
+        <h3 class="text-[11px] font-bold text-rose-800 uppercase tracking-wider">Pengeluaran / Belanja Awal (Opsional)</h3>
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block text-[10px] font-bold text-rose-700 mb-1">Kategori</label>
@@ -536,8 +577,13 @@
   <div class="modal fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 items-center justify-center p-4 hidden" id="modalStok">
     <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-8 max-w-lg w-full shadow-2xl shadow-slate-950/10 space-y-4 modal-animate">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
-        <h2 class="font-bold text-base text-slate-900">Tambah Stok Barang Baru</h2>
-        <button onclick="closeModal('modalStok')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">✕</button>
+        <h2 class="font-bold text-base text-slate-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          Tambah Stok Barang Baru
+        </h2>
+        <button onclick="closeModal('modalStok')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
       </div>
       <div>
         <label class="block text-xs font-medium text-slate-600 mb-1">Nama Barang / Material</label>
@@ -568,8 +614,13 @@
   <div class="modal fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 items-center justify-center p-4 hidden" id="modalPembelian">
     <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-8 max-w-3xl w-full shadow-2xl shadow-slate-950/10 space-y-4 max-h-[90vh] overflow-y-auto modal-animate">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
-        <h2 class="font-bold text-base text-slate-900">🛒 Tambah Pembelian Barang</h2>
-        <button onclick="closeModal('modalPembelian')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">✕</button>
+        <h2 class="font-bold text-base text-slate-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          Tambah Pembelian Barang
+        </h2>
+        <button onclick="closeModal('modalPembelian')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
       </div>
 
       <div class="grid grid-cols-2 gap-3">
@@ -585,7 +636,10 @@
 
       <div class="border border-slate-200 rounded-3xl overflow-hidden">
         <div class="bg-slate-50 px-4 py-3 border-b border-slate-200 flex justify-between items-center">
-          <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider">📋 Daftar Barang Dibeli</h3>
+          <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+            Daftar Barang Dibeli
+          </h3>
           <button onclick="tambahBarisPembelian()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-xl text-[11px] font-semibold flex items-center gap-1">
             <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
             Tambah Baris
@@ -614,7 +668,10 @@
       </div>
 
       <div class="flex gap-3 pt-3 border-t border-slate-100">
-        <button onclick="simpanPembelian()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 rounded-2xl text-xs shadow-md shadow-emerald-600/20">💾 Simpan Pembelian</button>
+        <button onclick="simpanPembelian()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 rounded-2xl text-xs shadow-md shadow-emerald-600/20 flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          Simpan Pembelian
+        </button>
         <button onclick="closeModal('modalPembelian')" class="px-5 bg-slate-100 text-slate-600 font-semibold py-3.5 rounded-2xl text-xs">Batal</button>
       </div>
     </div>
@@ -624,8 +681,13 @@
   <div class="modal fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 items-center justify-center p-4 hidden" id="modalPenjualan">
     <div class="bg-white/95 backdrop-blur-xl border border-slate-200/80 rounded-[2.5rem] p-6 sm:p-8 max-w-3xl w-full shadow-2xl shadow-slate-950/10 space-y-4 max-h-[90vh] overflow-y-auto modal-animate">
       <div class="flex justify-between items-center pb-3 border-b border-slate-100">
-        <h2 class="font-bold text-base text-slate-900">💰 Tambah Penjualan Barang</h2>
-        <button onclick="closeModal('modalPenjualan')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">✕</button>
+        <h2 class="font-bold text-base text-slate-900 flex items-center gap-2">
+          <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Tambah Penjualan Barang
+        </h2>
+        <button onclick="closeModal('modalPenjualan')" class="h-9 w-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center font-bold">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
       </div>
 
       <div class="grid grid-cols-2 gap-3">
@@ -641,7 +703,10 @@
 
       <div class="border border-slate-200 rounded-3xl overflow-hidden">
         <div class="bg-slate-50 px-4 py-3 border-b border-slate-200 flex justify-between items-center">
-          <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider">📋 Daftar Barang Dijual</h3>
+          <h3 class="font-bold text-xs text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+            Daftar Barang Dijual
+          </h3>
           <button onclick="tambahBarisPenjualan()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-xl text-[11px] font-semibold flex items-center gap-1">
             <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
             Tambah Baris
@@ -676,15 +741,14 @@
       </div>
 
       <div class="flex gap-3 pt-3 border-t border-slate-100">
-        <button onclick="simpanPenjualan()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-2xl text-xs shadow-md shadow-blue-600/20">💾 Simpan Penjualan</button>
+        <button onclick="simpanPenjualan()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 rounded-2xl text-xs shadow-md shadow-blue-600/20 flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          Simpan Penjualan
+        </button>
         <button onclick="closeModal('modalPenjualan')" class="px-5 bg-slate-100 text-slate-600 font-semibold py-3.5 rounded-2xl text-xs">Batal</button>
       </div>
     </div>
   </div>
-
-  <!-- =============================================
-       SCRIPT FIREBASE & LOGIKA - BAGIAN 3 (lanjut)
-       ============================================= -->
     <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
     import {
@@ -810,7 +874,7 @@
       }
     };
 
-    // ============ LOAD ALL DATA ============
+    // ============ LOAD ALL ============
     async function loadAll() {
       try {
         const pj = await getDocs(query(collection(db, "pekerjaan"), orderBy("createdAt", "desc")));
@@ -909,7 +973,7 @@
           <td class="py-4 px-6 align-middle font-extrabold ${labaProj >= 0 ? 'text-blue-600' : 'text-rose-600'}">${rupiah(labaProj)}</td>
           <td class="py-4 px-6 align-middle text-right">
             <div class="inline-flex items-center gap-2">
-              <button class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm" onclick="bukaDetailPekerjaan('${p.id}')">📂 Rincian</button>
+              <button class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm" onclick="bukaDetailPekerjaan('${p.id}')">Rincian</button>
               <button class="bg-rose-50 hover:bg-rose-100 text-rose-600 px-3 py-2 rounded-xl text-xs font-semibold transition-all shadow-sm" onclick="hapusPekerjaan('${p.id}')">Hapus</button>
             </div>
           </td>
@@ -1194,11 +1258,9 @@
       document.querySelectorAll(".subtab-content").forEach(el => el.classList.add("hidden"));
       document.getElementById("subtab-" + sub).classList.remove("hidden");
       document.querySelectorAll(".sub-tab-btn").forEach(el => {
-        el.classList.remove("active");
         el.className = el.className.replace("bg-indigo-600 text-white", "bg-slate-100 text-slate-700 hover:bg-slate-200");
       });
       const active = document.getElementById("subtbtn-" + sub);
-      active.classList.add("active");
       active.className = active.className.replace("bg-slate-100 text-slate-700 hover:bg-slate-200", "bg-indigo-600 text-white");
       if (sub === 'laporan') renderLaporan();
     };
@@ -1324,7 +1386,9 @@
           <input type="number" oninput="updateBarisBeli(${id})" id="beliHarga-${id}" placeholder="0" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-emerald-600">
         </div>
         <div class="col-span-2 flex gap-1">
-          <button onclick="hapusBarisBeli(${id})" class="flex-1 bg-rose-50 hover:bg-rose-100 text-rose-600 py-2 rounded-xl text-xs font-bold">✕</button>
+          <button onclick="hapusBarisBeli(${id})" class="flex-1 bg-rose-50 hover:bg-rose-100 text-rose-600 py-2 rounded-xl text-xs font-bold">
+            <svg class="w-3.5 h-3.5 inline" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
         </div>
       `;
       document.getElementById("barisPembelian").appendChild(div);
@@ -1380,12 +1444,10 @@
         total += jumlah * harga;
       });
       if (!valid) return alert("Semua baris harus diisi lengkap!");
-      // Simpan pembelian
       await addDoc(collection(db, "toko_pembelian"), {
         tanggal: tgl, supplier, metode, keterangan: ket, items, total,
         createdAt: serverTimestamp()
       });
-      // Update stok (tambah) + update modal
       for (const item of items) {
         const brg = dataStok.find(s => s.id === item.barangId);
         if (brg) {
@@ -1446,7 +1508,9 @@
           <input type="number" oninput="updateBarisJual(${id})" id="jualHarga-${id}" placeholder="0" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-600">
         </div>
         <div class="col-span-2 flex gap-1">
-          <button onclick="hapusBarisJual(${id})" class="flex-1 bg-rose-50 hover:bg-rose-100 text-rose-600 py-2 rounded-xl text-xs font-bold">✕</button>
+          <button onclick="hapusBarisJual(${id})" class="flex-1 bg-rose-50 hover:bg-rose-100 text-rose-600 py-2 rounded-xl text-xs font-bold">
+            <svg class="w-3.5 h-3.5 inline" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
         </div>
       `;
       document.getElementById("barisPenjualan").appendChild(div);
@@ -1510,12 +1574,10 @@
       });
       if (!valid) return;
       if (!confirm(`Simpan penjualan?\nTotal: ${rupiah(total)}\nLaba: ${rupiah(laba)}`)) return;
-      // Simpan penjualan
       await addDoc(collection(db, "toko_penjualan"), {
         tanggal: tgl, pelanggan, metode, keterangan: ket, items, total, laba,
         createdAt: serverTimestamp()
       });
-      // Update stok (kurang)
       for (const item of items) {
         const brg = dataStok.find(s => s.id === item.barangId);
         if (brg) {
@@ -1578,7 +1640,6 @@
       document.getElementById("lapTotalLaba").textContent = rupiah(totalLaba);
       document.getElementById("lapTotalTrx").textContent = penjualanF.length + pembelianF.length;
 
-      // Tabel penjualan
       const elJual = document.getElementById("lapListPenjualan");
       if (penjualanF.length === 0) {
         elJual.innerHTML = '<div class="text-center py-8 text-slate-400 text-sm">Belum ada transaksi penjualan.</div>';
@@ -1601,7 +1662,6 @@
         elJual.innerHTML = html;
       }
 
-      // Tabel pembelian
       const elBeli = document.getElementById("lapListPembelian");
       if (pembelianF.length === 0) {
         elBeli.innerHTML = '<div class="text-center py-8 text-slate-400 text-sm">Belum ada transaksi pembelian.</div>';
